@@ -1,12 +1,12 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 session_start();
 
 
 $client = new Google_Client();
-$client->setClientId("");
-$client->setClientSecret("");
-$client->setRedirectUri("http://localhost/AnikoWebsite/Aniko/gClientSetup.php"); // ✅ same as Google Console
+$client->setClientId("914921820277-65g7cco12fl293e2o9u1v1kd1rdfcrmk.apps.googleusercontent.com");
+$client->setClientSecret("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");
+$client->setRedirectUri("http://localhost/ANIKOWEB/ANIKO-SMARTCROP-SYSTEM/gClientSetup.php"); // ✅ same as Google Console
 $client->addScope("email");
 $client->addScope("profile");
 
