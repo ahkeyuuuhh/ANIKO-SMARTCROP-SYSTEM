@@ -1,19 +1,26 @@
 <?php
-include 'INCLUDE/header.php';
 session_start();
-require __DIR__ . '/../vendor/autoload.php';
 
+ 
+if (isset($_SESSION['email'])) {
+    include 'INCLUDE/header-logged.php';
+} else {
+    include 'INCLUDE/header-unlogged.php';
+}
+  
 
-
+require __DIR__ . '/../vendor/autoload.php'; // adjust path if needed
 
 $client = new Google_Client();
 $client->setClientId("914921820277-65g7cco12fl293e2o9u1v1kd1rdfcrmk.apps.googleusercontent.com");
 $client->setClientSecret("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");
-$client->setRedirectUri("http://localhost/ANIKOWEB/ANIKO-SMARTCROP-SYSTEM/gClientSetup.php"); 
+$client->setRedirectUri("http://localhost/ANIKOWEB/ANIKO-SMARTCROP-SYSTEM/gClientSetup.php");
+$client->addScope("email");
 $client->addScope("profile");
 
 $login_url = $client->createAuthUrl();
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -22,6 +29,7 @@ $login_url = $client->createAuthUrl();
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Aniko</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
     :root {
       --c1: #CBBA9E;
@@ -353,10 +361,20 @@ $login_url = $client->createAuthUrl();
           </p>
         </div>
 
-        <!-- Button on Right -->
-      <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-        <a href="<?php echo $client->createAuthUrl(); ?>">login with google </a>
-        </div>
+      <!-- Button on Right -->
+<div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+    <?php
+    if (isset($_SESSION['email'])) {
+        // User is logged in, go directly to testimonial-submit.php
+        $button_link = "testimonial-submit.php";
+    } else {
+        // User not logged in, go to Google login
+        $button_link = htmlspecialchars($login_url);
+    }
+    ?>
+    <a href="<?php echo $button_link; ?>" class="btn btn-primary">Submit Now!</a>
+</div>
+
 
       </div>
     </div>

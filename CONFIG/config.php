@@ -9,7 +9,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $host = '127.0.0.1'; //loop back IP address
 $user = 'root';
 $password = '';
-$db = 'testdb'; //kung ano 'yung active schema/kung ano 'yung ginagamit
+$db = 'aniko_app'; //kung ano 'yung active schema/kung ano 'yung ginagamit
 
 
 try {
