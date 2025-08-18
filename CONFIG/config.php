@@ -14,7 +14,6 @@ $db = 'aniko_app'; //kung ano 'yung active schema/kung ano 'yung ginagamit
 
 try {
     $con = new mysqli($host, $user, $password, $db);
-    echo '<br><div class = "alert alert-warning">Connected</div>';
 }
 catch(mysqli_sql_exception $e) //variable e represents the mysqli exceptions
 {

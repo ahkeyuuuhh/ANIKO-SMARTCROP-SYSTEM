@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Floating Header</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
     :root {
@@ -73,18 +73,18 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav gap-3">
-          <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Testimonial</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Download</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Why Aniko</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.php">Contact Us</a></li>
-        </ul>
+       <ul class="navbar-nav gap-3">
+        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="testimonial-display.php">Testimonial</a></li>
+        <li class="nav-item"><a class="nav-link" href="#download">Download</a></li>
+        <li class="nav-item"><a class="nav-link" href="#why-aniko">Why Aniko</a></li>
+        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+        <li class="nav-item"><a class="nav-link" href="compliance.php">Compliance</a></li>
+      </ul>
 
-        <!-- User Info Dropdown on Right -->
+
         <?php if(isset($_SESSION['name'])): ?>
           <div class="dropdown ms-auto">
             <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">

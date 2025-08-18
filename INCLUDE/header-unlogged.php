@@ -75,13 +75,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav gap-3">
             <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Testimonial</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Download</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Why Aniko</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-            <li class="nav-item"><a class="nav-link" href="contact.php">Contact Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+            <li class="nav-item"><a class="nav-link" href="#testimonial-display.php">Testimonial</a></li>
+            <li class="nav-item"><a class="nav-link" href="#download">Download</a></li>
+            <li class="nav-item"><a class="nav-link" href="#why-aniko">Why Aniko</a></li>
+            <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+            <li class="nav-item"><a class="nav-link" href="compliance.php">Compliance</a></li>
           </ul>
         </div>
       </div>
