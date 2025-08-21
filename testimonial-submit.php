@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Check if user is logged in with Google
 if (!isset($_SESSION['email'])) {
     header("Location: index.php");
     exit();
@@ -58,7 +57,6 @@ if (!isset($_SESSION['email'])) {
             box-shadow: 0 32px 80px rgba(0, 0, 0, 0.12);
         }
 
-        /* Left Column Styling */
         .content-section {
             padding-right: 40px;
         }
@@ -99,9 +97,8 @@ if (!isset($_SESSION['email'])) {
             font-size: 1rem;
         }
 
-        /* Right Column Form Styling */
         .form-section {
-            background: var(--c6); /* light green background */
+            background: var(--c6); 
             border-radius: 20px;
             padding: 40px;
             
@@ -144,7 +141,7 @@ if (!isset($_SESSION['email'])) {
         }
 
         .submit-btn {
-            background: var(--c9); /* brown button */
+            background: var(--c9); 
             color: var(--c7);
             font-weight: 600;
             border: none;
@@ -160,7 +157,7 @@ if (!isset($_SESSION['email'])) {
         }
 
         .submit-btn:hover {
-            background: var(--c6); /* dark brown hover */
+            background: var(--c6);
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(77, 45, 24, 0.4);
         }
@@ -172,7 +169,6 @@ if (!isset($_SESSION['email'])) {
             margin-top: 8px;
         }
 
-        /* Responsive Design */
         @media (max-width: 992px) {
             .testimonial-card {
                 padding: 40px;
@@ -203,7 +199,7 @@ if (!isset($_SESSION['email'])) {
             }
         }
 
-        /* Animation for form elements */
+       
         .form-section {
             animation: slideInUp 0.6s ease-out;
         }
@@ -225,7 +221,6 @@ if (!isset($_SESSION['email'])) {
 <div class="testimonial-container">
     <div class="testimonial-card">
         <div class="row g-0">
-            <!-- Left Column: Heading + Subheading -->
             <div class="col-lg-5 d-flex flex-column justify-content-center">
                 <div class="content-section">
                     <h2>Share Your Experience</h2>
@@ -240,7 +235,7 @@ if (!isset($_SESSION['email'])) {
                 </div>
             </div>
 
-            <!-- Right Column: Form -->
+          
             <div class="col-lg-7">
                 <div class="form-section">
                     <form action="save_testimonial.php" method="POST">

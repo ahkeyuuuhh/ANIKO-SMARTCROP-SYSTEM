@@ -1,9 +1,8 @@
 <?php
 session_start();
-require_once "CONFIG/config.php"; // your db connection file
+require_once "CONFIG/config.php"; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // sanitize and collect inputs
     $firstName  = trim($_POST['firstName']);
     $lastName   = trim($_POST['lastName']);
     $email      = trim($_POST['email']);
@@ -21,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute();
 
         $_SESSION['success'] = "Your message has been sent successfully!";
-        header("Location: compliance.php"); // redirect back to contact page
+        header("Location: compliance.php"); 
         exit;
     } catch (Exception $e) {
         $_SESSION['error'] = "Something went wrong: " . $e->getMessage();

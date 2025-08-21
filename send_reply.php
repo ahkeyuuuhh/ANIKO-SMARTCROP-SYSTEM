@@ -5,11 +5,10 @@ error_reporting(E_ALL);
 
 require_once 'CONFIG/config.php';
 
-// PHPMailer via Composer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require __DIR__ . '/../vendor/autoload.php'; // adjust if your vendor folder is elsewhere
+require __DIR__ . '/../vendor/autoload.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contactId = intval($_POST['contact_id'] ?? 0);
@@ -31,16 +30,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         $mail = new PHPMailer(true);
-        // SMTP settings — replace with your provider or service (e.g., Gmail, Mailgun, SendGrid)
+       
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'col.2023010024@lsb.edu.ph';      // TODO: change
-        $mail->Password   = '09182656131';    // TODO: change (Gmail App Password)
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // 'tls'
+        $mail->Username   = 'col.2023010024@lsb.edu.ph';      
+        $mail->Password   = '';   
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // 
         $mail->Port       = 587;
 
-        $mail->setFrom('col.2023010024@lsb.edu.ph', 'Admin Support'); // TODO: change
+        $mail->setFrom('col.2023010024@lsb.edu.ph', 'Admin Support');
         $mail->addAddress($toEmail);
 
         $mail->isHTML(true);

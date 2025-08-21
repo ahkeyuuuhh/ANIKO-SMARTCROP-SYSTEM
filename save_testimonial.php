@@ -2,7 +2,6 @@
 session_start();
 include 'CONFIG/config.php';
 
-// ✅ Use account_id instead of user_id
 if (!isset($_SESSION['account_id'])) {
     header("Location: index.php");
     exit();
@@ -10,7 +9,7 @@ if (!isset($_SESSION['account_id'])) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $testimonial = trim($_POST['testimonial']);
-    $user_id = $_SESSION['account_id']; // ✅ correct session variable
+    $user_id = $_SESSION['account_id']; 
 
     if (!empty($testimonial)) {
         $stmt = $con->prepare("

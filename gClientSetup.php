@@ -3,7 +3,7 @@ ob_start();
 require __DIR__ . '/../vendor/autoload.php';
 session_start();
 
-require 'CONFIG/config.php'; // <-- add this to use $con
+require 'CONFIG/config.php';
 
 $client = new Google_Client();
 $client->setClientId("914921820277-65g7cco12fl293e2o9u1v1kd1rdfcrmk.apps.googleusercontent.com");
@@ -22,16 +22,13 @@ if (isset($_GET['code'])) {
     $google_oauth = new Google_Service_Oauth2($client);
     $u = $google_oauth->userinfo->get();
 
-    // Normalize size of the picture URL (optional)
     $picture = preg_replace('/=s\d+-c$/', '=s80-c', $u->picture);
 
-    // Save to session
     $_SESSION['google_id'] = $u->id;
     $_SESSION['name']      = $u->name;
     $_SESSION['email']     = $u->email;
     $_SESSION['picture']   = $picture;
 
-    // Upsert into accounts (by email)
     $stmt = $con->prepare("SELECT id FROM accounts WHERE email = ? LIMIT 1");
     $stmt->bind_param("s", $u->email);
     $stmt->execute();
