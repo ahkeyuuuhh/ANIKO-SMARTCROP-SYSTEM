@@ -376,17 +376,18 @@ if (isset($_SESSION['email'])) {
                 </div>
                 
                 <div class="contact-form-section">
-                    <form>
+                   <form action="process_contact.php" method="POST">
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                                  <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required>
                                     <label for="firstName">First Name</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                                 <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" required>
                                     <label for="lastName">Last Name</label>
                                 </div>
                             </div>
@@ -395,38 +396,38 @@ if (isset($_SESSION['email'])) {
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="Email Address" required>
+                                   <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
                                     <label for="email">Email Address</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="tel" class="form-control" id="phone" placeholder="Phone Number">
+                                   <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number">
                                     <label for="phone">Phone Number</label>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="mb-4">
-                            <select class="form-select" id="subject" required>
-                                <option value="disable" disabled selected>Select a subject</option>
-                                <option value="general">General Inquiry</option>
-                                <option value="support">Technical Support</option>
-                                <option value="sales">Sales Question</option>
-                                <option value="partnership">Partnership Opportunity</option>
-                                <option value="feedback">Feedback</option>
-                                <option value="other">Other</option>
-                            </select>
+                         <select class="form-select" id="subject" name="subject" required>
+                            <option value="disable" disabled selected>Select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="support">Technical Support</option>
+                            <option value="sales">Sales Question</option>
+                            <option value="partnership">Partnership Opportunity</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="other">Other</option>
+                        </select>
                         </div>
                         
                         <div class="form-floating mb-4">
-                            <textarea class="form-control" id="message" placeholder="Your message" style="height: 120px" required></textarea>
+                         <textarea class="form-control" id="message" name="message" placeholder="Your message" style="height: 120px" required></textarea>
                             <label for="message">Tell us how we can help you...</label>
                         </div>
                         
                         <div class="mb-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="newsletter">
+                               <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
                                 <label class="form-check-label" for="newsletter">
                                     I'd like to receive updates and newsletters
                                 </label>
