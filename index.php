@@ -18,6 +18,7 @@ if (isset($_SESSION['email'])) {
 } else {
   include 'INCLUDE/header-unlogged.php';
 }
+// sample comment
 
 $imagePath = '';
 $sql = "SELECT image_path FROM home_images ORDER BY uploaded_at DESC LIMIT 1";
