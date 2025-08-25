@@ -20,6 +20,8 @@ if (isset($_SESSION['email'])) {
 }
 // sample comment
 
+// COMMENT
+
 $imagePath = '';
 $sql = "SELECT image_path FROM home_images ORDER BY uploaded_at DESC LIMIT 1";
 $result = $con->query($sql);
