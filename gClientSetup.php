@@ -1,14 +1,14 @@
 <?php
 ob_start();
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 session_start();
 
 require 'CONFIG/config.php';
 
 $client = new Google_Client();
-$client->setClientId("914921820277-65g7cco12fl293e2o9u1v1kd1rdfcrmk.apps.googleusercontent.com");
-$client->setClientSecret("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");
-$client->setRedirectUri("http://localhost/ANIKOWEB/ANIKO-SMARTCROP-SYSTEM/gClientSetup.php");
+$client->setClientId("67607885572-0unromtvovfl5bb73dmv8mb5shrop87n.apps.googleusercontent.com");
+$client->setClientSecret("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");
+$client->setRedirectUri("http://localhost/ANIKO-SMARTCROP-SYSTEM/gClientSetup.php");
 $client->addScope("email");
 $client->addScope("profile");
 
@@ -50,8 +50,10 @@ if (isset($_GET['code'])) {
         $stmt->close();
     }
 
-    header("Location: /ANIKOWEB/ANIKO-SMARTCROP-SYSTEM/testimonial-submit.php");
-    exit();
+header("Location: testimonial-submit.php");
+exit();
+
+
 } else {
     $login_url = $client->createAuthUrl();
     header("Location: " . filter_var($login_url, FILTER_SANITIZE_URL));

@@ -8,7 +8,7 @@ require_once 'CONFIG/config.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require __DIR__ . '/../vendor/autoload.php'; 
+require __DIR__ . '/vendor/autoload.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contactId = intval($_POST['contact_id'] ?? 0);
