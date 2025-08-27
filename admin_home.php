@@ -74,52 +74,72 @@ $images = $con->query("SELECT * FROM home_images ORDER BY uploaded_at DESC");
     <title>Admin - Home Images</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="container py-4">
 
-   
+<style>
+    .dashboard {
+        margin-left: 260px;
+        padding: 20px;
+        transition: margin-left 0.3s ease;
+    }
+  
+    @media (max-width: 992px) {
+        .dashboard {
+            margin-left: 0;
+            padding: 15px;
+        }
+    }
+</style>
 
-    <?php if (isset($_SESSION['message'])): ?>
-        <div class="alert alert-info">
-            <?php echo $_SESSION['message']; unset($_SESSION['message']); ?>
-        </div>
-    <?php endif; ?>
+<body>
+    <div class="dashboard">
+        <div class="row g-4">
+            <?php if (isset($_SESSION['message'])): ?>
+                <div class="alert alert-info">
+                    <?php echo $_SESSION['message']; unset($_SESSION['message']); ?>
+                </div>
+            <?php endif; ?>
 
-    <div class="container mt-5">
-        <h2>Upload Home Image</h2>
-        <form action="upload_home_image.php" method="POST" enctype="multipart/form-data">
-            <div class="mb-3">
-                <input type="file" name="home_image" class="form-control" required>
+            <!-- UPLOAD FORM TO -->
+            <div class="col-sm-6 col-lg-12">
+                <h2>Upload Home Image</h2>
+                <form action="upload_home_image.php" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <input type="file" name="home_image" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload Image</button>
+                </form>
             </div>
-            <button type="submit" class="btn btn-primary">Upload Image</button>
-        </form>
-    </div>
-
-    <h2>Uploaded Images</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Preview</th>
-                <th>File Path</th>
-                <th>Uploaded At</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $result = $con->query("SELECT * FROM home_images ORDER BY uploaded_at DESC");
-            while ($row = $result->fetch_assoc()):
-            ?>
+            
+        </div>
+         <!-- UPLOADED IMAGES TABLE -->
+        <h2>Uploaded Images</h2>
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td><img src="<?= htmlspecialchars($row['image_path']) ?>" alt="Image" style="width:150px;"></td>
-                    <td><?= htmlspecialchars($row['image_path']) ?></td>
-                    <td><?= htmlspecialchars($row['uploaded_at']) ?></td>
-                    <td>
-                        <a href="admin_index.php?delete_id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this image?')">Delete</a>
-                    </td>
+                    <th>Preview</th>
+                    <th>File Path</th>
+                    <th>Uploaded At</th>
+                    <th>Action</th>
                 </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php
+                $result = $con->query("SELECT * FROM home_images ORDER BY uploaded_at DESC");
+                while ($row = $result->fetch_assoc()):
+                ?>
+                    <tr>
+                        <td><img src="<?= htmlspecialchars($row['image_path']) ?>" alt="Image" style="width:150px;"></td>
+                        <td><?= htmlspecialchars($row['image_path']) ?></td>
+                        <td><?= htmlspecialchars($row['uploaded_at']) ?></td>
+                        <td>
+                            <a href="admin_index.php?delete_id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this image?')">Delete</a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
+   
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

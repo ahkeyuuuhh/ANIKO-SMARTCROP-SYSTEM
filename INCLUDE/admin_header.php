@@ -101,9 +101,9 @@
     <a class="nav-link" href="admin_contact.php">Contact Management</a>
     <a class="nav-link" href="admin_home.php">Home Management</a>
     <a class="nav-link" href="admin_benefits.php">Benefit Management</a>
-      <a class="nav-link" href="admin_download.php">Download Management</a>
-        <a class="nav-link" href="admin_whyaniko.php">Why Aniko Management</a>
-          <a class="nav-link" href="admin_team.php">Team Members </a>
+    <a class="nav-link" href="admin_download.php">Download Management</a>
+    <a class="nav-link" href="admin_whyaniko.php">Why Aniko Management</a>
+    <a class="nav-link" href="admin_team.php">Team Members </a>
     <a class="nav-link text-danger" href="admin_logout.php">Logout</a>
   </nav>
 </div>

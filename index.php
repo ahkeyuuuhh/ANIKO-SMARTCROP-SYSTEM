@@ -54,6 +54,7 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
       --c8: #000000;
       --c9: #1D492C; 
     }
+
     body {
       background: var(--c1) !important;
       margin: 0;
@@ -271,7 +272,9 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
     }
   </style>
 </head>
+
 <body>
+  <!-- HERO SECTIONNNN -->
   <div class="container">
     <section class="hero">
       <div class="row align-items-center">
@@ -284,19 +287,24 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
         </div>
       </div>
     </section>
+
     <div class="home-img-container">
       <img src="<?php echo htmlspecialchars($imagePath); ?>" alt="Home Image" class="img-fluid">
     </div>
+
     <p class="subtext" id="about">
       Aniko is a smart soil monitoring app that helps you track moisture, temperature, 
       sunlight, and humidity in real time. Designed for farmers and growers, it empowers 
       you to make better decisions for healthier crops and higher yields.
     </p>
+
     <hr class="custom-line">
     <h2 class="section-heading">Aniko in numbers</h2>
+
     <p class="section-subtext">
       Discover how Aniko is transforming agriculture from real-time insights to improved crop yields — the numbers speak for themselves.
     </p>
+
     <div class="row stats-section">
       <div class="col-md-4 col-12 mb-4">
         <div class="stat-box">
@@ -304,12 +312,14 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
           <p>Continuous Soil Health Monitoring</p>
         </div>
       </div>
+
       <div class="col-md-4 col-12 mb-4">
         <div class="stat-box">
           <img src="IMG/home-icon2.png" alt="Icon 2">
           <p>Find the right treatment for more than 780 plant diseases</p>
         </div>
       </div>
+
       <div class="col-md-4 col-12 mb-4">
         <div class="stat-box">
           <img src="IMG/home-icon3.png" alt="Icon 3">
@@ -318,6 +328,8 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
       </div>
     </div>
   </div>
+
+  <!-- SOLUTION / BENEFITS ROW -->
   <section class="farmer-section" id="features">
     <h2>A solution designed for farmers</h2>
     <div class="container mt-5">
@@ -325,31 +337,38 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
         <div class="col-lg-6 text-start">
           <h3 class="text-white fw-bold">Aniko</h3>
           <p class="text-light mb-4">Features</p>
+
           <div class="row g-4">
             <div class="col-6 d-flex align-items-center">
               <img src="IMG/feature-icon1.png" alt="Feature 1" class="me-3" style="width:45px; height:45px;">
               <p class="text-white mb-0">Climate Pattern Analysis</p>
             </div>
+
             <div class="col-6 d-flex align-items-center">
               <img src="IMG/feature-icon2.png" alt="Feature 2" class="me-3" style="width:45px; height:45px;">
               <p class="text-white mb-0">AI-Powered Plant Diagnosis</p>
             </div>
+
             <div class="col-6 d-flex align-items-center">
               <img src="IMG/feature-icon3.png" alt="Feature 3" class="me-3" style="width:45px; height:45px;">
               <p class="text-white mb-0">Soil Health Monitoring</p>
             </div>
+
             <div class="col-6 d-flex align-items-center">
               <img src="IMG/feature-icon4.png" alt="Feature 4" class="me-3" style="width:45px; height:45px;">
               <p class="text-white mb-0">AI-Powered Soil Health Check</p>
             </div>
           </div>
         </div>
+
         <div class="col-lg-6 text-center mt-4 mt-lg-0">
           <img src="<?php echo $benefitsImage; ?>" alt="Aniko App" class="img-fluid" style="max-width:380px; border-radius:20px;">
         </div>
       </div>
     </div>
+
     <hr class="custom-line">
+
     <div class="container mt-5">
       <div class="row mb-4">
         <div class="col text-start">
@@ -357,6 +376,7 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
           <p class="text-light">Benefits</p>
         </div>
       </div>
+
       <div class="row g-4">
         <div class="col-md-4 col-12">
           <div class="benefit-card">
@@ -365,6 +385,7 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
             <p>Monitor the field status 24/7</p>
           </div>
         </div>
+
         <div class="col-md-4 col-12">
           <div class="benefit-card">
             <h5>Save Resources</h5>
@@ -372,6 +393,7 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
             <p>Predict Climate Anomalies</p>
           </div>
         </div>
+
         <div class="col-md-4 col-12">
           <div class="benefit-card">
             <h5>Stay Ahead</h5>
@@ -382,6 +404,8 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
       </div>
     </div>
   </section>
+
+  <!-- TESTIMONIAL SECTIONNNN -->
   <section class="testimonial-section py-5">
     <div class="container">
       <div class="row align-items-center mb-4">
@@ -389,63 +413,68 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
           <h2 class="fw-bold text-dark" id="download">What Our Farmers Say</h2>
           <p class="text-muted mb-0">Real experiences from real farmers who are growing smarter with Aniko.</p>
         </div>
-       <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-        <?php
-        if (isset($_SESSION['email'])) {
-          $button_link = "testimonial-submit.php";
-        } else {
-          $button_link = htmlspecialchars($login_url) . "&redirect=testimonial-submit";
-        }
-        ?>
-        <a href="<?php echo $button_link; ?>" class="btn btn-primary">Submit Now!</a>
+
+        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+          <?php
+          if (isset($_SESSION['email'])) {
+            $button_link = "testimonial-submit.php";
+          } else {
+            $button_link = htmlspecialchars($login_url) . "&redirect=testimonial-submit";
+          }
+          ?>
+          <a href="<?php echo $button_link; ?>" class="btn btn-primary">Submit Now!</a>
+        </div>
       </div>
 
-      </div>
       <div class="testimonial-scroll d-flex gap-3" id="testimonialScroll">
         <?php
-        include 'CONFIG/config.php';
-        $sql = "SELECT t.testimonial, t.created_at, a.name, a.email, a.picture
-                FROM testimonials t
-                JOIN accounts a ON t.user_id = a.id
-                WHERE t.status = 'approved'
-                ORDER BY t.created_at DESC";
-        $result = $con->query($sql);
-        if ($result && $result->num_rows > 0) {
-          while ($row = $result->fetch_assoc()) {
-            $profile_pic = !empty($row['picture'])
-              ? $row['picture']
-              : ("https://www.gravatar.com/avatar/" . md5(strtolower(trim($row['email']))) . "?d=mp&s=80");
-            echo '<div class="testimonial-card card shadow-sm flex-shrink-0">';
-            echo '  <div class="card-body">';
-            echo '    <div class="d-flex align-items-center mb-3">';
-            echo '      <img src="' . htmlspecialchars($profile_pic) . '" class="rounded-circle me-3" width="50" height="50" alt="Profile">';
-            echo '      <div>';
-            echo '        <h6 class="mb-0">' . htmlspecialchars($row['name']) . '</h6>';
-            echo '        <small class="text-muted">' . htmlspecialchars($row['email']) . '</small>';
-            echo '      </div>';
-            echo '    </div>';
-            echo '    <p class="card-text">' . htmlspecialchars($row['testimonial']) . '</p>';
-            echo '  </div>';
-            echo '  <div class="card-footer text-muted">';
-            echo '    <small>Posted on ' . date("F j, Y", strtotime($row['created_at'])) . '</small>';
-            echo '  </div>';
-            echo '</div>';
+          include 'CONFIG/config.php';
+          $sql = "SELECT t.testimonial, t.created_at, a.name, a.email, a.picture
+                  FROM testimonials t
+                  JOIN accounts a ON t.user_id = a.id
+                  WHERE t.status = 'approved'
+                  ORDER BY t.created_at DESC";
+          $result = $con->query($sql);
+          if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+              $profile_pic = !empty($row['picture'])
+                ? $row['picture']
+                : ("https://www.gravatar.com/avatar/" . md5(strtolower(trim($row['email']))) . "?d=mp&s=80");
+              echo '<div class="testimonial-card card shadow-sm flex-shrink-0">';
+              echo '  <div class="card-body">';
+              echo '    <div class="d-flex align-items-center mb-3">';
+              echo '      <img src="' . htmlspecialchars($profile_pic) . '" class="rounded-circle me-3" width="50" height="50" alt="Profile">';
+              echo '      <div>';
+              echo '        <h6 class="mb-0">' . htmlspecialchars($row['name']) . '</h6>';
+              echo '        <small class="text-muted">' . htmlspecialchars($row['email']) . '</small>';
+              echo '      </div>';
+              echo '    </div>';
+              echo '    <p class="card-text">' . htmlspecialchars($row['testimonial']) . '</p>';
+              echo '  </div>';
+              echo '  <div class="card-footer text-muted">';
+              echo '    <small>Posted on ' . date("F j, Y", strtotime($row['created_at'])) . '</small>';
+              echo '  </div>';
+              echo '</div>';
+            }
+          } else {
+            echo '<p class="text-muted">No approved testimonials yet.</p>';
           }
-        } else {
-          echo '<p class="text-muted">No approved testimonials yet.</p>';
-        }
         ?>
       </div>
+
       <?php
-      $result = $con->query("SELECT * FROM download_images ORDER BY uploaded_at DESC LIMIT 1");
-      if ($row = $result->fetch_assoc()):
+        $result = $con->query("SELECT * FROM download_images ORDER BY uploaded_at DESC LIMIT 1");
+        if ($row = $result->fetch_assoc()):
       ?>
+
       <div class="text-center mt-5">
         <img src="<?= htmlspecialchars($row['image_path']) ?>" alt="Download Now" class="img-fluid" style="max-width: 1000px;">
       </div>
       <?php endif; ?>
     </div>
   </section>
+
+  <!-- WHY ANIKO SECTION -->
   <section id="why-aniko" class="why-aniko">
     <div class="container">
       <div class="row align-items-center">
@@ -457,6 +486,7 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
             market data analysis. Aniko is the right solution
             for more sustainable and advanced agriculture.</p>
         </div>
+
         <div class="col-lg-6 text-center">
           <?php
           $res = $con->query("SELECT image_path FROM why_aniko_images ORDER BY uploaded_at DESC LIMIT 1");
@@ -468,6 +498,7 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
           <?php endif; ?>
         </div>
       </div>
+
       <div class="card mt-5 shadow-lg border-0">
         <div class="card-body bg-white text-center p-4">
           <div class="row">
@@ -475,10 +506,12 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
               <img src="IMG/why-icon1.png" alt="Icon 1" class="mb-3" width="60">
               <p class="mb-0 text-muted">The only real-time solution for managing soil and plant health</p>
             </div>
+
             <div class="col-md-4 mb-3 mb-md-0 border-start border-end">
               <img src="IMG/why-icon1.png" alt="Icon 2" class="mb-3" width="60">
               <p class="mb-0 text-muted">Over 40% of crop loss are caused by extreme weather conditions</p>
             </div>
+
             <div class="col-md-4">
               <img src="IMG/why-icon1.png" alt="Icon 3" class="mb-3" width="60">
               <p class="mb-0 text-muted">Over 40% of crop loss stem from poor plant disease diagnosis.</p>
@@ -488,6 +521,8 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
       </div>
     </div>
   </section>
+
+  <!-- TEAM TEXT SECTIONNNN -->
   <section class="team-section position-relative" id="team">
     <div class="container-fluid p-0">
       <img src="IMG/team-image.png" alt="Our Team" class="img-fluid team-img w-100">
@@ -499,6 +534,8 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
       </div>
     </div>
   </section>
+
+<!-- TEAM SECTION -->
   <section class="team-members py-5">
     <div class="container text-center">
       <div class="row justify-content-center">
@@ -518,7 +555,9 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
       </div>
     </div>
   </section>
+
   <?php include 'INCLUDE/footer.php'; ?>
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
