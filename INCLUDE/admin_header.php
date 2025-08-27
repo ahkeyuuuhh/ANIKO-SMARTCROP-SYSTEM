@@ -95,7 +95,7 @@
     <?php endif; ?>
   </div>
   <nav class="nav flex-column">
-     <a class="nav-link" href="admin_index1.php">Home</a>
+     <a class="nav-link" href="admin_index.php">Home</a>
     <a class="nav-link" href="admin_testimonial.php">Testimonial Management</a>
     <a class="nav-link" href="admin_users.php">Account Management</a>
     <a class="nav-link" href="admin_contact.php">Contact Management</a>
