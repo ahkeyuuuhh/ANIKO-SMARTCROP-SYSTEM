@@ -12,6 +12,11 @@ $client->setRedirectUri("http://localhost/ANIKO-SMARTCROP-SYSTEM/gClientSetup.ph
 $client->addScope("email");
 $client->addScope("profile");
 
+
+if (isset($_GET['redirect'])) {
+    $_SESSION['login_redirect'] = $_GET['redirect'];
+}
+
 if (isset($_GET['code'])) {
     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
     if (isset($token['error'])) {
@@ -29,6 +34,7 @@ if (isset($_GET['code'])) {
     $_SESSION['email']     = $u->email;
     $_SESSION['picture']   = $picture;
 
+  
     $stmt = $con->prepare("SELECT id FROM accounts WHERE email = ? LIMIT 1");
     $stmt->bind_param("s", $u->email);
     $stmt->execute();
@@ -50,9 +56,17 @@ if (isset($_GET['code'])) {
         $stmt->close();
     }
 
-header("Location: testimonial-submit.php");
-exit();
+   
+    $redirectPage = $_SESSION['login_redirect'] ?? 'testimonial-submit';
+    unset($_SESSION['login_redirect']);
 
+    
+    if (!str_ends_with($redirectPage, '.php')) {
+        $redirectPage .= ".php";
+    }
+
+    header("Location: " . $redirectPage);
+    exit();
 
 } else {
     $login_url = $client->createAuthUrl();

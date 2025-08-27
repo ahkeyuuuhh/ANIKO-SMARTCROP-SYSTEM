@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 include 'CONFIG/config.php';
+include 'INCLUDE/admin_header.php';
 
 if (!isset($_SESSION['admin_id'])) {
     header("Location: admin_login.php");

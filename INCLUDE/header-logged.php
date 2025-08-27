@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Floating Header</title>
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
     :root {
@@ -66,24 +66,23 @@
 <header class="floating-header">
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="index.php">
         <img src="IMG/logo-hr.png" alt="Aniko Logo" height="30" class="d-inline-block align-text-top">
       </a>    
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-       <ul class="navbar-nav gap-3">
-        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-        <li class="nav-item"><a class="nav-link" href="testimonial-display.php">Testimonial</a></li>
-        <li class="nav-item"><a class="nav-link" href="#download">Download</a></li>
-        <li class="nav-item"><a class="nav-link" href="#why-aniko">Why Aniko</a></li>
-        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-        <li class="nav-item"><a class="nav-link" href="compliance.php">Compliance</a></li>
-      </ul>
-
+        <ul class="navbar-nav gap-3">
+          <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.php#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.php#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="testimonial-display.php">Testimonial</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.php#download">Download</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.php#why-aniko">Why Aniko</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.php#team">Team</a></li>
+          <li class="nav-item"><a class="nav-link" href="compliance.php">Compliance</a></li>
+        </ul>
 
         <?php if(isset($_SESSION['name'])): ?>
           <div class="dropdown ms-auto">
@@ -102,8 +101,6 @@
   </nav>
 </header>
 
-
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

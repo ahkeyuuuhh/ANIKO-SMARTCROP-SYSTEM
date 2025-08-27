@@ -26,7 +26,7 @@ if (isset($_POST['login'])) {
                 $_SESSION['admin_id'] = $id;
                 $_SESSION['admin_username'] = $username;
 
-                header("Location: admin_index.php");
+                header("Location: admin_index1.php");
                 exit;
             } else {
                 $message = '<div class="alert alert-danger">Invalid password.</div>';

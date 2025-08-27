@@ -1,0 +1,138 @@
+<?php
+session_start();
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+include 'CONFIG/config.php';
+include 'INCLUDE/admin_header.php';
+
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: admin_login.php");
+    exit;
+}
+
+// ✅ Function to handle testimonial actions
+function handleAction($action, $con) {
+    if (isset($_GET['action']) && $_GET['action'] === $action && isset($_GET['id'])) {
+        $id = intval($_GET['id']);
+        if ($action === 'approve') {
+            $stmt = $con->prepare("UPDATE testimonials SET status = 'approved' WHERE id = ?");
+        } elseif ($action === 'delete_testimonial') {
+            $stmt = $con->prepare("DELETE FROM testimonials WHERE id = ?");
+        }
+        $stmt->bind_param("i", $id);
+        if ($stmt->execute()) {
+            $_SESSION['message'] = ucfirst($action) . "d successfully!";
+        } else {
+            $_SESSION['message'] = "Error " . $action . "ing.";
+        }
+        $stmt->close();
+        header("Location: admin_testimonial.php");
+        exit();
+    }
+}
+handleAction('approve', $con);
+handleAction('delete_testimonial', $con);
+
+// ✅ Fetch testimonials
+$pending = $con->query("
+    SELECT t.id, a.name, a.email, t.testimonial, t.created_at 
+    FROM testimonials t 
+    JOIN accounts a ON t.user_id = a.id 
+    WHERE t.status = 'pending'
+    ORDER BY t.created_at DESC
+");
+
+$approved = $con->query("
+    SELECT t.id, a.name, a.email, t.testimonial, t.created_at 
+    FROM testimonials t 
+    JOIN accounts a ON t.user_id = a.id 
+    WHERE t.status = 'approved'
+    ORDER BY t.created_at DESC
+");
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Manage Testimonials</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container py-4">
+
+    <h2>Manage Testimonials</h2>
+
+    <?php if (isset($_SESSION['message'])): ?>
+        <div class="alert alert-info">
+            <?php echo $_SESSION['message']; unset($_SESSION['message']); ?>
+        </div>
+    <?php endif; ?>
+
+    <!-- ✅ Pending Testimonials -->
+    <h3 class="mt-4">Pending Testimonials</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="table-warning">
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Email</th>
+                <th>Testimonial</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php while ($row = $pending->fetch_assoc()): ?>
+            <tr>
+                <td><?= $row['id']; ?></td>
+                <td><?= htmlspecialchars($row['name']); ?></td>
+                <td><?= htmlspecialchars($row['email']); ?></td>
+                <td><?= htmlspecialchars($row['testimonial']); ?></td>
+                <td><?= $row['created_at']; ?></td>
+                <td>
+                    <a href="admin_testimonial.php?action=approve&id=<?= $row['id']; ?>" 
+                       class="btn btn-sm btn-success"
+                       onclick="return confirm('Approve this testimonial?');">Approve</a>
+                    <a href="admin_testimonial.php?action=delete_testimonial&id=<?= $row['id']; ?>" 
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Delete this testimonial?');">Delete</a>
+                </td>
+            </tr>
+        <?php endwhile; ?>
+        </tbody>
+    </table>
+
+    <!-- ✅ Approved Testimonials -->
+    <h3 class="mt-5">Approved Testimonials</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="table-success">
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Email</th>
+                <th>Testimonial</th>
+                <th>Approved At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php while ($row = $approved->fetch_assoc()): ?>
+            <tr>
+                <td><?= $row['id']; ?></td>
+                <td><?= htmlspecialchars($row['name']); ?></td>
+                <td><?= htmlspecialchars($row['email']); ?></td>
+                <td><?= htmlspecialchars($row['testimonial']); ?></td>
+                <td><?= $row['created_at']; ?></td>
+                <td>
+                    <a href="admin_testimonial.php?action=delete_testimonial&id=<?= $row['id']; ?>" 
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Delete this testimonial?');">Delete</a>
+                </td>
+            </tr>
+        <?php endwhile; ?>
+        </tbody>
+    </table>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</html>

@@ -1,4 +1,3 @@
-<!-- comment -->
 <?php
 session_start();
 
@@ -18,9 +17,7 @@ if (isset($_SESSION['email'])) {
 } else {
   include 'INCLUDE/header-unlogged.php';
 }
-// sample comment
 
-// COMMENT
 
 $imagePath = '';
 $sql = "SELECT image_path FROM home_images ORDER BY uploaded_at DESC LIMIT 1";
@@ -392,16 +389,17 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
           <h2 class="fw-bold text-dark" id="download">What Our Farmers Say</h2>
           <p class="text-muted mb-0">Real experiences from real farmers who are growing smarter with Aniko.</p>
         </div>
-        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-          <?php
-          if (isset($_SESSION['email'])) {
-            $button_link = "testimonial-submit.php";
-          } else {
-            $button_link = htmlspecialchars($login_url);
-          }
-          ?>
-          <a href="<?php echo $button_link; ?>" class="btn btn-primary">Submit Now!</a>
-        </div>
+       <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+        <?php
+        if (isset($_SESSION['email'])) {
+          $button_link = "testimonial-submit.php";
+        } else {
+          $button_link = htmlspecialchars($login_url) . "&redirect=testimonial-submit";
+        }
+        ?>
+        <a href="<?php echo $button_link; ?>" class="btn btn-primary">Submit Now!</a>
+      </div>
+
       </div>
       <div class="testimonial-scroll d-flex gap-3" id="testimonialScroll">
         <?php

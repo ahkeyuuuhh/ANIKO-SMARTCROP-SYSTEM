@@ -1,11 +1,12 @@
 <?php 
 session_start();
 
-if (isset($_SESSION['email'])) {
-    include 'INCLUDE/header-logged.php';
-} else {
-    include 'INCLUDE/header-unlogged.php';
-} 
+if (!isset($_SESSION['email'])) {
+    header("Location: index.php");
+    exit();
+}
+
+ include 'INCLUDE/header-logged.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +16,7 @@ if (isset($_SESSION['email'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+   
     
     <style>
       
@@ -394,12 +396,22 @@ if (isset($_SESSION['email'])) {
                         </div>
                         
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                   <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
-                                    <label for="email">Email Address</label>
-                                </div>
+                         <div class="col-md-6">
+                            <div class="form-floating">
+                                <input 
+                                    type="email" 
+                                    class="form-control" 
+                                    id="email" 
+                                    name="email" 
+                                    placeholder="Email Address" 
+                                    value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>" 
+                                    <?php echo isset($_SESSION['email']) ? 'readonly' : ''; ?> 
+                                    required
+                                >
+                                <label for="email">Email Address</label>
                             </div>
+                        </div>
+
                             <div class="col-md-6">
                                 <div class="form-floating">
                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number">
@@ -443,6 +455,6 @@ if (isset($_SESSION['email'])) {
         </div>
     </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   
 </body>
 </html>
