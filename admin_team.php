@@ -11,27 +11,31 @@ if (!isset($_SESSION['admin_id'])) {
     exit;
 }
 
-// Function to delete team member
+// Function to delete team member (use the correct table: team_members)
 function deleteTeam($id, $con) {
-    $stmt = $con->prepare("SELECT image_path FROM team WHERE id=?");
+    // Get image path
+    $stmt = $con->prepare("SELECT image_path FROM team_members WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $stmt->bind_result($imagePath);
     $found = $stmt->fetch();
     $stmt->close();
 
+    // Remove image file if found
     if ($found && $imagePath && file_exists($imagePath)) {
-        unlink($imagePath);
+        @unlink($imagePath);
     }
-    $stmt = $con->prepare("DELETE FROM team WHERE id=?");
+
+    // Delete record
+    $stmt = $con->prepare("DELETE FROM team_members WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $stmt->close();
 }
 
-// Handle delete action for team members
+// Handle delete action for team members (make sure the link hits THIS page)
 if (isset($_GET['delete_team_id'])) {
-    deleteTeam(intval($_GET['delete_team_id']), $con);
+    deleteTeam((int)$_GET['delete_team_id'], $con);
     header("Location: admin_team.php");
     exit;
 }
@@ -42,23 +46,20 @@ if (isset($_GET['delete_team_id'])) {
     <meta charset="UTF-8">
     <title>Admin - Manage Team Members</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<style>
-    .dashboard {
-        margin-left: 260px;
-        padding: 20px;
-        transition: margin-left 0.3s ease;
-    }
-  
-    @media (max-width: 992px) {
+    <style>
         .dashboard {
-            margin-left: 0;
-            padding: 15px;
+            margin-left: 260px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
         }
-    }
-</style>
-
+        @media (max-width: 992px) {
+            .dashboard {
+                margin-left: 0;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
 <body>
     <div class="dashboard">
         <div class="g-4">
@@ -99,8 +100,10 @@ if (isset($_GET['delete_team_id'])) {
                         <td><?= htmlspecialchars($row['name']) ?></td>
                         <td><?= htmlspecialchars($row['role']) ?></td>
                         <td>
-                            <a href="admin_index.php?delete_team_id=<?= $row['id'] ?>" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Delete this team member?')">Delete</a>
+                            <!-- Point to THIS page so the handler runs -->
+                            <a href="admin_team.php?delete_team_id=<?= (int)$row['id'] ?>" 
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Delete this team member?')">Delete</a>
                         </td>
                     </tr>
                     <?php endwhile; ?>
@@ -108,6 +111,6 @@ if (isset($_GET['delete_team_id'])) {
             </table>
         </div>
     </div>
-</body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

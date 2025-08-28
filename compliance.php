@@ -334,45 +334,34 @@ if (!isset($_SESSION['email'])) {
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <div class="contact-item-content">
-                            <strong>Visit Us</strong>
-                            123 Creative Street<br>
-                            Innovation District<br>
-                            City, State 12345
+                           
                         </div>
                     </div>
                     
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
                         <div class="contact-item-content">
-                            <strong>Call Us</strong>
-                            +1 (555) 123-4567<br>
-                            +1 (555) 987-6543
+                          
                         </div>
                     </div>
                     
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
                         <div class="contact-item-content">
-                            <strong>Email Us</strong>
-                            hello@company.com<br>
-                            support@company.com
+                          
                         </div>
                     </div>
                     
                     <div class="contact-item">
                         <i class="fas fa-clock"></i>
                         <div class="contact-item-content">
-                            <strong>Office Hours</strong>
-                            Monday - Friday: 9:00 AM - 6:00 PM<br>
-                            Saturday: 10:00 AM - 4:00 PM<br>
-                            Sunday: Closed
+                          
                         </div>
                     </div>
                     
                     <div class="social-links">
                         <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
@@ -441,7 +430,7 @@ if (!isset($_SESSION['email'])) {
                             <div class="form-check">
                                <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
                                 <label class="form-check-label" for="newsletter">
-                                    I'd like to receive updates and newsletters
+                                    I'd like to receive updates and news
                                 </label>
                             </div>
                         </div>

@@ -48,7 +48,7 @@ $result = $con->query($sql);
     }
     .testimonial-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+      box-shadow: 0 0 25px rgba(47, 192, 54, 0.4);
     }
     .testimonial-user {
       display: flex;

@@ -144,11 +144,7 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
                 </div>
             </div>
 
-            <div class="container my-4">
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registerModal">
-                    + Register New Admin
-                </button>
-            </div>
+           
 
             <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -215,7 +211,13 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
                 </table>
             </div>
         </div>
+         <div class="container my-4">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registerModal">
+                    + Register New Admin
+                </button>
+            </div>
     </div>
+    
 
   
     
