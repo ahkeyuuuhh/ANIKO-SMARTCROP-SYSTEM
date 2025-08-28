@@ -39,413 +39,1212 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Aniko</title>
+  <title>Aniko - Smart Soil Monitoring</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --c1: #cfc4b2ff; /* BG COLOR*/
-      --c2: #BDE08A; 
-      --c3: #8A6440; 
-      --c4: #4D2D18;
-      --c5: #112822; 
-      --c6: #4C6444;
-      --c7: #FFFFFF;
-      --c8: #000000;
-      --c9: #1D492C; 
+      --primary-green: #1D492C;
+      --accent-green: #84cc16;
+      --pastel-green: #BDE08A;
+      --light-green: #f0fdf4;
+      --dark-green: #143820;
+      --dark-gray: #374151;
+      --light-gray: #f9fafb;
+      --white: #ffffff;
+      --bg-color: #cfc4b2ff;
+      --primary-brown: #8A6440;
+      --dark-brown: #4D2D18;
+      --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+      --gradient-earthy: linear-gradient(135deg, var(--primary-brown), var(--primary-green));
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
-      background: var(--c1) !important;
+      background: var(--bg-color) !important;
       margin: 0;
-      font-family: system-ui, sans-serif;
+      font-family: 'Manrope', system-ui, sans-serif;
+      line-height: 1.6;
+      color: var(--dark-gray);
+      overflow-x: hidden;
     }
+
     .hero {
-      padding: 40px 20px;
+      background-image: url('IMG/hero-bg.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      padding: 100px 20px 80px;
+      position: relative;
+      overflow: hidden;
+      margin-top: -10rem;
+      z-index: 1;
     }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: inherit;      
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      filter: blur(6px) brightness(60%); 
+      transform: scale(1.05);         
+      z-index: -1;
+    }
+
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(132, 204, 22, 0.1) 0%, transparent 70%);
+      animation: rotate 30s linear infinite;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
     .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 2.8rem); 
-      font-weight: 700;
-      color: var(--c4); 
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 800;
+      color: var(--light-green) !important;
+      margin-bottom: 32px;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-top: 5rem;
     }
+
     .hero p {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      margin-top: 15px;
-      color: var(--c8); 
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 40px;
+      max-width: 650px;
+      font-weight: 400;
+      line-height: 1.7;
     }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--gradient-accent);
+      color: var(--accent-green);
+      padding: 20px 40px;
+      border-radius: 60px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: 0 8px 25px rgba(132, 204, 22, 0.4);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0px 0px 20px 5px var(--accent-green);
+    }
+
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s;
+    }
+
+    .hero-cta:hover::before {
+      left: 100%;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 35px rgba(132, 204, 22, 0.5);
+      color: var(--light-green);
+    }
+
     .hero .hero-img {
-      max-width: 250px;
+      max-width: 320px;
       height: auto;
+      filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.3));
+      transition: all 0.4s ease;
+      animation: float 6s ease-in-out infinite;
     }
+
+    .hero .hero-img:hover {
+      transform: scale(1.08) rotate(2deg);
+    }
+
     .home-img-container {
       text-align: center;
+      margin: -60px 0 80px;
+      position: relative;
+      z-index: 3;
     }
+
     .home-img-container img {
-      width: 85% !important;
+      width: min(90%, 900px);
       height: auto;
+      border-radius: 32px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      border: 6px solid var(--white);
+      transition: all 0.4s ease;
     }
+
+    .home-img-container img:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 35px 70px rgba(0, 0, 0, 0.2);
+    }
+
     .subtext {
-      margin-top: 20px;
+      margin: 80px auto;
       text-align: center;
-      font-size: 1rem;
-      color: var(--c8);
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
-      padding: 0 15px;
+      font-size: 1.3rem;
+      color: var(--dark-gray);
+      max-width: 950px;
+      line-height: 1.8;
+      padding: 0 20px;
+      font-weight: 400;
+      position: relative;
     }
-    .custom-line {
-      max-width: 90%; 
-      height: 3px;
-      background: var(--c5);
-      margin: 20px auto;
-      border: none;
+
+    .subtext::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--gradient-accent);
       border-radius: 2px;
     }
+
+    .custom-line {
+      max-width: 150px;
+      height: 6px;
+      background: var(--gradient-primary);
+      margin: 60px auto;
+      border: none;
+      border-radius: 3px;
+      position: relative;
+    }
+
+    .custom-line::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: var(--gradient-glow);
+      border-radius: 5px;
+      z-index: -1;
+    }
+
     .section-heading {
       text-align: center;
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 700;
-      color: var(--c4);
-      margin-top: 40px;
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--dark-brown);
+      margin: 80px 0 24px;
+      position: relative;
+      letter-spacing: -0.02em;
     }
+
+    .section-heading::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--gradient-accent);
+      border-radius: 2px;
+    }
+
     .section-subtext {
       text-align: center;
-      font-size: 1rem;
-      color: var(--c8);
-      max-width: 900px;
-      margin: 15px auto 40px;
-      line-height: 1.6;
-      padding: 0 15px;
+      font-size: 1.2rem;
+      color: #6b7280;
+      max-width: 850px;
+      margin: 0 auto 80px;
+      line-height: 1.8;
+      padding: 0 20px;
+      font-weight: 400;
     }
+
     .stats-section {
-      margin-top: 40px;
+      margin: 80px 0;
     }
+
     .stat-box {
       text-align: center;
-      padding: 20px;
+      padding: 50px 30px;
+      background: var(--light-green);
+      border-radius: 28px;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      height: 100%;
+      border: 2px solid rgba(21, 128, 61, 0.08);
+      position: relative;
+      overflow: hidden;
     }
+
+    .stat-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--gradient-accent);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .stat-box:hover::before {
+      transform: scaleX(1);
+    }
+
+    .stat-box:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(21, 128, 61, 0.15);
+      border-color: var(--accent-green);
+    }
+
     .stat-box img {
-      width: 70px;
-      height: 70px;
+      width: 90px;
+      height: 90px;
       object-fit: contain;
-      margin-bottom: 15px;
+      margin-bottom: 28px;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+      transition: all 0.3s ease;
     }
+
+    .stat-box:hover img {
+      transform: scale(1.1) rotate(5deg);
+    }
+
     .stat-box p {
-      font-size: 0.95rem;
-      color: var(--c8);
+      font-size: 1.15rem;
+      color: var(--dark-gray);
       margin: 0 auto;
-      line-height: 1.4;
-      max-width: 250px;
+      line-height: 1.7;
+      max-width: 300px;
+      font-weight: 500;
     }
+
     .farmer-section {
-      background-image: url('IMG/gradient-bg.jpg');
-      background-repeat: no-repeat; 
+      background-image: url('IMG/grad.jpg');
       background-size: cover;
-      background-position: 10% 20%;
-      padding: 60px 180px;
+      background-position: center;
+      padding: 120px 20px;
       text-align: center;
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto !important;
+      position: relative;
+      overflow: hidden;
+      margin-top: -16rem;
+      z-index: -1;
     }
-    .farmer-section h2 {
-      color: var(--c7);
-      font-size: clamp(1.6rem, 3vw, 2rem);
-      font-weight: 700;
-      margin: 0;
+
+    .farmer-section .container {
+      position: relative;
+      z-index: 2;
     }
-    .farmer-section h3 {
-      font-size: clamp(1.2rem, 2vw, 1.6rem);
-    }
-    .farmer-section p {
-      font-size: 1rem;
+
+    .farmer-section h1 {
+      font-family: 'Inter', sans-serif;
+      color: var(--white);
+      font-weight: 800;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 80px;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      letter-spacing: -0.02em;
+      margin-top: 8rem;
     }
 
     .solutionBenefits-con {
-      text-align: center;
-      margin: 0 auto !important;
+      text-align: left;
+      max-width: 1300px;
+      margin: 0 auto;
     }
 
-    .benefit-card {
-      background: var(--c7);
-      border-radius: 20px;
-      padding: 25px 20px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      height: 100%;
-      transition: transform 0.2s;
-      box-shadow: 0px 0px 20px 5px var(--c2);
+    .solutions-row {
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto !important;
+      display: flex;
     }
-    .benefit-card:hover {
-      transform: translateY(-5px);
+
+    .solution-text-side h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 12px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
-    .benefit-card h5 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-      color: var(--c9);
+
+    .solution-text-side > p {
+      font-size: 1.4rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 50px;
+      font-weight: 400;
     }
-    .benefit-card img {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 15px;
+
+    .solution-text-side .col-6 {
+      margin-bottom: 32px;
     }
-    .benefit-card p {
-      font-size: 0.95rem;
-      color: var(--c9);
-      margin: 0;
-    }
-    .testimonial-section {
-      background: var(--c1); 
-    }
-    .testimonial-section h2 {
-      font-size: 2rem;
-      color: var(--c4) !important;
-    }
-    .testimonial-section p {
+
+    .solution-text-side .col-6 p {
       font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--white);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
+    .sol-icon {
+      padding: 5px;
+      background: var(--white);
+      border-radius: 50px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      box-shadow: 0px 0px 20px 2px var(--accent-green);
+    }
+
+    .sol-icon::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: var(--gradient-accent);
+      border-radius: 22px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .sol-icon:hover::before {
+      opacity: 1;
+    }
+
+    .sol-icon:hover {
+      transform: scale(1.15) rotate(5deg);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .solution-img-side img {
+      transition: all 0.4s ease;
+    }
+
+    .solution-img-side img:hover {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    /* Enhanced benefit cards with sophisticated hover effects */
+    .benefits-row {
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto !important;  
+    }
+    
+    .benefit-card {
+      background: var(--light-green);
+      border-radius: 32px;
+      padding: 50px 32px;
+      text-align: center;
+      box-shadow: 0px 0px 20px 2px var(--accent-green);
+      height: 100%;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--gradient-accent);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .benefit-card::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(132, 204, 22, 0.1) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: all 0.4s ease;
+      border-radius: 50%;
+    }
+
+    .benefit-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .benefit-card:hover::after {
+      width: 300px;
+      height: 300px;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(21, 128, 61, 0.15);
+      border-color: var(--accent-green);
+    }
+
+    .benefit-card h5 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-green);
+      position: relative;
+      z-index: 2;
+    }
+
+    .benefit-card img {
+      width: 72px;
+      height: 72px;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .benefit-card:hover img {
+      transform: scale(1.15) rotate(10deg);
+    }
+
+    .benefit-card p {
+      font-size: 1.05rem;
+      color: var(--dark-gray);
+      margin: 0;
+      line-height: 1.7;
+      font-weight: 400;
+      position: relative;
+      z-index: 2;
+    }
+
+    .testimonial-section {
+      background: var(--bg-color);
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .testimonial-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="testimonial-pattern" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.8" fill="rgba(21, 128, 61, 0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23testimonial-pattern)"/></svg>') repeat;
+    }
+
+    .testimonial-section .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .testimonial-section h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--dark-brown) !important;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .testimonial-section > .container > .row > .col-lg-8 > p {
+      font-size: 1.3rem;
+      color: #6b7280;
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
     .submit-btn {
-      background-color: var(--c6) !important;
-      color: var(--c7) !important;
+      background: var(--gradient-primary);
+      color: var(--white) !important;
       font-weight: 500 !important;
       border-radius: 20px !important;
-      box-shadow: 0px 0px 20px 5px var(--c2) !important;
+      padding: 10px 20px !important;
+      border: none !important;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      display: inline-block;
+      font-size: 1.1rem;
+      position: relative;
+      overflow: hidden;
     }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s;
+    }
+
+    .submit-btn:hover::before {
+      left: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 35px rgba(21, 128, 61, 0.4);
+      color: var(--white);
+    }
+
     .testimonial-scroll {
       display: flex;
       flex-wrap: nowrap;
-      overflow-x: auto; 
+      overflow-x: auto;
       scroll-behavior: smooth;
-      padding-bottom: 10px;
+      padding: 30px 0 50px;
+      gap: 32px;
     }
+
     .testimonial-scroll::-webkit-scrollbar {
-      display: none;
+      height: 0px;
     }
-    .testimonial-scroll {
-      -ms-overflow-style: none;  
-      scrollbar-width: none;    
+
+    .testimonial-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 5px;
     }
+
+    .testimonial-scroll::-webkit-scrollbar-thumb {
+      background: var(--gradient-accent);
+      border-radius: 5px;
+    }
+
     .testimonial-card {
-      flex: 0 0 calc(33.333% - 1rem);
-      min-width: 280px;
+      flex: 0 0 calc(33.333% - 22px);
+      min-width: 350px;
+      border-radius: 28px !important;
+      border: 2px solid #e5e7eb;
+      background: var(--light-green) !important;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      position: relative;
     }
-    .why-aniko {
-      background-color: #1D492C;
-      padding: 80px 0;
+
+    .testimonial-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-accent);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
     }
-    .why-aniko h2,
-    .why-aniko p {
-      color: #fff;
+
+    .testimonial-card:hover::before {
+      transform: scaleX(1);
     }
-    .why-aniko .card {
-      border-radius: 20px;
+
+    .testimonial-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(21, 128, 61, 0.12);
+      border-color: var(--accent-green);
+    }
+
+    .testimonial-card .card-body {
+      padding: 40px 32px 32px;
+    }
+
+    .testimonial-name {
+      font-weight: 700;
+      color: var(--primary-green);
+      font-size: 1.2rem;
+    }
+
+    .testimonial-email {
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+
+    .testimonial-text {
+      color: var(--dark-gray);
+      font-weight: 400;
+      line-height: 1.7;
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+
+    .card-footer {
+      background: var(--pastel-green) !important;
+      border-top: 1px solid #e5e7eb;
+      color: var(--primary-green);
+      font-weight: 600;
+      padding: 20px 32px;
+    }
+
+    .viewTestimonial-btn {
+      background: var(--primary-brown);
+      border: none;
+      border-radius: 60px;
+      padding: 10px 40px;
+      margin: 0 auto;
+      display: block;
+      width: fit-content;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
       overflow: hidden;
     }
-    .why-aniko .card-body img {
-      display: block;
-      margin: 0 auto;
-    }
-    .team-section {
-      margin-top: -50px;
-    }
-    .team-section .team-img {
+
+    .viewTestimonial-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
       width: 100%;
-      height: 300px;
-      object-fit: cover;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s;
     }
+
+    .viewTestimonial-btn:hover::before {
+      left: 100%;
+    }
+
+    .viewTestimonial-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 35px rgba(132, 204, 22, 0.4);
+    }
+
+    .viewTestimonial-btn a {
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+
+    .why-aniko {
+      background: var(--primary-green);
+      padding: 5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .why-aniko .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .why-aniko h2 {
+      font-family: 'Inter', sans-serif;
+      color: var(--accent-green);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: 32px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      letter-spacing: -0.02em;
+    }
+
+    .why-aniko p {
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 1.3rem;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    .why-aniko img {
+      transition: all 0.4s ease;
+    }
+
+    .why-aniko img:hover {
+      transform: scale(1.05) rotate(-1deg);
+    }
+
+    .why-aniko-card {
+      box-shadow: 0px 0px 30px 5px var(--accent-green);
+      border-radius: 32px !important;
+      border: 3px solid rgba(132, 204, 22, 0.3);
+      overflow: hidden;
+      margin-top: 80px;
+      position: relative;
+      padding: 1rem;
+      background-color: var(--dark-green) !important;
+    }
+
+    .why-aniko-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--gradient-accent);
+    }
+
+    .why-aniko-card .card-body {
+      padding: 80px 50px;
+      background-color: var(--dark-green)!important;
+      color: white !important;
+    }
+
+    .why-aniko-card .col-md-4 {
+      padding: 0 40px;
+      position: relative;
+    }
+
+    .why-aniko-card .col-md-4::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      bottom: 20px;
+      right: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--accent-green), transparent);
+    }
+
+    .why-aniko-card .col-md-4:last-child::after {
+      display: none;
+    }
+
+    .why-aniko-card img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 32px;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
+      transition: all 0.3s ease;
+    }
+
+    .why-aniko-card .col-md-4:hover img {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .why-aniko-card p {
+      color: var(--light-green) !important;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .team-section {
+      position: relative;
+      margin-top: 0;
+      background-color: var(--accent-g) !important;
+    }
+
+    .team-img {
+      width: 100%;
+      height: 600px;
+      object-fit: cover;
+      filter: brightness(0.6) contrast(1.1);
+    }
+
     .team-overlay {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       max-width: 800px;
-      padding: 20px;
+      padding: 30px 40px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.1);
     }
-    .team-overlay h2 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
+
+    .team-overlay h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 32px;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      letter-spacing: -0.02em;
     }
+
     .team-overlay p {
-      font-size: 1.2rem;
-      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.8;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     }
+
+    .team-members {
+      padding: 120px 0;
+      background: var(--bg-color);
+    }
+
     .team-member-img {
-      width: 180px;
-      height: 180px;
+      width: 200px;
+      height: 200px;
       object-fit: cover;
-      border: 5px solid #fff;
-      box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+      border: 5px solid var(--white);
+      box-shadow: 0 15px 35px rgba(21, 128, 61, 0.2);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
     }
+
+    .team-member-img::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      background: var(--gradient-accent);
+      border-radius: 50%;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .team-member-img:hover::before {
+      opacity: 1;
+    }
+
+    .team-member-img:hover {
+      transform: scale(1.08) rotate(3deg);
+      box-shadow: 0 20px 45px rgba(21, 128, 61, 0.3);
+    }
+
     .team-members h5 {
-      margin-top: 10px;
-      font-size: 1.2rem;
+      font-family: 'Inter', sans-serif;
+      margin-top: 32px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--dark-brown);
     }
+
     .team-members p {
+      color: #6b7280;
+      font-size: 1.1rem;
       margin-bottom: 0;
+      font-weight: 500;
     }
+
+    .download-img-con {
+      background: var(--gradient-primary);
+      border-radius: 32px;
+      padding: 60px;
+      margin-top: 80px;
+      box-shadow: 0 20px 40px rgba(21, 128, 61, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .download-img-con::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="download-pattern" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23download-pattern)"/></svg>') repeat;
+    }
+
+    .download-img-con img {
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25% { transform: translateY(-10px) rotate(1deg); }
+      50% { transform: translateY(-5px) rotate(0deg); }
+      75% { transform: translateY(-15px) rotate(-1deg); }
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* RESPONSIVENSSSS */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 80px 20px 60px;
+      }
+      
+      .farmer-section {
+        padding: 80px 20px;
+      }
+      
+      .solutions-row {
+        gap: 50px;
+      }
+      
+      .solution-text-side .col-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+      
+      .testimonial-card {
+        min-width: 300px;
+      }
+      
+      .why-aniko-card .col-md-4 {
+        padding: 30px 20px;
+        margin-bottom: 50px;
+      }
+      
+      .why-aniko-card .col-md-4::after {
+        display: none;
+      }
+      
+      .why-aniko-card .border-start.border-end {
+        border-left: none !important;
+        border-right: none !important;
+        border-top: 3px solid var(--accent-green) !important;
+        border-bottom: 3px solid var(--accent-green) !important;
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+
+      .stat-box {
+        padding: 40px 25px;
+      }
+
+      .benefit-card {
+        padding: 40px 25px;
+      }
+    }
+
+    /* scrollinggg */
     html {
       scroll-behavior: smooth;
     }
-    .solutions-row {
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto !important;
+
+    .stat-box,
+    .benefit-card,
+    .testimonial-card {
+      animation: fadeInUp 0.8s ease-out;
     }
+
     .solution-text-side {
+      animation: slideInLeft 0.8s ease-out;
     }
 
-    .sol-icon {
-      background-color: var(--c7);
-      padding: 5px 5px;
-      border-radius: 50%;
-      box-shadow: 0px 0px 20px 5px var(--c2);
+    .solution-img-side {
+      animation: slideInRight 0.8s ease-out;
     }
 
+    * {
+      will-change: auto;
+    }
 
-    .why-aniko-card {
-      box-shadow: 0px 0px 25px 5px var(--c2) !important;
-      margin-bottom: 5rem;
+    .hero-cta,
+    .stat-box,
+    .benefit-card,
+    .testimonial-card,
+    .sol-icon,
+    .team-member-img {
+      will-change: transform;
     }
   </style>
 </head>
 
 <body>
-  <!-- HERO SECTIONNNN -->
-  <div class="container">
-    <section class="hero">
-      <div class="row align-items-center">
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <div class="container">
+      <section class="row align-items-center">
         <div class="col-lg-7 text-center text-lg-start">
-          <h1>Free app for soil health monitoring</h1>
-          <p>The all-in-one app that gives you real-time soil insights for healthier crops and bigger harvests. Download now and grow smarter!</p>
+          <h1>Smart Soil Monitoring for Modern Farmers</h1>
+          <p>Transform your farming with real-time soil insights, AI-powered plant diagnosis, and climate pattern analysis. Join thousands of farmers growing smarter with Aniko.</p>
+          <a href="#download" class="hero-cta">
+            <span>Download Free App</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 17L17 7M17 7H7M17 7V17"/>
+            </svg>
+          </a>
         </div>
         <div class="col-lg-5 text-center mt-4 mt-lg-0">
           <img src="IMG/google-play.png" alt="Download on Google Play" class="hero-img">
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
+  </div>
 
+  <div class="container">
     <div class="home-img-container">
-      <img src="<?php echo htmlspecialchars($imagePath); ?>" alt="Home Image" class="img-fluid">
+      <img src="<?php echo htmlspecialchars($imagePath); ?>" alt="Aniko App Interface" class="img-fluid">
     </div>
 
     <p class="subtext" id="about">
-      Aniko is a smart soil monitoring app that helps you track moisture, temperature, 
-      sunlight, and humidity in real time. Designed for farmers and growers, it empowers 
-      you to make better decisions for healthier crops and higher yields.
+      Aniko revolutionizes agriculture with intelligent soil monitoring technology. Track moisture, temperature, 
+      sunlight, and humidity in real-time while getting AI-powered insights for healthier crops and maximum yields.
     </p>
 
     <hr class="custom-line">
-    <h2 class="section-heading">Aniko in numbers</h2>
+    <h2 class="section-heading">Trusted by Farmers Worldwide</h2>
 
     <p class="section-subtext">
-      Discover how Aniko is transforming agriculture from real-time insights to improved crop yields — the numbers speak for themselves.
+      Discover how Aniko is transforming agriculture with data-driven insights, from real-time monitoring to improved crop yields.
     </p>
 
     <div class="row stats-section">
       <div class="col-md-4 col-12 mb-4">
         <div class="stat-box">
-          <img src="IMG/soil-monitoring-icon.png" alt="Icon 1">
-          <p>Continuous Soil Health Monitoring</p>
+          <img src="IMG/soil-monitoring-icon.png" alt="Soil Monitoring">
+          <p>24/7 Continuous Soil Health Monitoring with Real-Time Alerts</p>
         </div>
       </div>
 
       <div class="col-md-4 col-12 mb-4">
         <div class="stat-box">
-          <img src="IMG/plant-treatment-icon.png" alt="Icon 2">
-          <p>Find the right treatment for more than 780 plant diseases</p>
+          <img src="IMG/plant-treatment-icon.png" alt="Plant Treatment">
+          <p>AI-Powered Diagnosis for 780+ Plant Diseases with Treatment Recommendations</p>
         </div>
       </div>
 
       <div class="col-md-4 col-12 mb-4">
         <div class="stat-box">
-          <img src="IMG/climate-icon.png" alt="Icon 3">
-          <p>Detects over 5 climate anomalies.</p>
+          <img src="IMG/climate-icon.png" alt="Climate Analysis">
+          <p>Advanced Climate Pattern Analysis Detecting 5+ Weather Anomalies</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SOLUTION / BENEFITS ROW -->
+
+  <!-- SOLUTION / BENEFITS SECTION -->
   <section class="farmer-section" id="features">
-    <h2>A solution designed for farmers</h2>
-    <!-- solution container -->
-    <div class="container mt-5 solutionBenefits-con">
-      <div class="row align-items-center solutions-row">
-        <div class="col-lg-6 text-start solution-text-side">
-          <h3 class="text-white fw-bold">Aniko</h3>
-          <p class="text-light mb-4">Features</p>
+    <div class="container">
+      <h1>Precision Agriculture Made Simple</h1>
+      
+      <div class="solutionBenefits-con mt-5">
+        <div class="row align-items-center solutions-row">
+          <div class="col-lg-6 solution-text-side">
+            <h3>Aniko</h3>
+            <p>Advanced Features for Smart Farming</p>
 
-          <div class="row g-4">
-            <div class="col-6 d-flex align-items-center">
-              <img src="IMG/fc1.png" alt="Feature 1" class="me-3 sol-icon" style="width:45px; height:45px;">
-              <p class="text-white mb-0">Climate Pattern Analysis</p>
+            <div class="row g-4">
+              <div class="col-6 d-flex align-items-center">
+                <img src="IMG/fc1.png" alt="Climate Analysis" class="me-3 sol-icon" style="width:45px; height:45px;">
+                <p class="mb-0">Climate Pattern Analysis</p>
+              </div>
+
+              <div class="col-6 d-flex align-items-center">
+                <img src="IMG/fc2.png" alt="Plant Diagnosis" class="me-3 sol-icon" style="width:45px; height:45px;">
+                <p class="mb-0">AI-Powered Plant Diagnosis</p>
+              </div>
+
+              <div class="col-6 d-flex align-items-center">
+                <img src="IMG/fc3.png" alt="Soil Health" class="me-3 sol-icon" style="width:45px; height:45px;">
+                <p class="mb-0">Real-Time Soil Monitoring</p>
+              </div>
+
+              <div class="col-6 d-flex align-items-center">
+                <img src="IMG/fc4.png" alt="Health Check" class="me-3 sol-icon" style="width:45px; height:45px;">
+                <p class="mb-0">Intelligent Health Analytics</p>
+              </div>
             </div>
+          </div>
 
-            <div class="col-6 d-flex align-items-center">
-              <img src="IMG/fc2.png" alt="Feature 2" class="me-3 sol-icon" style="width:45px; height:45px;">
-              <p class="text-white mb-0">AI-Powered Plant Diagnosis</p>
-            </div>
+          <div class="col-lg-4 text-center mt-4 mt-lg-0 solution-img-side">
+            <img src="<?php echo $benefitsImage; ?>" alt="Aniko App Interface" class="img-fluid" style="max-width:380px;">
+          </div>
+        </div>
 
-            <div class="col-6 d-flex align-items-center">
-              <img src="IMG/fc3.png" alt="Feature 3" class="me-3 sol-icon" style="width:45px; height:45px;">
-              <p class="text-white mb-0">Soil Health Monitoring</p>
-            </div>
+        <hr class="custom-line">
 
-            <div class="col-6 d-flex align-items-center">
-              <img src="IMG/fc4.png" alt="Feature 4" class="me-3 sol-icon" style="width:45px; height:45px;">
-              <p class="text-white mb-0">AI-Powered Soil Health Check</p>
+        <div class="row mb-4 benefits-row">
+          <div class="col-lg-10 solution-text-side">
+            <h3>Aniko</h3>
+            <p>Proven Benefits for Your Farm</p>
+
+            <div class="row g-4">
+              <div class="col-md-4 col-12">
+                <div class="benefit-card">
+                  <h5>Monitor & Protect</h5>
+                  <img src="IMG/benefits-icon1.png" alt="24/7 Monitoring">
+                  <p>Continuous field monitoring with instant alerts for optimal crop protection and growth management.</p>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-12">
+                <div class="benefit-card">
+                  <h5>Predict & Prevent</h5>
+                  <img src="IMG/benefits-icon2.png" alt="Climate Prediction">
+                  <p>Advanced climate anomaly prediction helps you prepare and protect your crops from weather threats.</p>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-12">
+                <div class="benefit-card">
+                  <h5>Optimize & Grow</h5>
+                  <img src="IMG/benefits-icon3.png" alt="AI Features">
+                  <p>AI-powered insights and recommendations to maximize yield and optimize resource usage efficiently.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- image side -->
-        <div class="col-lg-6 text-center mt-4 mt-lg-0 solution-img-side">
-          <img src="<?php echo $benefitsImage; ?>" alt="Aniko App" class="img-fluid" style="max-width:380px; border-radius:20px;">
-        </div>
-      </div>
-
-      <hr class="custom-line">
-
-      <!-- Benefits container -->
-      <div class="row mb-4 benefits-row">
-        <div class="col text-start">
-          <h3 class="text-white fw-bold">Aniko</h3>
-          <p class="text-light">Benefits</p>
-        </div>
-      </div>
-
-      <div class="row g-4">
-        <div class="col-md-4 col-12">
-          <div class="benefit-card">
-            <h5>Monitors</h5>
-            <img src="IMG/benefits-icon1.png" alt="Benefit 1">
-            <p>Monitor the field status 24/7</p>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-12">
-          <div class="benefit-card">
-            <h5>Save Resources</h5>
-            <img src="IMG/benefits-icon2.png" alt="Benefit 2">
-            <p>Predict Climate Anomalies</p>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-12">
-          <div class="benefit-card">
-            <h5>Stay Ahead</h5>
-            <img src="IMG/benefits-icon3.png" alt="Benefit 3">
-            <p>AI-Powered Application Features</p>
-          </div>
-        </div>
+       
       </div>
     </div>
   </section>
 
-  <!-- TESTIMONIAL SECTIONNNN -->
+    <!-- TESTIMONIAL SECTIONNNN -->
   <section class="testimonial-section py-5">
     <div class="container">
       <div class="row align-items-center mb-4">
@@ -485,11 +1284,11 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
               echo '    <div class="d-flex align-items-center mb-3">';
               echo '      <img src="' . htmlspecialchars($profile_pic) . '" class="rounded-circle me-3" width="50" height="50" alt="Profile">';
               echo '      <div>';
-              echo '        <h6 class="mb-0">' . htmlspecialchars($row['name']) . '</h6>';
-              echo '        <small class="text-muted">' . htmlspecialchars($row['email']) . '</small>';
+              echo '        <h6 class="mb-0 testimonial-name">' . htmlspecialchars($row['name']) . '</h6>';
+              echo '        <small class="text-muted testimonial-email">' . htmlspecialchars($row['email']) . '</small>';
               echo '      </div>';
               echo '    </div>';
-              echo '    <p class="card-text">' . htmlspecialchars($row['testimonial']) . '</p>';
+              echo '    <p class="card-text testimonial-text">' . htmlspecialchars($row['testimonial']) . '</p>';
               echo '  </div>';
               echo '  <div class="card-footer text-muted">';
               echo '    <small>Posted on ' . date("F j, Y", strtotime($row['created_at'])) . '</small>';
@@ -502,14 +1301,12 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
         ?>
       </div>
 
+      <button class="viewTestimonial-btn"><a href="testimonial-display.php">View Testimonials</a></button>
+
       <?php
         $result = $con->query("SELECT * FROM download_images ORDER BY uploaded_at DESC LIMIT 1");
         if ($row = $result->fetch_assoc()):
       ?>
-
-      <div class="text-center mt-5">
-        <img src="<?= htmlspecialchars($row['image_path']) ?>" alt="Download Now" class="img-fluid" style="max-width: 1000px;">
-      </div>
       <?php endif; ?>
     </div>
   </section>
@@ -567,7 +1364,7 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
     <div class="container-fluid p-0">
       <img src="IMG/team-image.png" alt="Our Team" class="img-fluid team-img w-100">
       <div class="team-overlay text-center text-white">
-        <h2 class="fw-bold">Meet the Team</h2>
+        <h3 class="fw-bold">Meet the Team</h3>
         <p class="lead">We are five 3rd-year IT students who share a passion for technology 
         and innovation, each bringing unique skills and perspectives to create 
         impactful, real-world solutions together.</p>
