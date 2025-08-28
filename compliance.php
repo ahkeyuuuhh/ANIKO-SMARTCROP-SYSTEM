@@ -21,7 +21,7 @@ if (!isset($_SESSION['email'])) {
     <style>
       
         :root {
-            --c1: #CBBA9E;
+            --c1: #cfc4b2ff;
             --c2: #BDE08A;
             --c3: #8A6440;
             --c4: #4D2D18;

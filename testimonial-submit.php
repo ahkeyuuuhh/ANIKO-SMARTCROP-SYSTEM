@@ -18,7 +18,7 @@ if (!isset($_SESSION['email'])) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --c1: #CBBA9E;
+            --c1: #cfc4b2ff;
             --c2: #BDE08A; 
             --c3: #8A6440; 
             --c4: #4D2D18;

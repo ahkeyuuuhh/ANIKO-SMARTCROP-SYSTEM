@@ -23,7 +23,7 @@ $result = $con->query($sql);
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
      :root {
-      --c1: #CBBA9E;
+      --c1: #cfc4b2ff;
       --c2: #BDE08A; 
       --c3: #8A6440; 
       --c4: #4D2D18;
@@ -35,15 +35,16 @@ $result = $con->query($sql);
     }
     body {
       background: var(--c1);
-      color: var(--c7);
+      color: var(--c5);
     }
     .testimonial-card {
-      background: var(--c5);
+      background: var(--c7);
       border: 1px solid var(--c2);
       border-radius: 1rem;
       padding: 1.5rem;
       margin-bottom: 1.5rem;
       transition: transform 0.2s;
+      border: 2px solid var(--c4)
     }
     .testimonial-card:hover {
       transform: translateY(-5px);
@@ -59,11 +60,11 @@ $result = $con->query($sql);
       height: 60px;
       border-radius: 50%;
       margin-right: 1rem;
-      border: 2px solid var(--c2);
+      border: 2px solid var(--c3);
     }
     .testimonial-user h5 {
       margin: 0;
-      color: var(--c2);
+      color: var(--c5);
     }
     .testimonial-text {
       font-size: 1.1rem;

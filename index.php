@@ -44,7 +44,7 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
 
   <style>
     :root {
-      --c1: #CBBA9E;
+      --c1: #cfc4b2ff; /* BG COLOR*/
       --c2: #BDE08A; 
       --c3: #8A6440; 
       --c4: #4D2D18;
@@ -78,11 +78,10 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
       height: auto;
     }
     .home-img-container {
-      margin-top: -80px; 
       text-align: center;
     }
     .home-img-container img {
-      max-width: 100%;
+      width: 85% !important;
       height: auto;
     }
     .subtext {
@@ -141,9 +140,15 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
       max-width: 250px;
     }
     .farmer-section {
-      background: var(--c9);
-      padding: 60px 20px;
+      background-image: url('IMG/gradient-bg.jpg');
+      background-repeat: no-repeat; 
+      background-size: cover;
+      background-position: 10% 20%;
+      padding: 60px 180px;
       text-align: center;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto !important;
     }
     .farmer-section h2 {
       color: var(--c7);
@@ -157,6 +162,12 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
     .farmer-section p {
       font-size: 1rem;
     }
+
+    .solutionBenefits-con {
+      text-align: center;
+      margin: 0 auto !important;
+    }
+
     .benefit-card {
       background: var(--c7);
       border-radius: 20px;
@@ -165,6 +176,7 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       height: 100%;
       transition: transform 0.2s;
+      box-shadow: 0px 0px 20px 5px var(--c2);
     }
     .benefit-card:hover {
       transform: translateY(-5px);
@@ -190,15 +202,22 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
     }
     .testimonial-section h2 {
       font-size: 2rem;
-      color: var(--c4);
+      color: var(--c4) !important;
     }
     .testimonial-section p {
       font-size: 1.1rem;
     }
+    .submit-btn {
+      background-color: var(--c6) !important;
+      color: var(--c7) !important;
+      font-weight: 500 !important;
+      border-radius: 20px !important;
+      box-shadow: 0px 0px 20px 5px var(--c2) !important;
+    }
     .testimonial-scroll {
       display: flex;
       flex-wrap: nowrap;
-      overflow-x: auto;
+      overflow-x: auto; 
       scroll-behavior: smooth;
       padding-bottom: 10px;
     }
@@ -270,6 +289,26 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
     html {
       scroll-behavior: smooth;
     }
+    .solutions-row {
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto !important;
+    }
+    .solution-text-side {
+    }
+
+    .sol-icon {
+      background-color: var(--c7);
+      padding: 5px 5px;
+      border-radius: 50%;
+      box-shadow: 0px 0px 20px 5px var(--c2);
+    }
+
+
+    .why-aniko-card {
+      box-shadow: 0px 0px 25px 5px var(--c2) !important;
+      margin-bottom: 5rem;
+    }
   </style>
 </head>
 
@@ -308,21 +347,21 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
     <div class="row stats-section">
       <div class="col-md-4 col-12 mb-4">
         <div class="stat-box">
-          <img src="IMG/home-icon1.png" alt="Icon 1">
+          <img src="IMG/soil-monitoring-icon.png" alt="Icon 1">
           <p>Continuous Soil Health Monitoring</p>
         </div>
       </div>
 
       <div class="col-md-4 col-12 mb-4">
         <div class="stat-box">
-          <img src="IMG/home-icon2.png" alt="Icon 2">
+          <img src="IMG/plant-treatment-icon.png" alt="Icon 2">
           <p>Find the right treatment for more than 780 plant diseases</p>
         </div>
       </div>
 
       <div class="col-md-4 col-12 mb-4">
         <div class="stat-box">
-          <img src="IMG/home-icon3.png" alt="Icon 3">
+          <img src="IMG/climate-icon.png" alt="Icon 3">
           <p>Detects over 5 climate anomalies.</p>
         </div>
       </div>
@@ -332,45 +371,46 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
   <!-- SOLUTION / BENEFITS ROW -->
   <section class="farmer-section" id="features">
     <h2>A solution designed for farmers</h2>
-    <div class="container mt-5">
-      <div class="row align-items-center">
-        <div class="col-lg-6 text-start">
+    <!-- solution container -->
+    <div class="container mt-5 solutionBenefits-con">
+      <div class="row align-items-center solutions-row">
+        <div class="col-lg-6 text-start solution-text-side">
           <h3 class="text-white fw-bold">Aniko</h3>
           <p class="text-light mb-4">Features</p>
 
           <div class="row g-4">
             <div class="col-6 d-flex align-items-center">
-              <img src="IMG/feature-icon1.png" alt="Feature 1" class="me-3" style="width:45px; height:45px;">
+              <img src="IMG/fc1.png" alt="Feature 1" class="me-3 sol-icon" style="width:45px; height:45px;">
               <p class="text-white mb-0">Climate Pattern Analysis</p>
             </div>
 
             <div class="col-6 d-flex align-items-center">
-              <img src="IMG/feature-icon2.png" alt="Feature 2" class="me-3" style="width:45px; height:45px;">
+              <img src="IMG/fc2.png" alt="Feature 2" class="me-3 sol-icon" style="width:45px; height:45px;">
               <p class="text-white mb-0">AI-Powered Plant Diagnosis</p>
             </div>
 
             <div class="col-6 d-flex align-items-center">
-              <img src="IMG/feature-icon3.png" alt="Feature 3" class="me-3" style="width:45px; height:45px;">
+              <img src="IMG/fc3.png" alt="Feature 3" class="me-3 sol-icon" style="width:45px; height:45px;">
               <p class="text-white mb-0">Soil Health Monitoring</p>
             </div>
 
             <div class="col-6 d-flex align-items-center">
-              <img src="IMG/feature-icon4.png" alt="Feature 4" class="me-3" style="width:45px; height:45px;">
+              <img src="IMG/fc4.png" alt="Feature 4" class="me-3 sol-icon" style="width:45px; height:45px;">
               <p class="text-white mb-0">AI-Powered Soil Health Check</p>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-6 text-center mt-4 mt-lg-0">
+        <!-- image side -->
+        <div class="col-lg-6 text-center mt-4 mt-lg-0 solution-img-side">
           <img src="<?php echo $benefitsImage; ?>" alt="Aniko App" class="img-fluid" style="max-width:380px; border-radius:20px;">
         </div>
       </div>
-    </div>
 
-    <hr class="custom-line">
+      <hr class="custom-line">
 
-    <div class="container mt-5">
-      <div class="row mb-4">
+      <!-- Benefits container -->
+      <div class="row mb-4 benefits-row">
         <div class="col text-start">
           <h3 class="text-white fw-bold">Aniko</h3>
           <p class="text-light">Benefits</p>
@@ -422,7 +462,7 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
             $button_link = htmlspecialchars($login_url) . "&redirect=testimonial-submit";
           }
           ?>
-          <a href="<?php echo $button_link; ?>" class="btn btn-primary">Submit Now!</a>
+          <a href="<?php echo $button_link; ?>" class="btn submit-btn">Submit Now!</a>
         </div>
       </div>
 
@@ -499,7 +539,7 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
         </div>
       </div>
 
-      <div class="card mt-5 shadow-lg border-0">
+      <div class="card mt-5 why-aniko-card">
         <div class="card-body bg-white text-center p-4">
           <div class="row">
             <div class="col-md-4 mb-3 mb-md-0">
