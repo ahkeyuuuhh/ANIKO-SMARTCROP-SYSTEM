@@ -1815,6 +1815,50 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<!-- for draggable floating iconn itezz -->
+<script>
+const btn = document.getElementById('chatbot-button');
+
+let isDragging = false;
+let offsetX, offsetY;
+
+btn.addEventListener('mousedown', (e) => {
+  isDragging = true;
+  offsetX = e.clientX - btn.getBoundingClientRect().left;
+  offsetY = e.clientY - btn.getBoundingClientRect().top;
+  btn.style.transition = 'none';
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+
+  // Calculate new position
+  let left = e.clientX - offsetX;
+  let top = e.clientY - offsetY;
+
+  // Constrain within viewport
+  const maxLeft = window.innerWidth - btn.offsetWidth;
+  const maxTop = window.innerHeight - btn.offsetHeight;
+  if (left < 0) left = 0;
+  if (top < 0) top = 0;
+  if (left > maxLeft) left = maxLeft;
+  if (top > maxTop) top = maxTop;
+
+  btn.style.left = left + 'px';
+  btn.style.top = top + 'px';
+  btn.style.right = 'auto';
+  btn.style.bottom = 'auto';
+});
+
+document.addEventListener('mouseup', () => {
+  if (isDragging) {
+    isDragging = false;
+    btn.style.transition = 'transform 0.2s ease, background 0.2s ease';
+  }
+});
+</script>
+
+
 
 
 
