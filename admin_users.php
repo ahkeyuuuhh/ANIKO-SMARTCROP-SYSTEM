@@ -65,10 +65,8 @@ if (isset($_POST['register_admin'])) {
     }
 }
 
-// ✅ Fetch users
 $users = $con->query("SELECT id, name, email, created_at FROM accounts ORDER BY created_at DESC");
 
-// ✅ Fetch admin accounts
 $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER BY created_at DESC");
 ?>
 <!DOCTYPE html>
@@ -80,8 +78,32 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
 </head>
 
 <style>
+     :root {
+      --primary-green: #1D492C;
+      --accent-green: #84cc16;
+      --pastel-green: #BDE08A;
+      --light-green: #f0fdf4;
+      --dark-green: #143820;
+      --dark-gray: #374151;
+      --light-gray: #f9fafb;
+      --white: #ffffff;
+      --bg-color: #cfc4b2ff;
+      --primary-brown: #8A6440;
+      --dark-brown: #4D2D18;
+      --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+      --gradient-earthy: linear-gradient(135deg, var(--primary-brown), var(--primary-green));
+    }
+
+    body {
+        background: var(--gradient-primary) !important;
+        min-height: 100vh;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        margin: 0;
+    }
+
     .dashboard {
-        margin-left: 260px;
+        margin-left: 280px;
         padding: 20px;
         transition: margin-left 0.3s ease;
     }
@@ -91,6 +113,25 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
             margin-left: 0;
             padding: 15px;
         }
+    }
+
+    .card {
+        background: rgba(20, 56, 32, 0.55); 
+        backdrop-filter: blur(12px) brightness(0.9);
+        -webkit-backdrop-filter: blur(12px) brightness(0.9);
+        border: none !important;
+        box-shadow: 0px 0px 20px 5px var(--pastel-green) !important;
+        margin-bottom: 4rem !important;
+        border-radius: 20px;
+    }
+
+    .card-body h5 {
+        color: var(--light-green);
+        margin-bottom: 1rem !important;
+    }
+
+    .table {
+        border-radius: 20px !important;
     }
 </style>
 
@@ -107,10 +148,8 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
 
             <!-- ✅ Users Section -->
             <div class="card mb-4 shadow">
-                <div class="card-header">
-                    <h5 class="mb-0">User Accounts</h5>
-                </div>
                 <div class="card-body">
+                    <h5 class="mb-0">User Accounts</h5>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
                             <tr>
@@ -144,8 +183,6 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
                 </div>
             </div>
 
-           
-
             <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -177,10 +214,8 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
         </div>
         <!-- ✅ Admin Accounts Section -->
         <div class="card shadow">
-            <div class="card-header">
-                <h5 class="mb-0">Admin Accounts</h5>
-            </div>
             <div class="card-body">
+                <h5 class="mb-0">Admin Accounts</h5>
                 <table class="table table-bordered table-striped">
                     <thead class="table-dark">
                         <tr>
