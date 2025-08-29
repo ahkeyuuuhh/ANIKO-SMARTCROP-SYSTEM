@@ -18,19 +18,23 @@ if (!isset($_SESSION['email'])) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --c1: #cfc4b2ff;
-            --c2: #BDE08A; 
-            --c3: #8A6440; 
-            --c4: #4D2D18;
-            --c5: #112822; 
-            --c6: #4C6444;
-            --c7: #FFFFFF;
-            --c8: #000000;
-            --c9: #1D492C; 
+            --primary-green: #1D492C;
+            --accent-green: #84cc16;
+            --pastel-green: #BDE08A;
+            --light-green: #f0fdf4;
+            --dark-green: #143820;
+            --dark-gray: #374151;
+            --light-gray: #f9fafb;
+            --white: #ffffff;
+            --bg-color: #cfc4b2ff;
+            --primary-brown: #8A6440;
+            --dark-brown: #4D2D18;
+            --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+            --gradient-earthy: linear-gradient(135deg, var(--primary-brown), var(--primary-green));
         }
 
         body {
-            background: var(--c1);
+            background: var(--bg-color) !important;
             margin: 0;
             font-family: 'Inter', system-ui, sans-serif;
         }
@@ -43,13 +47,14 @@ if (!isset($_SESSION['email'])) {
         }
 
         .testimonial-card {
-              background: var(--c9);
-          
-            border-radius: 24px;
+            background: var(--gradient-primary);
             padding: 60px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.05);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-top-right-radius: 100px;
+            border-bottom-left-radius: 100px;
+            margin-top: -3rem;
+            margin-bottom: 3rem;
         }
 
         .testimonial-card:hover {
@@ -64,15 +69,15 @@ if (!isset($_SESSION['email'])) {
         .testimonial-card h2 {
             font-weight: 700;
             font-size: 2.5rem;
-            color: var(--c7);
+            color: var(--light-green) !important;
             margin-bottom: 20px;
-            line-height: 1.2;
             position: relative;
+            text-shadow: 0px 0px 5px var(--accent-green);
         }
 
         .subtitle {
             font-size: 1.125rem;
-             color: var(--c7);
+            color: var(--light-green);
             line-height: 1.7;
             margin-bottom: 30px;
         }
@@ -87,22 +92,28 @@ if (!isset($_SESSION['email'])) {
             display: flex;
             align-items: center;
             margin-bottom: 12px;
-           color: var(--c7);
+            color: var(--light-green);
             font-size: 0.95rem;
         }
 
         .feature-list li i {
-            color: var(--c7);
+            color: var(--pastel-green);
             margin-right: 12px;
             font-size: 1rem;
         }
 
         .form-section {
-            background: var(--c6); 
-            border-radius: 20px;
+            background: var(--pastel-green); 
+            border-top-right-radius: 100px !important;
+            border-bottom-left-radius: 100px !important;
             padding: 40px;
-            
-            color: var(--c4);
+            color: var(--primary-green) !important;
+            box-shadow: 0px 0px 20px 5px var(--accent-green);
+        }
+
+        .form-section label {
+            color: var(--primary-green);
+            font-weight: bold !important;
         }
 
         .form-label {
@@ -116,12 +127,10 @@ if (!isset($_SESSION['email'])) {
         .testimonial-card textarea {
             width: 100%;
             border-radius: 16px;
-          
             padding: 20px;
             font-size: 1rem;
             resize: vertical;
             transition: all 0.3s ease;
-            background: var(--c7);
             color: var(--c5);
             font-family: inherit;
             line-height: 1.6;
@@ -141,11 +150,11 @@ if (!isset($_SESSION['email'])) {
         }
 
         .submit-btn {
-            background: var(--c9); 
+            background: var(--primary-green); 
             color: var(--c7);
             font-weight: 600;
             border: none;
-            padding: 16px 32px;
+            padding: 10px 40px;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -153,18 +162,16 @@ if (!isset($_SESSION['email'])) {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(77, 45, 24, 0.3);
         }
 
         .submit-btn:hover {
-            background: var(--c6);
+            background: var(--dark-green);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(77, 45, 24, 0.4);
         }
 
         .character-count {
             font-size: 0.875rem;
-            color: var(--c7);
+            color: var(--primary-green);
             text-align: right;
             margin-top: 8px;
         }
@@ -282,5 +289,7 @@ if (!isset($_SESSION['email'])) {
         }
     }
 </script>
+
+<?php include 'INCLUDE/footer.php'; ?>
 </body>
 </html>
