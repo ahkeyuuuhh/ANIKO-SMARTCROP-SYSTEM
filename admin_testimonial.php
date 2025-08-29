@@ -60,10 +60,34 @@ $approved = $con->query("
 </head>
 
 <style>
+     :root {
+      --primary-green: #1D492C;
+      --accent-green: #84cc16;
+      --pastel-green: #BDE08A;
+      --light-green: #f0fdf4;
+      --dark-green: #143820;
+      --dark-gray: #374151;
+      --light-gray: #f9fafb;
+      --white: #ffffff;
+      --bg-color: #cfc4b2ff;
+      --primary-brown: #8A6440;
+      --dark-brown: #4D2D18;
+      --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+      --gradient-earthy: linear-gradient(135deg, var(--primary-brown), var(--primary-green));
+    }
+
+    body {
+        background: var(--gradient-primary) !important;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+    }
+
     .dashboard {
-        margin-left: 260px;
+        margin-left: 280px;
         padding: 20px;
         transition: margin-left 0.3s ease;
+        margin-top: 4rem !important;
     }
   
     @media (max-width: 992px) {
@@ -72,13 +96,25 @@ $approved = $con->query("
             padding: 15px;
         }
     }
+
+    .header {
+        text-align: center;
+        color: var(--dark-green);
+        font-weight: bold;
+        text-shadow: 0px 0px 20px var(--pastel-green);
+    }
+
+    .header2 {
+        color: var(--light-green);
+        font-weight: 500;
+    }
 </style>
 
 <body>
     <div class="dashboard">
         <div class="row- g-4">
             <div>
-                <h2>Manage Testimonials</h2>
+                <h1 class="header">Manage Testimonials</h1>
                 <?php if (isset($_SESSION['message'])): ?>
                     <div class="alert alert-info">
                         <?php echo $_SESSION['message']; unset($_SESSION['message']); ?>
@@ -86,7 +122,7 @@ $approved = $con->query("
                 <?php endif; ?>
 
                 <!-- ✅ Pending Testimonials -->
-                <h3 class="mt-4">Pending Testimonials</h3>
+                <h3 class="mt-4 header2">Pending Testimonials</h3>
                 <table class="table table-bordered table-striped">
                     <thead class="table-warning">
                         <tr>
@@ -99,29 +135,37 @@ $approved = $con->query("
                         </tr>
                     </thead>
                     <tbody>
-                    <?php while ($row = $pending->fetch_assoc()): ?>
-                        <tr>
-                            <td><?= $row['id']; ?></td>
-                            <td><?= htmlspecialchars($row['name']); ?></td>
-                            <td><?= htmlspecialchars($row['email']); ?></td>
-                            <td><?= htmlspecialchars($row['testimonial']); ?></td>
-                            <td><?= $row['created_at']; ?></td>
-                            <td>
-                                <a href="admin_testimonial.php?action=approve&id=<?= $row['id']; ?>" 
-                                class="btn btn-sm btn-success"
-                                onclick="return confirm('Approve this testimonial?');">Approve</a>
-                                <a href="admin_testimonial.php?action=delete_testimonial&id=<?= $row['id']; ?>" 
-                                class="btn btn-sm btn-danger"
-                                onclick="return confirm('Delete this testimonial?');">Delete</a>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
+                        <?php if ($pending->num_rows > 0): ?>
+                            <?php while ($row = $pending->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?= $row['id']; ?></td>
+                                    <td><?= htmlspecialchars($row['name']); ?></td>
+                                    <td><?= htmlspecialchars($row['email']); ?></td>
+                                    <td><?= htmlspecialchars($row['testimonial']); ?></td>
+                                    <td><?= $row['created_at']; ?></td>
+                                    <td>
+                                        <a href="admin_testimonial.php?action=approve&id=<?= $row['id']; ?>" 
+                                        class="btn btn-sm btn-success"
+                                        onclick="return confirm('Approve this testimonial?');">Approve</a>
+                                        <a href="admin_testimonial.php?action=delete_testimonial&id=<?= $row['id']; ?>" 
+                                        class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Delete this testimonial?');">Delete</a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">
+                                    No pending testimonials found.
+                                </td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
         </div>
         <!-- ✅ Approved Testimonials -->
-        <h3 class="mt-5">Approved Testimonials</h3>
+        <h3 class="mt-5 header2">Approved Testimonials</h3>
         <table class="table table-bordered table-striped">
             <thead class="table-success">
                 <tr>

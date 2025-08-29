@@ -6,45 +6,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Sidebar</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
   <style>
     :root {
-      --c1: #CBBA9E;
-      --c2: #BDE08A; 
-      --c3: #8A6440; 
-      --c4: #4D2D18;
-      --c5: #112822; 
-      --c6: #4C6444;
-      --c7: #FFFFFF;
-      --c8: #000000;
-      --c9: #1D492C; 
+      --primary-green: #1D492C;
+      --accent-green: #84cc16;
+      --pastel-green: #BDE08A;
+      --light-green: #f0fdf4;
+      --dark-green: #143820;
+      --dark-gray: #374151;
+      --light-gray: #f9fafb;
+      --white: #ffffff;
+      --bg-color: #cfc4b2ff;
+      --primary-brown: #8A6440;
+      --dark-brown: #4D2D18;
+      --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+      --gradient-earthy: linear-gradient(135deg, var(--primary-brown), var(--primary-green));
     }
 
     body {
       margin: 0;
       padding: 0;
-      background: var(--c1);
+      background: var(--bg-color) !important;
       font-family: Arial, sans-serif;
     }
 
     /* Sidebar styles */
     .sidebar {
-      height: 100vh;
-      width: 250px;
+      height: 90%;
+      width: 270px;
       position: fixed;
-      top: 20px;
-      left: 20px;
-      background: var(--c5);
-      color: var(--c7);
+      left: 10px;
+      top: 50px;
+      background: var(--dark-green) !important;
+      color: var(--light-green);
       border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
       padding-top: 20px;
       transition: all 0.3s;
       z-index: 1000;
+      display: flex;
+      flex-direction: column;
     }
 
     .sidebar .nav-link {
-      color: var(--c7);
+      color: var(--light-green);
       padding: 12px 20px;
       display: block;
       font-weight: 500;
@@ -53,8 +59,12 @@
     }
 
     .sidebar .nav-link:hover {
-      background: var(--c6);
+      background: var(--primary-green) !important;
       color: var(--c2);
+    }
+
+    .nav-link i {
+      margin-right: 1rem;
     }
 
     .sidebar .sidebar-header {
@@ -63,15 +73,19 @@
     }
 
     .sidebar .sidebar-header img {
-      width: 60px;
       height: 60px;
-      border-radius: 50%;
       margin-bottom: 10px;
     }
 
     .content {
       margin-left: 290px;
       padding: 20px;
+    }
+
+    .logout {
+      margin-top: auto;
+      font-weight: bold !important;
+      margin-bottom: 1.5rem;
     }
 
     @media (max-width: 992px) {
@@ -88,22 +102,21 @@
 
 <div class="sidebar">
   <div class="sidebar-header">
-    <img src="IMG/logo-hr.png" alt="Admin Logo">
+    <img src="IMG/logo-noText.png" alt="Admin Logo">
     <h5>Admin Panel</h5>
     <?php if(isset($_SESSION['name'])): ?>
       <p>Welcome, Admin</p>
     <?php endif; ?>
   </div>
-  <nav class="nav flex-column">
-     <a class="nav-link" href="admin_index.php">Home</a>
-    <a class="nav-link" href="admin_testimonial.php">Testimonial Management</a>
-    <a class="nav-link" href="admin_users.php">Account Management</a>
-    <a class="nav-link" href="admin_contact.php">Contact Management</a>
+    <a class="nav-link" href="admin_index.php"><i class="bi bi-house-door-fill"></i>Home</a>
+    <a class="nav-link" href="admin_testimonial.php"><i class="bi bi-chat-left-dots-fill"></i>Testimonial Management</a>
+    <a class="nav-link" href="admin_users.php"><i class="bi bi-person-lines-fill"></i>Account Management</a>
+    <a class="nav-link" href="admin_contact.php"><i class="bi bi-chat-square-text-fill"></i>Contact Management</a>
     <a class="nav-link" href="admin_home.php">Home Management</a>
     <a class="nav-link" href="admin_benefits.php">Benefit Management</a>
     <a class="nav-link" href="admin_download.php">Download Management</a>
     <a class="nav-link" href="admin_whyaniko.php">Why Aniko Management</a>
     <a class="nav-link" href="admin_team.php">Team Members </a>
-    <a class="nav-link text-danger" href="admin_logout.php">Logout</a>
+    <a class="nav-link text-danger logout" href="admin_logout.php"><i class="bi bi-box-arrow-left"></i>Logout</a>
   </nav>
 </div>
