@@ -112,7 +112,7 @@
     <a class="nav-link" href="admin_testimonial.php"><i class="bi bi-chat-left-dots-fill"></i>Testimonial Management</a>
     <a class="nav-link" href="admin_users.php"><i class="bi bi-person-lines-fill"></i>Account Management</a>
     <a class="nav-link" href="admin_contact.php"><i class="bi bi-chat-square-text-fill"></i>Contact Management</a>
-    <a class="nav-link" href="admin_cms.php">Content Management</a>
+    <a class="nav-link" href="admin_cms.php"><i class="bi bi-body-text"></i>Content Management</a>
    
     <a class="nav-link text-danger logout" href="admin_logout.php"><i class="bi bi-box-arrow-left"></i>Logout</a>
   </nav>
