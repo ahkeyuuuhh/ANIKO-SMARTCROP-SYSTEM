@@ -245,7 +245,11 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
   <div class="col draggable-col">
     <div class="card table-card h-100">
       <div class="card-body">
-        <h5>Testimonials</h5>
+       <h5 class="d-flex justify-content-between align-items-center">
+    Testimonials
+    <a href="admin_testimonial.php" class="btn btn-primary btn-sm">View More</a>
+</h5>
+
         <table class="table table-bordered table-striped mt-3">
           <thead class="table-info">
             <tr>
@@ -283,7 +287,10 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
   <div class="col draggable-col">
     <div class="card table-card h-100">
       <div class="card-body">
-        <h5>Contact Messages</h5>
+          <h5 class="d-flex justify-content-between align-items-center">
+    Contact Messages
+    <a href="admin_contact.php" class="btn btn-primary btn-sm">View More</a>
+</h5>
         <?php if (isset($_SESSION['message'])): ?>
             <div class="alert alert-info">
                 <?= $_SESSION['message']; unset($_SESSION['message']); ?>
