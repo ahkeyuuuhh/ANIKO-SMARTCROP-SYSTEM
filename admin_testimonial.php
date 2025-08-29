@@ -102,7 +102,14 @@ $approved = $con->query("
         color: var(--light-green);
         font-weight: bold;
         text-shadow: 0px 0px 20px var(--accent-green);
+    }
+
+    .subheader {
+        color: var(--light-green);
+        text-align: center;
+        font-size: 18px;
         margin-bottom: 2rem;
+        font-weight: 400;
     }
 
     .header2 {
@@ -226,6 +233,7 @@ $approved = $con->query("
         <div class="row- g-4">
             <div>
                 <h1 class="header">Manage Testimonials</h1>
+                <h6 class="subheader">Review and approve customer stories before publishing.</h6>
                 <?php if (isset($_SESSION['message'])): ?>
                     <div class="alert alert-info">
                         <?php echo $_SESSION['message']; unset($_SESSION['message']); ?>

@@ -11,7 +11,6 @@ if (!isset($_SESSION['admin_id'])) {
     exit;
 }
 
-// ✅ Handle deleting normal users
 if (isset($_GET['action']) && $_GET['action'] === 'delete_user' && isset($_GET['id'])) {
     $id = intval($_GET['id']);
     $stmt = $con->prepare("DELETE FROM accounts WHERE id = ?");
@@ -26,7 +25,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'delete_user' && isset($_GET['
     exit();
 }
 
-// ✅ Handle deleting admin accounts
 if (isset($_GET['action']) && $_GET['action'] === 'delete_admin' && isset($_GET['id'])) {
     $id = intval($_GET['id']);
     $stmt = $con->prepare("DELETE FROM admin_accounts WHERE id = ?");
@@ -106,6 +104,7 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
         margin-left: 280px;
         padding: 20px;
         transition: margin-left 0.3s ease;
+        margin-top: 4rem;
     }
   
     @media (max-width: 992px) {
@@ -130,15 +129,111 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
         margin-bottom: 1rem !important;
     }
 
-    .table {
-        border-radius: 20px !important;
+    .header {
+        color: var(--light-green);
+        text-shadow: 0px 0px 10px var(--accent-green);
+        font-weight: bold;
     }
+
+    .subheader {
+        color: var(--light-green) !important;
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+    .table {
+        border-radius: 20px;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.15); 
+        color: var(--white);
+        border:none !important;
+    }
+
+    .table tbody tr:hover {
+        background: rgba(255, 255, 255, 0.08) !important;
+        transition: 0.3s ease;
+    }
+
+    .table thead {
+        background: linear-gradient(135deg, #16a34a, #166534) !important;
+        color: var(--dark-green) !important;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+    }
+
+    .table .btn {
+        border-radius: 20px;
+        font-size: 0.85rem;
+        padding: 4px 10px;
+        transition: all 0.3s ease;
+    }
+
+    .table .btn-success:hover {
+        background-color: var(--dark-green) !important;
+        color: var(--white);
+    }
+
+    .table .btn-danger {
+        background: #dc2626;
+        border: none;
+    }
+
+    .table .btn-danger:hover {
+        background: #b91c1c;
+    }
+
+    .bi {
+        margin-right: 1rem;
+    }
+
+    .bi-trash3-fill {
+        margin-right: 7px;
+    }
+
+    .heading {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+        justify-content: space-between !important;
+    }
+
+   .heading .col-6:last-child {
+        display: flex;
+        justify-content: flex-end; /* pushes button to the far right */
+        align-items: center;
+    }
+
+    .heading a {
+        background-color: var(--primary-green) !important;
+        padding: 10px 20px;
+        border-radius: 20px;
+    }
+
+   .heading a:hover {
+    background-color: var(--dark-green) !important;
+    box-shadow: 0 0 20px 5px var(--pastel-green), 0 0 30px var(--dark-green);
+    transition: all 0.3s ease-in-out;
+}
+
+
 </style>
 
 <body>
     <div class="dashboard">
         <div class="g-4">
-            <h2 class="mb-3">Manage Accounts</h2>
+            <div class="row heading">
+                <div class="col-6">
+                    <h1 class="mb-3 header">Manage Accounts</h1>
+                    <h6 class="subheader">Central hub for managing all user credentials.</h6>
+                </div>
+                <div class="col-6">
+                    <a role="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registerModal">
+                        + Register New Admin
+                    </a>
+                </div>
+            </div>
+          
 
             <?php if (isset($_SESSION['message'])): ?>
                 <div class="alert alert-info">
@@ -146,12 +241,11 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
                 </div>
             <?php endif; ?>
 
-            <!-- ✅ Users Section -->
             <div class="card mb-4 shadow">
                 <div class="card-body">
-                    <h5 class="mb-0">User Accounts</h5>
-                    <table class="table table-bordered table-striped">
-                        <thead class="table-dark">
+                    <h5 class="mb-0"><i class="bi bi-person-fill"></i>User Accounts</h5>
+                    <table class="table table-striped table-bordered">
+                        <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
@@ -171,7 +265,7 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
                                     <td>
                                         <a href="admin_users.php?action=delete_user&id=<?= $row['id']; ?>" 
                                         class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Delete this user?');">Delete</a>
+                                        onclick="return confirm('Delete this user?');"><i class="bi bi-trash3-fill"></i>Delete</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -215,9 +309,9 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
         <!-- ✅ Admin Accounts Section -->
         <div class="card shadow">
             <div class="card-body">
-                <h5 class="mb-0">Admin Accounts</h5>
-                <table class="table table-bordered table-striped">
-                    <thead class="table-dark">
+                <h5 class="mb-0"><i class="bi bi-person-fill"></i>Admin Accounts</h5>
+                <table class="table table-striped table-bordered">
+                    <thead>
                         <tr>
                             <th>ID</th>
                             <th>Username</th>
@@ -235,7 +329,7 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
                                 <td>
                                     <a href="admin_users.php?action=delete_admin&id=<?= $row['id']; ?>" 
                                     class="btn btn-sm btn-danger"
-                                    onclick="return confirm('Delete this admin account?');">Delete</a>
+                                    onclick="return confirm('Delete this admin account?');"><i class="bi bi-trash3-fill"></i>Delete</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -246,11 +340,6 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
                 </table>
             </div>
         </div>
-         <div class="container my-4">
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registerModal">
-                    + Register New Admin
-                </button>
-            </div>
     </div>
     
 
