@@ -74,22 +74,32 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-                  <ul class="navbar-nav gap-3">
-            <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="index.php#about">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="index.php#features">Features</a></li>
-            <li class="nav-item"><a class="nav-link" href="testimonial-display.php">Testimonial</a></li>
-            <li class="nav-item"><a class="nav-link" href="index.php#download">Download</a></li>
-            <li class="nav-item"><a class="nav-link" href="index.php#why-aniko">Why Aniko</a></li>
-            <li class="nav-item"><a class="nav-link" href="index.php#team">Team</a></li>
-            <?php
-              if (isset($_SESSION['email'])) {
-                  echo '<li class="nav-item"><a class="nav-link" href="compliance.php">Compliance</a></li>';
-              } else {
-                  echo '<li class="nav-item"><a class="nav-link" href="gClientSetup.php?redirect=compliance">Compliance</a></li>';
-              }
-            ?>
-          </ul>
+             <ul class="navbar-nav gap-3">
+                <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.php#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.php#features">Features</a></li>
+
+                <?php
+                  if (isset($_SESSION['email'])) {
+                      echo '<li class="nav-item"><a class="nav-link" href="testimonial-display.php">Testimonial</a></li>';
+                  } else {
+                      echo '<li class="nav-item"><a class="nav-link" href="gClientSetup.php?redirect=testimonial-display">Testimonial</a></li>';
+                  }
+                ?>
+
+                <li class="nav-item"><a class="nav-link" href="index.php#download">Download</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.php#why-aniko">Why Aniko</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.php#team">Team</a></li>
+
+                <?php
+                  if (isset($_SESSION['email'])) {
+                      echo '<li class="nav-item"><a class="nav-link" href="compliance.php">Compliance</a></li>';
+                  } else {
+                      echo '<li class="nav-item"><a class="nav-link" href="gClientSetup.php?redirect=compliance">Compliance</a></li>';
+                  }
+                ?>
+              </ul>
+
 
         </div>
       </div>

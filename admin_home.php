@@ -43,15 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['home_image'])) {
 // Handle delete image
 if (isset($_GET['action']) && $_GET['action'] === 'delete_home_image' && isset($_GET['id'])) {
     $id = intval($_GET['id']);
-    $stmt = $con->prepare("SELECT file_path FROM home_images WHERE id = ?");
+    $stmt = $con->prepare("SELECT image_path FROM home_images WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
-    $stmt->bind_result($filePath);
+    $stmt->bind_result($imagePath);
     $stmt->fetch();
     $stmt->close();
 
-    if (!empty($filePath) && file_exists($filePath)) {
-        unlink($filePath);
+    if (!empty($imagePath) && file_exists($imagePath)) {
+        unlink($imagePath);
     }
 
     $stmt = $con->prepare("DELETE FROM home_images WHERE id = ?");
@@ -132,7 +132,7 @@ $images = $con->query("SELECT * FROM home_images ORDER BY uploaded_at DESC");
                         <td><?= htmlspecialchars($row['image_path']) ?></td>
                         <td><?= htmlspecialchars($row['uploaded_at']) ?></td>
                         <td>
-                            <a href="admin_index.php?delete_id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this image?')">Delete</a>
+                            <a href="admin_home.php?action=delete_home_image&id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this image?')">Delete</a>
                         </td>
                     </tr>
                 <?php endwhile; ?>

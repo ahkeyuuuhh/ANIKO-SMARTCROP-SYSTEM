@@ -1098,10 +1098,240 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
     .team-member-img {
       will-change: transform;
     }
+
+ /* Floating Circle Button */
+.floating-circle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: var(--light-green);
+  color: var(--primary-green);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.floating-circle:hover {
+  transform: scale(1.1);
+  background: var(--accent-green);
+  color: #fff;
+}
+
+/* Side Chat Panel */
+.chat-panel {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 350px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -3px 0 10px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.chat-panel.open {
+  right: 0; 
+}
+
+
+.chat-header {
+  background: var(--primary-green);
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+.chat-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: #f9f9f9;
+}
+
+
+.chat-footer {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+.chat-footer input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+
+.chat-footer button {
+  background: var(--primary-green);
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  cursor: pointer;
+}
+
+.recommendations {
+  background: #f1f8f4;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+
+.recommendations p {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+#suggestions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.suggest-btn {
+  padding: 6px 10px;
+  font-size: 13px;
+  background: var(--light-green);
+  color: var(--primary-green);
+  border: 1px solid var(--primary-green);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.suggest-btn:hover {
+  background: var(--primary-green);
+  color: #fff;
+}
+
+.retry-btn {
+  display: block;
+  width: 100%;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 8px;
+  padding: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.retry-btn:hover {
+  background: #ccc;
+}
+
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.message {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  white-space: pre-wrap; 
+  font-size: 14px;
+}
+
+.message.user {
+  align-self: flex-end;
+  background: var(--light-green);
+  color: var(--primary-green);
+  border: 1px solid var(--primary-green);
+}
+
+.message.bot {
+  align-self: flex-start;
+  background: #f1f1f1;
+  color: #333;
+  border: 1px solid #ddd;
+}
+.clear-btn {
+  display: block;
+  width: 100%;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 8px;
+  padding: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 8px;
+  color: red;
+}
+
+.clear-btn:hover {
+  background: #ccc;
+}
+
+
   </style>
 </head>
 
 <body>
+
+    <!-- Floating Circle -->
+    <div id="chatbot-button" class="floating-circle">
+      <img src="IMG/logo-notext.png" alt="Chatbot" style="width:25px; height:25px;">
+    </div>
+
+    <!-- Chat Panel -->
+    <div id="chat-panel" class="chat-panel">
+      <div class="chat-header">
+        <span>AI Chatbot</span>
+        <div class="chat-actions">
+          <button id="close-panel" class="close-btn">X</button>
+        </div>
+      </div>
+
+      <!-- Recommendations -->
+      <div id="recommendations" class="recommendations">
+        <p>Suggested farming questions:</p>
+        <div id="suggestions-list"></div>
+        <button id="retry-btn" class="retry-btn">Retry Suggestions</button>
+           <button id="clear-history" class="clear-btn">Clear</button>
+      </div>
+
+      <!-- Chat Body -->
+      <div id="chat-body" class="chat-body"></div>
+
+      <!-- Chat Footer -->
+      <div class="chat-footer">
+        <input type="text" id="chat-input" placeholder="Type a message...">
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+
   <!-- HERO SECTION -->
   <div class="hero">
     <div class="container">
@@ -1412,6 +1642,183 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
       }
       setInterval(autoScroll, 20);
     });
+
+
+   
+
   </script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Elements
+  const chatbotBtn = document.getElementById("chatbot-button");
+  const chatPanel = document.getElementById("chat-panel");
+  const closePanel = document.getElementById("close-panel");
+  const sendBtn = document.getElementById("send-btn");
+  const chatBody = document.getElementById("chat-body");
+  const chatInput = document.getElementById("chat-input");
+  const retryBtn = document.getElementById("retry-btn");
+  const suggestionsList = document.getElementById("suggestions-list");
+  const clearBtn = document.getElementById("clear-history");
+
+  // Chat history storage key
+  const STORAGE_KEY = "chatHistory";
+  let chatHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+  // Open/close panel
+  chatbotBtn.addEventListener("click", () => {
+    chatPanel.classList.add("open");
+    chatbotBtn.style.display = "none";
+    renderChatHistory();
+    renderSuggestions();
+  });
+
+  closePanel.addEventListener("click", () => {
+    chatPanel.classList.remove("open");
+    chatbotBtn.style.display = "flex";
+  });
+
+  // Append message to UI + save history
+  function appendMessage(sender, text, save = true) {
+    const msg = document.createElement("div");
+    msg.classList.add("message");
+    msg.classList.add(sender === "You" ? "user" : "bot");
+    msg.innerText = text.trim();
+
+    chatBody.appendChild(msg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    if (save) {
+      chatHistory.push({ sender, text });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(chatHistory));
+    }
+  }
+
+  // Render entire history
+  function renderChatHistory() {
+    chatBody.innerHTML = "";
+    chatHistory.forEach(msg => appendMessage(msg.sender, msg.text, false));
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  // Clear history
+  function clearHistory() {
+    localStorage.removeItem(STORAGE_KEY);
+    chatHistory = [];
+    renderChatHistory();
+  }
+
+  clearBtn && clearBtn.addEventListener("click", clearHistory);
+
+  // Send message
+  function sendMessage() {
+    const userMsg = chatInput.value.trim();
+    if (!userMsg) return;
+    appendMessage("You", userMsg);
+    chatInput.value = "";
+    getDeepSeekResponse(userMsg);
+  }
+
+  sendBtn.addEventListener("click", sendMessage);
+  chatInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // ---------------- Suggestions ----------------
+  const allSuggestions = [
+    "How to improve rice yield?",
+    "Best fertilizer for corn?",
+    "How to prevent crop diseases?",
+    "What are sustainable farming practices?",
+    "How to save water in irrigation?",
+    "Best organic pesticides?",
+    "How to grow vegetables in dry soil?",
+    "When is the best season to plant rice?",
+    "Tips for greenhouse farming?",
+    "How to raise chickens for eggs?",
+    "How to manage livestock health?",
+    "What crops are profitable in small farms?",
+    "How to start organic farming?",
+    "Best practices for crop rotation?",
+    "How to prevent soil erosion?",
+    "How to use compost effectively?",
+    "How to deal with weeds naturally?",
+    "How to increase banana production?",
+    "Best practices for mango farming?",
+    "How to improve soil fertility naturally?",
+    "How to manage farm expenses?",
+    "Best modern farming technologies?",
+    "How does climate change affect farming?",
+    "Best practices for sustainable livestock?",
+    "How to market farm products effectively?",
+  ];
+
+  function getRandomSuggestions(num = 5) {
+    let shuffled = [...allSuggestions].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, num);
+  }
+
+  function renderSuggestions() {
+    suggestionsList.innerHTML = "";
+    getRandomSuggestions(5).forEach(suggestion => {
+      const btn = document.createElement("button");
+      btn.className = "suggest-btn";
+      btn.textContent = suggestion;
+      btn.addEventListener("click", () => {
+        appendMessage("You", suggestion);
+        getDeepSeekResponse(suggestion);
+      });
+      suggestionsList.appendChild(btn);
+    });
+  }
+
+  retryBtn && retryBtn.addEventListener("click", renderSuggestions);
+
+  // ---------------- OpenRouter API ----------------
+  async function getDeepSeekResponse(userInput) {
+    appendMessage("Bot", "Thinking...");
+    try {
+      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer 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", // your API key
+          "HTTP-Referer": "https://yourwebsite.com",
+          "X-Title": "ChatbotPanel",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          "model": "deepseek/deepseek-r1:free",
+          "messages": [{ role: "user", content: userInput }]
+        })
+      });
+
+      const data = await response.json();
+
+      // Remove "Thinking..." message
+      const lastMsg = chatBody.lastElementChild;
+      if (lastMsg && lastMsg.innerText === "Thinking...") {
+        chatBody.removeChild(lastMsg);
+      }
+
+      const text = data.choices?.[0]?.message?.content || "No response from the model.";
+      appendMessage("Bot", text);
+    } catch (err) {
+      appendMessage("Bot", `Error: ${err.message}`);
+      console.error(err);
+    }
+  }
+
+  // Render initial suggestions
+  renderSuggestions();
+});
+</script>
+
+
+
+
+
+
 </body>
 </html>

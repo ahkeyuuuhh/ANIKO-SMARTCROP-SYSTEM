@@ -344,25 +344,41 @@ $result = $con->query($sql);
       <?php endif; ?>
     </div>
 
-    <?php if ($count > 9): ?>
-      <div class="text-center mt-5">
-        <button id="viewMoreBtn" class="btn btn-success">View More Stories</button>
-      </div>
-    <?php endif; ?>
+  <?php if ($count > 9): ?>
+  <div class="text-center mt-5">
+    <button id="viewMoreBtn" class="btn btn-success">View More Stories</button>
+    <button id="showLessBtn" class="btn btn-success" style="display: none;">Show Less Stories</button>
+  </div>
+<?php endif; ?>
+
   </div>
 
-  <script>
-    document.getElementById('viewMoreBtn')?.addEventListener('click', function () {
-      const hiddenItems = document.querySelectorAll('.hidden-testimonial');
-      hiddenItems.forEach((el, index) => {
-        setTimeout(() => {
-          el.style.display = 'block';
-          el.style.animation = `fadeInUp 0.6s ease forwards`;
-        }, index * 100);
-      });
-      this.style.display = 'none'; 
+ <script>
+  const viewMoreBtn = document.getElementById('viewMoreBtn');
+  const showLessBtn = document.getElementById('showLessBtn');
+  const hiddenItems = document.querySelectorAll('.hidden-testimonial');
+
+  viewMoreBtn?.addEventListener('click', function () {
+    hiddenItems.forEach((el, index) => {
+      setTimeout(() => {
+        el.style.display = 'block';
+        el.style.animation = `fadeInUp 0.6s ease forwards`;
+      }, index * 100);
     });
-  </script>
+    viewMoreBtn.style.display = 'none';
+    showLessBtn.style.display = 'inline-block';
+  });
+
+  showLessBtn?.addEventListener('click', function () {
+    hiddenItems.forEach(el => {
+      el.style.display = 'none';
+    });
+    showLessBtn.style.display = 'none';
+    viewMoreBtn.style.display = 'inline-block';
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // optional: scroll back up
+  });
+</script>
+
 
   <?php include 'INCLUDE/footer.php';?>
 
