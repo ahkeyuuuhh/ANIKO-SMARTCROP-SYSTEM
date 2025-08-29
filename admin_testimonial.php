@@ -80,7 +80,7 @@ $approved = $con->query("
         background: var(--gradient-primary) !important;
         background-size: cover;
         background-repeat: no-repeat;
-        height: 100vh;
+        max-height: 1000vh;
     }
 
     .dashboard {
@@ -99,14 +99,125 @@ $approved = $con->query("
 
     .header {
         text-align: center;
-        color: var(--dark-green);
+        color: var(--light-green);
         font-weight: bold;
-        text-shadow: 0px 0px 20px var(--pastel-green);
+        text-shadow: 0px 0px 20px var(--accent-green);
+        margin-bottom: 2rem;
     }
 
     .header2 {
         color: var(--light-green);
         font-weight: 500;
+        margin-bottom: 1rem;
+    }
+
+    table {
+        border-radius: 20px;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.15); 
+        color: var(--white);
+        border:none !important;
+    }
+
+    .approved-table th {
+        text-align: center;
+        font-weight: 600;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.25) !important; 
+        color: var(--light-green);
+    }
+
+    .approved-table td {
+        vertical-align: middle;
+        padding: 10px;
+        color: var(--primary-green) !important;
+    }
+
+    .pending-table th {
+        text-align: center;
+        font-weight: 600;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.25) !important; 
+        color: var(--light-green);
+    }
+
+    .pending-table td {
+        vertical-align: middle;
+        padding: 10px;
+        color: var(--primary-green) !important;
+    }
+
+    .table tbody tr:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transition: 0.3s ease;
+    }
+
+    .pending-table thead {
+        background: linear-gradient(135deg, #16a34a, #166534) !important;
+        color: var(--dark-green) !important;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+    }
+
+    .approved-table thead {
+        background: linear-gradient(135deg, #16a34a, #166534) !important;
+        border-top-right-radius: 20px !important; 
+        border-top-left-radius: 20px !important;
+    }
+
+    .approved-table {
+        border: none !important;
+    }
+
+    .table .btn {
+        border-radius: 20px;
+        font-size: 0.85rem;
+        padding: 4px 10px;
+        transition: all 0.3s ease;
+    }
+
+    .table .btn-success {
+        background: var(--pastel-green);
+        border: none;
+        color: var(--dark-green);
+    }
+
+    .table .btn-success:hover {
+        background-color: var(--dark-green) !important;
+        color: var(--white);
+    }
+
+    .table .btn-danger {
+        background: #dc2626;
+        border: none;
+    }
+
+    .table .btn-danger:hover {
+        background: #b91c1c;
+    }
+
+    .card {
+        background: rgba(20, 56, 32, 0.55); 
+        backdrop-filter: blur(12px) brightness(0.9);
+        -webkit-backdrop-filter: blur(12px) brightness(0.9);
+        padding: 20px 30px !important;
+        border: none !important;
+        margin-bottom: 2rem;
+        border-radius: 20px;
+        box-shadow: 0px 0px 20px 4px var(--pastel-green);
+    }
+
+    .bi {
+        margin-right: 1rem;
+    }
+
+    .bi-trash3-fill, .bi-check {
+        margin-right: 7px !important;
+    }
+
+    .last-td {
+        text-align: center;
     }
 </style>
 
@@ -122,51 +233,55 @@ $approved = $con->query("
                 <?php endif; ?>
 
                 <!-- ✅ Pending Testimonials -->
-                <h3 class="mt-4 header2">Pending Testimonials</h3>
-                <table class="table table-bordered table-striped">
-                    <thead class="table-warning">
-                        <tr>
-                            <th>ID</th>
-                            <th>User</th>
-                            <th>Email</th>
-                            <th>Testimonial</th>
-                            <th>Created At</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if ($pending->num_rows > 0): ?>
-                            <?php while ($row = $pending->fetch_assoc()): ?>
+                <div class="card pending-card">
+                    <h3 class="mt-2 header2"><i class="bi bi-clock-fill"></i>Pending Testimonials</h3>
+                    <table class="table table-bordered table-striped pending-table">
+                        <thead class="table-warning">
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>Testimonial</th>
+                                <th>Created At</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if ($pending->num_rows > 0): ?>
+                                <?php while ($row = $pending->fetch_assoc()): ?>
+                                    <tr>
+                                        <td><?= $row['id']; ?></td>
+                                        <td><?= htmlspecialchars($row['name']); ?></td>
+                                        <td><?= htmlspecialchars($row['email']); ?></td>
+                                        <td><?= htmlspecialchars($row['testimonial']); ?></td>
+                                        <td><?= $row['created_at']; ?></td>
+                                        <td class="last-td">
+                                            <a href="admin_testimonial.php?action=approve&id=<?= $row['id']; ?>" 
+                                            class="btn btn-sm btn-success"
+                                            onclick="return confirm('Approve this testimonial?');"><i class="bi bi-check"></i>  Approve</a>
+                                            <a href="admin_testimonial.php?action=delete_testimonial&id=<?= $row['id']; ?>" 
+                                            class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Delete this testimonial?');"><i class="bi bi-trash3-fill"></i>Delete</a>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            <?php else: ?>
                                 <tr>
-                                    <td><?= $row['id']; ?></td>
-                                    <td><?= htmlspecialchars($row['name']); ?></td>
-                                    <td><?= htmlspecialchars($row['email']); ?></td>
-                                    <td><?= htmlspecialchars($row['testimonial']); ?></td>
-                                    <td><?= $row['created_at']; ?></td>
-                                    <td>
-                                        <a href="admin_testimonial.php?action=approve&id=<?= $row['id']; ?>" 
-                                        class="btn btn-sm btn-success"
-                                        onclick="return confirm('Approve this testimonial?');">Approve</a>
-                                        <a href="admin_testimonial.php?action=delete_testimonial&id=<?= $row['id']; ?>" 
-                                        class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Delete this testimonial?');">Delete</a>
+                                    <td colspan="6" class="text-center text-muted">
+                                        No pending testimonials found.
                                     </td>
                                 </tr>
-                            <?php endwhile; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="6" class="text-center text-muted">
-                                    No pending testimonials found.
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+               
             </div>
         </div>
         <!-- ✅ Approved Testimonials -->
-        <h3 class="mt-5 header2">Approved Testimonials</h3>
-        <table class="table table-bordered table-striped">
+        <div class="card approved-card">
+            <h3 class="mt-2 header2"><i class="bi bi-check-square-fill"></i>Approved Testimonials</h3>
+            <table class="table table-bordered table-striped approved-table">
             <thead class="table-success">
                 <tr>
                     <th>ID</th>
@@ -185,15 +300,17 @@ $approved = $con->query("
                     <td><?= htmlspecialchars($row['email']); ?></td>
                     <td><?= htmlspecialchars($row['testimonial']); ?></td>
                     <td><?= $row['created_at']; ?></td>
-                    <td>
+                    <td class="last-td">
                         <a href="admin_testimonial.php?action=delete_testimonial&id=<?= $row['id']; ?>" 
                         class="btn btn-sm btn-danger"
-                        onclick="return confirm('Delete this testimonial?');">Delete</a>
+                        onclick="return confirm('Delete this testimonial?');"><i class="bi bi-trash3-fill"></i>Delete</a>
                     </td>
                 </tr>
             <?php endwhile; ?>
             </tbody>
         </table>
+        </div>
+       
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
