@@ -3,66 +3,52 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-require_once 'CONFIG/config.php';
+require 'vendor/autoload.php'; // Load PHPMailer
+include 'CONFIG/config.php';  // In case you need DB logging
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require __DIR__ . '/vendor/autoload.php'; 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $contactId = intval($_POST['contact_id'] ?? 0);
-    $toEmail   = trim($_POST['to_email'] ?? '');
-    $subject   = trim($_POST['subject'] ?? 'Re: Your Inquiry');
-    $message   = trim($_POST['reply_message'] ?? '');
+    $contact_id = $_POST['contact_id'];
+    $to_email   = $_POST['to_email'];
+    $subject    = $_POST['subject'];
+    $reply_msg  = $_POST['reply_message'];
 
-    if (!filter_var($toEmail, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['message'] = "Invalid recipient email address.";
-        header("Location: admin_index.php");
-        exit();
-    }
-
-    if ($message === '') {
-        $_SESSION['message'] = "Reply message cannot be empty.";
-        header("Location: admin_index.php");
-        exit();
-    }
+    // Setup PHPMailer
+    $mail = new PHPMailer(true);
 
     try {
-        $mail = new PHPMailer(true);
-       
+        // Server settings (adjust based on your email provider)
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
-        $mail->SMTPAuth   = true;
-        $mail->Username   = 'col.2023010024@lsb.edu.ph';      
-        $mail->Password   = '';   
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // 
-        $mail->Port       = 587;
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'roldancchristian@gmail.com';       // your Gmail
+            $mail->Password   = 'ihmd kpcp njeu lnfs';         // Gmail app password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
 
-        $mail->setFrom('col.2023010024@lsb.edu.ph', 'Admin Support');
-        $mail->addAddress($toEmail);
+$mail->setFrom('roldancchristian@gmail.com', 'Admin');
 
+
+        // Sender and recipient
+        $mail->setFrom('roldancchristian@gmail.com', 'ANIKO');
+        $mail->addAddress($to_email);   
+
+        // Content
         $mail->isHTML(true);
         $mail->Subject = $subject;
-        $mail->Body    = nl2br(htmlspecialchars($message));
-        $mail->AltBody = $message;
+        $mail->Body    = nl2br(htmlspecialchars($reply_msg));
+        $mail->AltBody = strip_tags($reply_msg);
 
         $mail->send();
 
-        // (Optional) Save reply history
-        // $stmt = $con->prepare("INSERT INTO contact_replies (contact_id, to_email, subject, message) VALUES (?, ?, ?, ?)");
-        // $stmt->bind_param("isss", $contactId, $toEmail, $subject, $message);
-        // $stmt->execute();
-        // $stmt->close();
-
-        $_SESSION['message'] = "Reply sent successfully!";
+        $_SESSION['message'] = "Reply sent successfully to $to_email!";
     } catch (Exception $e) {
-        $_SESSION['message'] = "Error sending reply: " . $mail->ErrorInfo;
+        $_SESSION['message'] = "Reply failed. Error: {$mail->ErrorInfo}";
     }
 
-    header("Location: admin_index.php");
-    exit();
-} else {
-    header("Location: admin_index.php");
+    header("Location: admin_contact.php");
     exit();
 }
+?>
