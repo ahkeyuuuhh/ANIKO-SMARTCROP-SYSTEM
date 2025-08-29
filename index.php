@@ -1299,37 +1299,37 @@ if ($result2 && $row2 = $result2->fetch_assoc()) {
 
 <body>
 
-    <!-- Floating Circle -->
-    <div id="chatbot-button" class="floating-circle">
-      <img src="IMG/logo-notext.png" alt="Chatbot" style="width:25px; height:25px;">
+  <!-- Floating Circle -->
+<div id="chatbot-button" class="floating-circle">
+  <img src="IMG/logo-notext.png" alt="Chatbot" style="width:25px; height:25px;">
+</div>
+
+<!-- Chat Panel -->
+<div id="chat-panel" class="chat-panel">
+  <div class="chat-header">
+    <span>AI Chatbot</span>
+    <div class="chat-actions">
+      <button id="close-panel" class="close-btn">X</button>
     </div>
+  </div>
 
-    <!-- Chat Panel -->
-    <div id="chat-panel" class="chat-panel">
-      <div class="chat-header">
-        <span>AI Chatbot</span>
-        <div class="chat-actions">
-          <button id="close-panel" class="close-btn">X</button>
-        </div>
-      </div>
+  <!-- Recommendations -->
+  <div id="recommendations" class="recommendations">
+    <p>Suggested farming questions:</p>
+    <div id="suggestions-list"></div>
+    <button id="retry-btn" class="retry-btn">Retry Suggestions</button>
+    <button id="clear-history" class="clear-btn">Clear</button>
+  </div>
 
-      <!-- Recommendations -->
-      <div id="recommendations" class="recommendations">
-        <p>Suggested farming questions:</p>
-        <div id="suggestions-list"></div>
-        <button id="retry-btn" class="retry-btn">Retry Suggestions</button>
-           <button id="clear-history" class="clear-btn">Clear</button>
-      </div>
+  <!-- Chat Body -->
+  <div id="chat-body" class="chat-body"></div>
 
-      <!-- Chat Body -->
-      <div id="chat-body" class="chat-body"></div>
-
-      <!-- Chat Footer -->
-      <div class="chat-footer">
-        <input type="text" id="chat-input" placeholder="Type a message...">
-        <button id="send-btn">Send</button>
-      </div>
-    </div>
+  <!-- Chat Footer -->
+  <div class="chat-footer">
+    <input type="text" id="userInput" placeholder="Type a message...">
+    <button id="send-btn" class="btn-success">Send</button>
+  </div>
+</div>
 
 
   <!-- HERO SECTION -->
@@ -1655,14 +1655,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const closePanel = document.getElementById("close-panel");
   const sendBtn = document.getElementById("send-btn");
   const chatBody = document.getElementById("chat-body");
-  const chatInput = document.getElementById("chat-input");
+  const chatInput = document.getElementById("userInput"); // fixed ID
   const retryBtn = document.getElementById("retry-btn");
   const suggestionsList = document.getElementById("suggestions-list");
   const clearBtn = document.getElementById("clear-history");
 
-  // Chat history storage key
-  const STORAGE_KEY = "chatHistory";
-  let chatHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+const STORAGE_KEY = "chatHistory_" + currentUser;  // unique per user
+let chatHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
 
   // Open/close panel
   chatbotBtn.addEventListener("click", () => {
@@ -1677,13 +1677,11 @@ document.addEventListener("DOMContentLoaded", () => {
     chatbotBtn.style.display = "flex";
   });
 
-  // Append message to UI + save history
+  // Append message
   function appendMessage(sender, text, save = true) {
     const msg = document.createElement("div");
-    msg.classList.add("message");
-    msg.classList.add(sender === "You" ? "user" : "bot");
+    msg.classList.add("message", sender === "You" ? "user" : "bot");
     msg.innerText = text.trim();
-
     chatBody.appendChild(msg);
     chatBody.scrollTop = chatBody.scrollHeight;
 
@@ -1693,21 +1691,63 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Render entire history
+  // Render chat history
   function renderChatHistory() {
     chatBody.innerHTML = "";
     chatHistory.forEach(msg => appendMessage(msg.sender, msg.text, false));
-    chatBody.scrollTop = chatBody.scrollHeight;
   }
 
   // Clear history
-  function clearHistory() {
+  clearBtn.addEventListener("click", () => {
     localStorage.removeItem(STORAGE_KEY);
     chatHistory = [];
     renderChatHistory();
-  }
+  });
 
-  clearBtn && clearBtn.addEventListener("click", clearHistory);
+ async function getAIResponse(userMsg) {
+  appendMessage("Bot", "Thinking...", false);
+
+  try {
+    // Build message history with a farming-only system instruction
+    const messages = [
+      {
+        role: "system",
+        content: "You are Aniko, an AI farming assistant. You ONLY answer farming-related questions. If a user asks something unrelated to farming, politely say: 'I specialize in farming topics. Can you ask me something about crops, livestock, soil, or agriculture?'"
+      },
+      ...chatHistory.map(m => ({
+        role: m.sender === "You" ? "user" : "assistant",
+        content: m.text
+      })),
+      { role: "user", content: userMsg }
+    ];
+
+    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer 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",
+        "HTTP-Referer": "http://localhost", // change to your site
+        "X-Title": "Aniko Chatbot",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "deepseek/deepseek-r1:free",
+        messages: messages
+      })
+    });
+
+    const data = await res.json();
+    const reply = data.choices?.[0]?.message?.content || "No response from AI.";
+
+    chatBody.lastChild.remove(); // remove "Thinking..."
+    appendMessage("Bot", reply);
+
+  } catch (err) {
+    chatBody.lastChild.remove();
+    appendMessage("Bot", " Error: " + err.message);
+  }
+}
+
+
 
   // Send message
   function sendMessage() {
@@ -1715,7 +1755,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!userMsg) return;
     appendMessage("You", userMsg);
     chatInput.value = "";
-    getDeepSeekResponse(userMsg);
+    getAIResponse(userMsg);
   }
 
   sendBtn.addEventListener("click", sendMessage);
@@ -1756,8 +1796,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   function getRandomSuggestions(num = 5) {
-    let shuffled = [...allSuggestions].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, num);
+    return [...allSuggestions].sort(() => 0.5 - Math.random()).slice(0, num);
   }
 
   function renderSuggestions() {
@@ -1768,59 +1807,21 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.textContent = suggestion;
       btn.addEventListener("click", () => {
         appendMessage("You", suggestion);
-        getDeepSeekResponse(suggestion);
+        getAIResponse(suggestion);
       });
       suggestionsList.appendChild(btn);
     });
   }
 
-  retryBtn && retryBtn.addEventListener("click", renderSuggestions);
-
-  // ---------------- OpenRouter API ----------------
-  async function getDeepSeekResponse(userInput) {
-    appendMessage("Bot", "Thinking...");
-    try {
-      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer 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", // your API key
-          "HTTP-Referer": "https://yourwebsite.com",
-          "X-Title": "ChatbotPanel",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          "model": "deepseek/deepseek-r1:free",
-          "messages": [{ role: "user", content: userInput }]
-        })
-      });
-
-      const data = await response.json();
-
-      // Remove "Thinking..." message
-      const lastMsg = chatBody.lastElementChild;
-      if (lastMsg && lastMsg.innerText === "Thinking...") {
-        chatBody.removeChild(lastMsg);
-      }
-
-      const text = data.choices?.[0]?.message?.content || "No response from the model.";
-      appendMessage("Bot", text);
-    } catch (err) {
-      appendMessage("Bot", `Error: ${err.message}`);
-      console.error(err);
-    }
-  }
-
-  // Render initial suggestions
+  retryBtn.addEventListener("click", renderSuggestions);
   renderSuggestions();
 });
 </script>
 
-<!-- for draggable floating iconn itezz -->
+<!-- Floating Button Drag -->
 <script>
 const btn = document.getElementById('chatbot-button');
-
-let isDragging = false;
-let offsetX, offsetY;
+let isDragging = false, offsetX, offsetY;
 
 btn.addEventListener('mousedown', (e) => {
   isDragging = true;
@@ -1831,23 +1832,16 @@ btn.addEventListener('mousedown', (e) => {
 
 document.addEventListener('mousemove', (e) => {
   if (!isDragging) return;
-
-  // Calculate new position
   let left = e.clientX - offsetX;
   let top = e.clientY - offsetY;
-
-  // Constrain within viewport
   const maxLeft = window.innerWidth - btn.offsetWidth;
   const maxTop = window.innerHeight - btn.offsetHeight;
   if (left < 0) left = 0;
   if (top < 0) top = 0;
   if (left > maxLeft) left = maxLeft;
   if (top > maxTop) top = maxTop;
-
   btn.style.left = left + 'px';
   btn.style.top = top + 'px';
-  btn.style.right = 'auto';
-  btn.style.bottom = 'auto';
 });
 
 document.addEventListener('mouseup', () => {
@@ -1857,6 +1851,10 @@ document.addEventListener('mouseup', () => {
   }
 });
 </script>
+<script>
+  const currentUser = "<?php echo $_SESSION['email']; ?>"; 
+</script>
+
 
 
 
