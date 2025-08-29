@@ -40,7 +40,7 @@ $result = $con->query($sql);
     }
 
     body {
-      background: var(--bg-color);
+      background:var(--gradient-primary);
       color: var(--foreground);
       font-family: 'Open Sans', sans-serif;
       line-height: 1.6;
@@ -65,8 +65,8 @@ $result = $con->query($sql);
       }
     }
 
-   button {
-      background-color: var(--light-green);
+    .button {
+      background-color: transparent;
       padding: 8px 16px;
       border: 2px solid var(--primary-green);
       width: 15%;
@@ -81,59 +81,38 @@ $result = $con->query($sql);
       transition: all 0.3s ease-in-out;
       position: relative;
       overflow: hidden;
-      text-decoration: hide !important;
-    }
-
-    button a {
-      color: var(--primary-green);
       text-decoration: none !important;
-      transition: color 0.3s ease-in-out;
+      box-shadow: 0px 0px 20px 5px var(--accent-green);
+      text-align: center;
     }
 
-    button:hover {
+    .button:hover {
       transform: translateY(-5px) scale(1.05);
       background-color: var(--primary-green);
       border-color: var(--primary-green);
       color: var(--white);
     }
 
-    button:hover a {
-      color: var(--white);
-    }
-
-    button::after {
+    .button::after {
       content: "";
       position: absolute;
       top: 50%;
       left: 50%;
       width: 0;
       height: 0;
-      background: rgba(255, 255, 255, 0.4);
       border-radius: 50%;
       transform: translate(-50%, -50%);
       transition: width 0.4s ease, height 0.4s ease;
     }
 
-    button:hover::after {
+    .button:hover::after {
       width: 200%;
       height: 500%;
     }
 
-    .testimonial-card {
-      background-color: var(--light-green);
-      border: none;
-      border-radius: 20px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      break-inside: avoid;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(74, 124, 43, 0.1);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
     h2 {
-      color: var(--dark-green) !important;
+      color: var(--light-green) !important;
+      text-shadow: 0px 0px 5px var(--accent-green) !important;
     }
 
     .header-subtext {
@@ -144,33 +123,32 @@ $result = $con->query($sql);
       display: block;
       margin: -2rem auto 0;
       margin-bottom: 1.5rem;
-      color: var(--primary-green);
+      color: var(--light-green);
+    }
+
+    .testimonial-card {
+      background-color: rgba(144, 238, 144, 0.32); 
+      border: none;
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      break-inside: avoid;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(74, 124, 43, 0.15);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: brightness(0.85) contrast(0.9) saturate(0.8) blur(6px);
+      -webkit-backdrop-filter: brightness(0.85) contrast(0.9) saturate(0.8) blur(6px);
     }
 
     .testimonial-card::before {
-      content: '';
+      content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--wood-texture);
-      opacity: 0.3;
-      z-index: 0;
-    }
-
-    .testimonial-card::after {
-      content: '"';
-      position: absolute;
-      top: -20px;
-      right: 20px;
-      font-size: 120px;
-      color: var(--primary);
-      opacity: 0.1;
-      font-family: 'Work Sans', serif;
-      font-weight: 700;
-      z-index: 1;
-      line-height: 1;
+      inset: 0;
+      border-radius: 20px;
+      filter: brightness(0.7) contrast(0.85) saturate(0.7);
+      opacity: 0.8;
+      z-index: -1;  
     }
 
     .testimonial-card:hover {
@@ -191,7 +169,7 @@ $result = $con->query($sql);
       height: 70px;
       border-radius: 50%;
       margin-right: 1rem;
-      border: 4px solid var(--primary-brown);
+      border: 4px solid var(--primary-green );
       box-shadow: 0 4px 16px rgba(74, 124, 43, 0.3);
       position: relative;
       z-index: 3;
@@ -204,7 +182,7 @@ $result = $con->query($sql);
 
     .testimonial-user-info h5 {
       margin: 0 0 0.25rem 0;
-      color: var(--primary);
+      color: var(--dark-green);
       font-family: 'Work Sans', sans-serif;
       font-weight: 600;
       font-size: 1.1rem;
@@ -251,18 +229,17 @@ $result = $con->query($sql);
     }
 
     .btn-success {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border: none;
-      color: var(--primary-foreground);
-      font-weight: 600;
+      background: transparent !important;
+      border: 2px solid var(--primary-green) !important;
+      color: var(--primary-green) !important;
+      font-weight: 600 !important;
       font-family: 'Work Sans', sans-serif;
-      padding: 1rem 2.5rem;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      box-shadow: 0 8px 24px rgba(74, 124, 43, 0.3);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
+      padding: 10px 20px !important;
+      border-radius: 50px !important;
+      font-size: 1.1rem !important;
+      transition: all 0.3s ease !important;
+      position: relative !important;
+      overflow: hidden !important;
     }
 
     .btn-success::before {
@@ -281,7 +258,8 @@ $result = $con->query($sql);
     }
 
     .btn-success:hover {
-      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      background-color: var(--primary-green);
+      color: white;
       transform: translateY(-3px);
       box-shadow: 0 12px 32px rgba(74, 124, 43, 0.4);
     }
@@ -335,7 +313,7 @@ $result = $con->query($sql);
   <div class="container my-5">
     <h2 class="testimonial-heading">Hear Directly From Our Users</h2>
     <p class="header-subtext">We don’t just create solutions—we build relationships that last. Discover how our work has made a difference through the voices of those who matter most.</p>
-    <a href="testimonial-submit.php"><button>Submit Testimonial</button></a>
+    <a href="testimonial-submit.php" class="button">Submit Testimonial</a>
 
 
     <div class="testimonials-masonry" id="testimonial-container">
@@ -385,5 +363,8 @@ $result = $con->query($sql);
       this.style.display = 'none'; 
     });
   </script>
+
+  <?php include 'INCLUDE/footer.php';?>
+
 </body>
 </html>
