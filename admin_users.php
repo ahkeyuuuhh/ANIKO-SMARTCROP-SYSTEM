@@ -125,7 +125,7 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
     }
 
     .card-body h5 {
-        color: var(--light-green);
+        color: var(--pastel-green);
         margin-bottom: 1rem !important;
     }
 
@@ -148,6 +148,45 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
         background: rgba(255, 255, 255, 0.15); 
         color: var(--white);
         border:none !important;
+        border-collapse: collapse !important;
+        width: 100%;
+    }
+
+    .table th {
+         text-align: center;
+        font-weight: 600;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.25) !important; 
+        color: var(--light-green);
+    }
+
+    .table td {
+        vertical-align: middle;
+        padding: 10px;
+        color: var(--primary-green) !important;
+    }
+
+    table td, 
+    table th {
+        border: 1px solid #ccc; 
+    }
+
+    table tr:first-child th {
+        border-top: none; 
+    }
+
+    table tr:last-child td {
+        border-bottom: none; 
+    }
+
+    table td:first-child,
+    table th:first-child {
+        border-left: none; 
+    }
+
+    table td:last-child,
+    table th:last-child {
+        border-right: none; 
     }
 
     .table tbody tr:hover {
@@ -155,7 +194,7 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
         transition: 0.3s ease;
     }
 
-    .table thead {
+    .table thead tr  {
         background: linear-gradient(135deg, #16a34a, #166534) !important;
         color: var(--dark-green) !important;
         border-top-right-radius: 20px;
@@ -205,16 +244,18 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
     }
 
     .heading a {
-        background-color: var(--primary-green) !important;
+        background-color: var(--primary-brown) !important;
         padding: 10px 20px;
         border-radius: 20px;
+        border: none !important; 
+        font-weight: 500;
     }
 
    .heading a:hover {
-    background-color: var(--dark-green) !important;
-    box-shadow: 0 0 20px 5px var(--pastel-green), 0 0 30px var(--dark-green);
-    transition: all 0.3s ease-in-out;
-}
+        background-color: var(--dark-brown) !important;
+        box-shadow: 0 0 20px 5px var(--pastel-green), 0 0 30px var(--dark-green);
+        transition: all 0.3s ease-in-out;
+    }
 
 
 </style>

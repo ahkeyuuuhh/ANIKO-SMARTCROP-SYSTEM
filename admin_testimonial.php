@@ -113,7 +113,7 @@ $approved = $con->query("
     }
 
     .header2 {
-        color: var(--light-green);
+        color: var(--pastel-green);
         font-weight: 500;
         margin-bottom: 1rem;
     }
@@ -155,12 +155,16 @@ $approved = $con->query("
         color: var(--primary-green) !important;
     }
 
-    .table tbody tr:hover {
-        background: rgba(255, 255, 255, 0.08);
+    .table tbody tr {
         transition: 0.3s ease;
     }
 
+    .table tbody tr:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
     .pending-table thead {
+        border-top: none !important;
         background: linear-gradient(135deg, #16a34a, #166534) !important;
         color: var(--dark-green) !important;
         border-top-right-radius: 20px;
@@ -168,6 +172,7 @@ $approved = $con->query("
     }
 
     .approved-table thead {
+        border-top: none !important;
         background: linear-gradient(135deg, #16a34a, #166534) !important;
         border-top-right-radius: 20px !important; 
         border-top-left-radius: 20px !important;
@@ -175,6 +180,29 @@ $approved = $con->query("
 
     .approved-table {
         border: none !important;
+    }
+
+    table td, 
+    table th {
+        border: 1px solid #ccc; 
+    }
+
+    table tr:first-child th {
+        border-top: none; 
+    }
+
+    table tr:last-child td {
+        border-bottom: none; 
+    }
+
+    table td:first-child,
+    table th:first-child {
+        border-left: none; 
+    }
+
+    table td:last-child,
+    table th:last-child {
+        border-right: none; 
     }
 
     .table .btn {
@@ -242,7 +270,7 @@ $approved = $con->query("
 
                 <!-- ✅ Pending Testimonials -->
                 <div class="card pending-card">
-                    <h3 class="mt-2 header2"><i class="bi bi-clock-fill"></i>Pending Testimonials</h3>
+                    <h5 class="mt-2 header2"><i class="bi bi-clock-fill"></i>Pending Testimonials</h5>
                     <table class="table table-bordered table-striped pending-table">
                         <thead class="table-warning">
                             <tr>
@@ -288,7 +316,7 @@ $approved = $con->query("
         </div>
         <!-- ✅ Approved Testimonials -->
         <div class="card approved-card">
-            <h3 class="mt-2 header2"><i class="bi bi-check-square-fill"></i>Approved Testimonials</h3>
+            <h5 class="mt-2 header2"><i class="bi bi-check-square-fill"></i>Approved Testimonials</h5>
             <table class="table table-bordered table-striped approved-table">
             <thead class="table-success">
                 <tr>

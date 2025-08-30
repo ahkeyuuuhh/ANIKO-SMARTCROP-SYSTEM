@@ -117,14 +117,54 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
         transition: 0.3s ease;
     }
 
-    tr th {
-      background: linear-gradient(135deg, #16a34a, #166534) !important;
-      border: none;
-      color: var(--light-green) !important;
+    .table th {
+         text-align: center;
+        font-weight: 600;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.25) !important; 
+        color: var(--light-green);
     }
-    
-    tr td {
-      color: var(--dark-green) !important;
+
+    .table td {
+        vertical-align: middle;
+        padding: 10px;
+        color: var(--primary-green) !important;
+    }
+
+    table td, 
+    table th {
+        border: 1px solid #ccc; 
+    }
+
+    table tr:first-child th {
+        border-top: none; 
+    }
+
+    table tr:last-child td {
+        border-bottom: none; 
+    }
+
+    table td:first-child,
+    table th:first-child {
+        border-left: none; 
+    }
+
+    table td:last-child,
+    table th:last-child {
+        border-right: none; 
+    }
+
+    .table tbody tr:hover {
+        background: rgba(255, 255, 255, 0.08) !important;
+        transition: 0.3s ease;
+    }
+
+    .table thead tr  {
+      border-top: none !important;
+        background: linear-gradient(135deg, #16a34a, #166534) !important;
+        color: var(--dark-green) !important;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
     }
 
     .reply-btn {
@@ -149,8 +189,8 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
     }
 
     .card-heading {
-      color: vaR(--light-green);
-
+      color: vaR(--pastel-green);
+      margin-bottom: 1rem;
     }
 </style>
 
@@ -167,8 +207,8 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
       <?php endif; ?>
 
       <div class="card">
-        <h4 class="card-heading"><i class="bi bi-envelope-fill"></i>Recent Messages</h4>
-        <table class="table table-bordered table-striped mt-4">
+        <h5 class="card-heading"><i class="bi bi-envelope-fill"></i>Recent Messages</h5>
+        <table class="table table-bordered table-striped">
           <thead class="table-info">
             <tr>
               <th>ID</th>

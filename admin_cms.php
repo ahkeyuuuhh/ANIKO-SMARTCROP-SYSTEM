@@ -71,17 +71,29 @@ if (!isset($_SESSION['admin_id'])) {
         margin-bottom: 1rem;
     }
 
+
     .nav-tabs {
-        background-color: var(--pastel-green);
-        border-radius: 10px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
+        border-radius: 20px;
+        width: 30%;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto !important;
+        border: none !important;
+        background: rgba(32, 68, 44, 0.55); 
+        backdrop-filter: blur(12px) brightness(0.9);
+        -webkit-backdrop-filter: blur(12px) brightness(0.9);
+        padding: 0;
+        margin-top: 2rem !important;
+        margin-bottom: 3rem !important;
+        box-shadow: 0px 0px 20px 5px var(--pastel-green);
     }
 
     .nav-link {
-        color: var(--primary-green);
+        color: var(--light-green);
         text-decoration: none;
         font-weight: 500;
+        align-items: center !important;
+        display: flex; 
     }
 
     .nav-link:hover {
@@ -90,15 +102,25 @@ if (!isset($_SESSION['admin_id'])) {
         text-decoration: none;
         font-weight: 500;
         border: none;
+        border-radius: 20px;
     }
 
     .nav-link.active {
-        background-color: var(--primary-brown) !important;
+        background-color: var(--pastel-green) !important;
         border: none !important;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        color: white !important;
-        font-weight: 500;
+        border-radius: 20px;
+        color: var(--primary-green) !important;
+        font-weight: bold !important;
+        margin: 0;
+        left: 0 !important;
+    }
+
+    .nav-tabs .nav-item:first-child .nav-link.active {
+       margin-left: -10px !important;
+    }
+
+     .nav-tabs .nav-item:last-child .nav-link.active {
+       margin-right: -10px !important;
     }
 
     .card {
@@ -112,7 +134,7 @@ if (!isset($_SESSION['admin_id'])) {
         box-shadow: 0px 0px 20px 4px var(--pastel-green);
     }
 
-    h4 {
+    .card h5 {
         color: var(--pastel-green) !important;
         margin-bottom: 1rem;
     }
@@ -152,6 +174,55 @@ if (!isset($_SESSION['admin_id'])) {
         color: var(--white);
     }
 
+    .table th {
+         text-align: center;
+        font-weight: 600;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.25) !important; 
+        color: var(--light-green);
+    }
+
+    .table td {
+        vertical-align: middle;
+        padding: 10px;
+        color: var(--primary-green) !important;
+    }
+
+    table td, 
+    table th {
+        border: 1px solid #ccc; 
+    }
+
+    table tr:first-child th {
+        border-top: none; 
+    }
+
+    table tr:last-child td {
+        border-bottom: none; 
+    }
+
+    table td:first-child,
+    table th:first-child {
+        border-left: none; 
+    }
+
+    table td:last-child,
+    table th:last-child {
+        border-right: none; 
+    }
+
+    .table tbody tr:hover {
+        background: rgba(255, 255, 255, 0.08) !important;
+        transition: 0.3s ease;
+    }
+
+    .table thead tr  {
+        background: linear-gradient(135deg, #16a34a, #166534) !important;
+        color: var(--dark-green) !important;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+    }
+
     .team-fc {
         display: block;
     }
@@ -166,6 +237,20 @@ if (!isset($_SESSION['admin_id'])) {
         margin-left: auto;
         display: flex;
     }
+
+    .bi-trash3-fill {
+        margin-right: 7px !important;
+    }
+
+    .btn-danger {
+        background-color: #b91c1c;
+        border-radius: 10px;
+    }
+
+    .btn-danger:hover {
+        background-color: #890c0cff;
+    }
+
 
 </style>
 </head>
@@ -189,7 +274,7 @@ if (!isset($_SESSION['admin_id'])) {
         <!-- Home Images -->
         <div class="tab-pane fade show active" id="home">
             <div class="card">
-                <h4><i class="bi bi-box-arrow-in-down"></i>Upload Home Image</h4>
+                <h5><i class="bi bi-box-arrow-in-down"></i>Upload Home Image</h5>
                 <form action="upload_home_image.php" method="POST" enctype="multipart/form-data" class="mb-3">
                     <input type="file" name="home_image" class="form-control" required>
                     <button type="submit" class="btn btn-primary">Upload Image</button>
@@ -198,7 +283,7 @@ if (!isset($_SESSION['admin_id'])) {
            
 
             <div class="card">
-                <h4><i class="bi bi-card-image"></i>Uploaded Images</h4>
+                <h5><i class="bi bi-card-image"></i>Uploaded Images</h5>
                 <table class="table table-bordered">
                     <thead><tr><th>Preview</th><th>File Path</th><th>Uploaded At</th><th>Action</th></tr></thead>
                     <tbody>
@@ -210,7 +295,9 @@ if (!isset($_SESSION['admin_id'])) {
                             <td><img src="<?= htmlspecialchars($row['image_path']) ?>" style="width:150px;"></td>
                             <td><?= htmlspecialchars($row['image_path']) ?></td>
                             <td><?= htmlspecialchars($row['uploaded_at']) ?></td>
-                            <td><a href="admin_home.php?action=delete_home_image&id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this image?')">Delete</a></td>
+                            <td><a href="admin_home.php?action=delete_home_image&id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this image?')">
+                                <i class="bi bi-trash3-fill"></i>Delete
+                            </a></td>
                         </tr>
                     <?php endwhile; ?>
                     </tbody>
@@ -223,7 +310,7 @@ if (!isset($_SESSION['admin_id'])) {
         <!-- Benefits Images -->
         <div class="tab-pane fade" id="benefits">
             <div class="card">
-                <h4><i class="bi bi-box-arrow-in-down"></i>Upload Benefits Image</h4>
+                <h5><i class="bi bi-box-arrow-in-down"></i>Upload Benefits Image</h5>
                 <form action="upload_benefits.php" method="POST" enctype="multipart/form-data" class="mb-3">
                     <input type="file" name="benefits_image" class="form-control" required>
                     <button type="submit" class="btn btn-primary">Upload Image</button>
@@ -231,7 +318,7 @@ if (!isset($_SESSION['admin_id'])) {
             </div>
            
             <div class="card">
-                <h4><i class="bi bi-image"></i>Uploaded Benefits Images</h4>
+                <h5><i class="bi bi-image"></i>Uploaded Benefits Images</h5>
                 <table class="table table-bordered">
                     <thead><tr><th>Preview</th><th>File Path</th><th>Uploaded At</th><th>Action</th></tr></thead>
                     <tbody>
@@ -243,7 +330,9 @@ if (!isset($_SESSION['admin_id'])) {
                             <td><img src="<?= htmlspecialchars($row['image_path']) ?>" style="width:150px;"></td>
                             <td><?= htmlspecialchars($row['image_path']) ?></td>
                             <td><?= htmlspecialchars($row['uploaded_at']) ?></td>
-                            <td><a href="admin_benefits.php?delete_benefits_id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Delete this benefits image?')">Delete</a></td>
+                            <td><a href="admin_benefits.php?delete_benefits_id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Delete this benefits image?')">
+                                <i class="bi bi-trash3-fill"></i>Delete
+                            </a></td>
                         </tr>
                     <?php endwhile; ?>
                     </tbody>
@@ -256,7 +345,7 @@ if (!isset($_SESSION['admin_id'])) {
         <!-- Why Aniko Images -->
         <div class="tab-pane fade" id="whyaniko">
             <div class="card">
-                <h4><i class="bi bi-box-arrow-in-down"></i>Upload Why Aniko Image</h4>
+                <h5><i class="bi bi-box-arrow-in-down"></i>Upload Why Aniko Image</h5>
                 <form action="upload_why_aniko.php" method="POST" enctype="multipart/form-data" class="mb-3">
                     <input type="file" name="why_aniko_image" class="form-control" required>
                     <button type="submit" class="btn btn-primary">Upload Image</button>
@@ -264,7 +353,7 @@ if (!isset($_SESSION['admin_id'])) {
             </div>
            
             <div class="card">
-                <h4><i class="bi bi-image"></i>Uploaded Why Aniko Images</h4>
+                <h5><i class="bi bi-image"></i>Uploaded Why Aniko Images</h5>
                 <table class="table table-bordered">
                     <thead><tr><th>Preview</th><th>File Path</th><th>Uploaded At</th><th>Action</th></tr></thead>
                     <tbody>
@@ -276,7 +365,9 @@ if (!isset($_SESSION['admin_id'])) {
                             <td><img src="<?= htmlspecialchars($row['image_path']) ?>" style="width:200px;"></td>
                             <td><?= htmlspecialchars($row['image_path']) ?></td>
                             <td><?= htmlspecialchars($row['uploaded_at']) ?></td>
-                            <td><a href="admin_why_aniko.php?delete_why_aniko_id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this image?')">Delete</a></td>
+                            <td><a href="admin_why_aniko.php?delete_why_aniko_id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this image?')">
+                                <i class="bi bi-trash3-fill"></i>Delete
+                            </a></td>
                         </tr>
                     <?php endwhile; ?>
                     </tbody>
@@ -288,7 +379,7 @@ if (!isset($_SESSION['admin_id'])) {
         <!-- Team Members -->
         <div class="tab-pane fade" id="team">
             <div class="card">
-                <h4><i class="bi bi-box-arrow-in-down"></i>Manage Team Members</h4>
+                <h5><i class="bi bi-box-arrow-in-down"></i>Manage Team Members</h5>
                 <form action="upload_team_member.php" method="POST" enctype="multipart/form-data" class="team-fc mb-3">
                     <input type="text" name="name" class="form-control mb-2" placeholder="Name" required>
                     <input type="text" name="role" class="form-control mb-2" placeholder="Role / Subtext" required>
@@ -298,7 +389,7 @@ if (!isset($_SESSION['admin_id'])) {
             </div>
            
             <div class="card">
-                <h4><i class="bi bi-image"></i>Current Team Members</h4>
+                <h5><i class="bi bi-image"></i>Current Team Members</h5>
                 <table class="table table-bordered">
                     <thead><tr><th>Photo</th><th>Name</th><th>Role</th><th>Action</th></tr></thead>
                     <tbody>
@@ -310,7 +401,8 @@ if (!isset($_SESSION['admin_id'])) {
                             <td><img src="<?= htmlspecialchars($row['image_path']) ?>" style="width:80px; border-radius:50%;"></td>
                             <td><?= htmlspecialchars($row['name']) ?></td>
                             <td><?= htmlspecialchars($row['role']) ?></td>
-                            <td><a href="admin_team.php?delete_team_id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Delete this team member?')">Delete</a></td>
+                            <td><a href="admin_team.php?delete_team_id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Delete this team member?')"><i class="bi bi-trash3-fill"></i>Delete
+                        </a></td>
                         </tr>
                     <?php endwhile; ?>
                     </tbody>
