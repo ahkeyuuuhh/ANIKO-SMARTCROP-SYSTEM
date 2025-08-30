@@ -1724,7 +1724,6 @@ let chatHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
     const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": "Bearer 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",
         "HTTP-Referer": "http://localhost", // change to your site
         "X-Title": "Aniko Chatbot",
         "Content-Type": "application/json"
