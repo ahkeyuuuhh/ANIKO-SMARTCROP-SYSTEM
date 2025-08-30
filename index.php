@@ -32,6 +32,13 @@ $result2 = $con->query($sql2);
 if ($result2 && $row2 = $result2->fetch_assoc()) {
   $benefitsImage = $row2['image_path'];
 }
+
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+
+$apiKey = $_ENV['OPENROUTER_API_KEY'];
 ?>
 
 <!doctype html>
@@ -1721,18 +1728,15 @@ let chatHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
       { role: "user", content: userMsg }
     ];
 
-    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "HTTP-Referer": "http://localhost", // change to your site
-        "X-Title": "Aniko Chatbot",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        model: "deepseek/deepseek-r1:free",
-        messages: messages
-      })
-    });
+      const res = await fetch("chat_api.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "deepseek/deepseek-r1:free",
+          messages: messages
+        })
+      });
+
 
     const data = await res.json();
     const reply = data.choices?.[0]?.message?.content || "No response from AI.";
