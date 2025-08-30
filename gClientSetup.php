@@ -5,6 +5,7 @@ session_start();
 
 require 'CONFIG/config.php';
 
+// Google client setup
 $client = new Google_Client();
 $client->setClientId("67607885572-0unromtvovfl5bb73dmv8mb5shrop87n.apps.googleusercontent.com");
 $client->setClientSecret("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");
@@ -12,7 +13,7 @@ $client->setRedirectUri("http://localhost/ANIKO-SMARTCROP-SYSTEM/gClientSetup.ph
 $client->addScope("email");
 $client->addScope("profile");
 
-
+// Save redirect
 if (isset($_GET['redirect'])) {
     $_SESSION['login_redirect'] = $_GET['redirect'];
 }
@@ -34,7 +35,7 @@ if (isset($_GET['code'])) {
     $_SESSION['email']     = $u->email;
     $_SESSION['picture']   = $picture;
 
-  
+    // Check if user exists
     $stmt = $con->prepare("SELECT id FROM accounts WHERE email = ? LIMIT 1");
     $stmt->bind_param("s", $u->email);
     $stmt->execute();
@@ -56,16 +57,43 @@ if (isset($_GET['code'])) {
         $stmt->close();
     }
 
-   
-    $redirectPage = $_SESSION['login_redirect'] ?? 'testimonial-submit';
-    unset($_SESSION['login_redirect']);
+    // ✅ Generate OTP
+    $otp = rand(100000, 999999);
+    $_SESSION['pending_otp'] = $otp;
+    $_SESSION['pending_account_id'] = $_SESSION['account_id'];
+    $_SESSION['otp_time'] = time();
 
-    
-    if (!str_ends_with($redirectPage, '.php')) {
-        $redirectPage .= ".php";
+    // ✅ Send OTP via PHPMailer
+    require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+    require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+    require 'vendor/phpmailer/phpmailer/src/Exception.php';
+
+    $mail = new PHPMailer\PHPMailer\PHPMailer();
+
+    try {
+        // SMTP settings (use your Gmail account for testing)
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'roldancchristian@gmail.com'; // replace with your Gmail
+        $mail->Password = 'ihmd kpcp njeu lnfs';  // use Google App Password
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        $mail->setFrom('roldancchristian@gmail.com', 'Aniko Smart Crop');
+        $mail->addAddress($u->email, $u->name);
+
+        $mail->isHTML(true);
+        $mail->Subject = "Your OTP Code";
+        $mail->Body = "Hello <b>{$u->name}</b>,<br><br>Your OTP code is: <b>{$otp}</b><br><br>This code will expire in 5 minutes.";
+
+        $mail->send();
+    } catch (Exception $e) {
+        die("OTP email could not be sent. Mailer Error: {$mail->ErrorInfo}");
     }
 
-    header("Location: " . $redirectPage);
+    // ✅ Redirect to OTP page
+    header("Location: verify-otp.php");
     exit();
 
 } else {
