@@ -476,12 +476,15 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
                     <td><?= htmlspecialchars($row['email']); ?></td>
                     <td><?= htmlspecialchars($row['testimonial']); ?></td>
                     <td class="d-flex gap-2">
-                      <a href="admin_index.php?action=approve&id=<?= $row['id']; ?>" 
-                        class="btn btn-sm btn-success approve-btn"
-                        onclick="return confirm('Approve this testimonial?');"><i class="bi bi-check"></i>Approve</a>
-                      <a href="admin_index.php?action=delete_testimonial&id=<?= $row['id']; ?>" 
-                        class="btn btn-sm btn-danger"
-                        onclick="return confirm('Delete this testimonial?');"><i class="bi bi-trash3-fill bi-trash-testimonial"></i>Delete</a>
+                      <!-- Approve Button -->
+                      <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#approveModal<?= $row['id']; ?>">
+                        <i class="bi bi-check"></i> Approve
+                      </button>
+
+                      <!-- Delete Button -->
+                      <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $row['id']; ?>">
+                        <i class="bi bi-trash3-fill"></i> Delete
+                      </button>
                     </td>
                   </tr>
                 <?php endwhile; ?>
@@ -591,6 +594,44 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
       </div>
     </div>
   </div>
+
+  <!-- Approve Modal -->
+<div class="modal fade" id="approveModal<?= $row['id']; ?>" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title">Confirm Approval</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        Approve testimonial from <strong><?= htmlspecialchars($row['email']); ?></strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="admin_index.php?action=approve&id=<?= $row['id']; ?>" class="btn btn-success">Yes, Approve</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal<?= $row['id']; ?>" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Confirm Deletion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        Delete testimonial from <strong><?= htmlspecialchars($row['email']); ?></strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="admin_index.php?action=delete_testimonial&id=<?= $row['id']; ?>" class="btn btn-danger">Yes, Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.3/Sortable.min.js"></script>

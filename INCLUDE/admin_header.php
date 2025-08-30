@@ -22,7 +22,7 @@
       --primary-brown: #8A6440;
       --dark-brown: #4D2D18;
       --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
-      --gradient-earthy: linear-gradient(135deg, var(--primary-brown), var(--primary-green));
+      --gradient-secondary: linear-gradient(135deg, var(--primary-green), var(--pastel-green));
     }
 
     body {
@@ -32,7 +32,6 @@
       font-family: Arial, sans-serif;
     }
 
-    /* Sidebar styles */
     .sidebar {
       height: 90%;
       width: 270px;
@@ -96,6 +95,71 @@
         margin-left: 220px;
       }
     }
+
+   
+    .modal-content {
+        background: var(--light-gray);
+        color: var(--dark-brown);
+        border-radius: 20px !important;
+        border: 2px solid var(--dark-brown) !important;
+        box-shadow: 0 0 15px rgba(29, 73, 44, 0.4);
+    }
+
+      .modal-header {
+        border-bottom: 1px solid var(--primary-brown);
+        background: var(--dark-brown);
+        color: var(--white);
+        font-weight: 600;
+        letter-spacing: 1px;
+        padding: 10px 15px!important;
+        border-top: none !important;
+        border-top-right-radius: 18px !important;
+        border-top-left-radius: 18px !important
+      }
+
+      .modal-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+
+      .modal-body {
+        font-size: 1rem;
+        color: var(--primary-green);
+        text-align: center;
+        font-weight: 500 !important;
+      }
+
+      .modal-footer {
+        border-top: 1px solid var(--primary-brown);
+        justify-content: center;
+      }
+
+      .modal-footer .btn-secondary {
+        background: var(--pastel-green);
+        border: none;
+        color: var(--primary-green);
+        transition: 0.3s ease;
+        font-weight: bold;
+      }
+
+      .modal-footer .btn-secondary:hover {
+        background: var(--primary-green);
+      }
+
+      .modal-footer .btn-danger {
+        background: var(--primary-brown);
+        border: none;
+        font-weight: bold;
+        color: var(--white);
+        transition: 0.3s ease;
+        box-shadow: 0 0 8px rgba(138, 100, 64, 0.7);
+      }
+
+      .modal-footer .btn-danger:hover {
+        background: var(--dark-brown);
+        box-shadow: 0 0 15px rgba(77, 45, 24, 0.9);
+      }
+
   </style>
 </head>
 <body>
@@ -114,6 +178,30 @@
     <a class="nav-link" href="admin_contact.php"><i class="bi bi-chat-square-text-fill"></i>Contact Management</a>
     <a class="nav-link" href="admin_cms.php"><i class="bi bi-body-text"></i>Content Management</a>
    
-    <a class="nav-link text-danger logout" href="admin_logout.php"><i class="bi bi-box-arrow-left"></i>Logout</a>
+    <a class="nav-link text-danger logout" href="admin_logout.php" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="bi bi-box-arrow-left"></i>Logout</a>
   </nav>
+</div>
+
+<!-- LOGOUTTTTT -->
+
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
+        Are you sure you want to log out?
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <!-- This goes to logout.php -->
+        <a href="admin_logout.php" class="btn btn-danger">Yes, Logout</a>
+      </div>
+    </div>
+  </div>
 </div>

@@ -349,7 +349,6 @@ $approved = $con->query("
             </tbody>
         </table>
         </div>
-       
     </div>
 
     
