@@ -51,11 +51,11 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
       --primary-brown: #8A6440;
       --dark-brown: #4D2D18;
       --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
-      --gradient-earthy: linear-gradient(135deg, var(--primary-brown), var(--primary-green));
+      --gradient-secondary: linear-gradient(135deg, var(--primary-green), var(--pastel-green));
     }
 
     body {
-      background: var(--gradient-primary) !important;
+      background-color: var(--bg-color) !important;
       min-height: 100vh;
     }
 
@@ -75,8 +75,7 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
     }
 
     h1 {
-      color: var(--light-green);
-      text-shadow: 0px 0px 10px var(--accent-green);
+      color: var(--dark-brown);
       font-weight: bold;
       text-align: center;
     }
@@ -86,7 +85,7 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
     }
 
     .subheader {
-      color: var(--light-green);
+      color: var(--primary-brown);
       font-size: 18px;
       font-weight: 400;
       text-align: center;
@@ -94,13 +93,14 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
     }
 
     .card {
-      background: rgba(20, 56, 32, 0.55); 
+      background: var(--gradient-secondary);
       backdrop-filter: blur(12px) brightness(0.9);
       -webkit-backdrop-filter: blur(12px) brightness(0.9);
-      padding: 20px 30px;
-      border-radius: 20px;
-      border:none;
-      box-shadow: 0px 0px 20px 5px var(--pastel-green);
+      padding: 30px 55px !important;
+      border-radius: 0;
+      border:2px solid var(--dark-green);
+      border-top-right-radius: 80px;
+      border-bottom-left-radius: 80px;
     }
 
      table {
@@ -189,7 +189,7 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
     }
 
     .card-heading {
-      color: vaR(--pastel-green);
+      color: vaR(--light-green);
       margin-bottom: 1rem;
     }
 </style>

@@ -101,11 +101,12 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
             --primary-brown: #8A6440;
             --dark-brown: #4D2D18;
             --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+            --gradient-secondary: linear-gradient(135deg, var(--primary-green), var(--pastel-green));
         }
 
         body {
-            background: var(--gradient-primary) !important;
-            min-height: 100vh;
+          background-color: var(--bg-color) !important;
+          min-height: 100vh;
         }
 
         .dashboard {
@@ -120,16 +121,16 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
         }
 
         .dashboard h1 {
-          font-weight: bold; color: var(--light-green);
+          font-weight: bold; 
+          color: var(--dark-brown);
           text-align: center;
-          text-shadow: 0px 0px 10px var(--accent-green) !important;
         }
 
         .subheader {
           text-align: center;
           font-size: 18px; 
           font-weight: 400;
-          color: var(--light-green);
+          color: var(--primary-brown);
           margin-bottom: 3rem;
         }
 
@@ -144,19 +145,24 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
         }
 
         .count-card {
-          background: rgba(0, 50, 0, 0.5) !important;
+          background: var(--gradient-secondary) !important;
           backdrop-filter: blur(10px) brightness(0.8);
-          border: none !important;
-          box-shadow: 0 0 20px 2px var(--pastel-green);
+          border: 2px solid var(--dark-green) !important;
+          border-top-right-radius: 100px !important;
+          border-bottom-left-radius: 100px !important;
+          border-top-left-radius: 0 !important;
+          border-bottom-right-radius: 0 !important;
+
         }
 
         .table-card {
-          background: rgba(20, 56, 32, 0.55);
+          background-color: var(--pastel-green);
           backdrop-filter: blur(12px) brightness(0.9);
           border-radius: 20px !important;
           overflow: hidden;
           box-shadow: 0 4px 25px rgba(0,0,0,0.35);
-          border: none !important;
+          padding: 20px;
+          border: 2px solid var(--primary-brown);
         }
 
         .display-6 { 
@@ -174,7 +180,6 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
 
         .table tbody tr { background: rgba(72,56,56,0.28) !important; transition: all 0.3s; }
         .table tbody tr:hover {
-            background: rgba(180,255,180,0.15);
             transform: scale(1.01);
             box-shadow: inset 0 0 8px rgba(132,204,22,0.4);
         }
@@ -221,7 +226,8 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
         }
 
         .regDash-card {
-          background-color: var(--pastel-green) !important;
+          background-color: var(--light-green) !important;
+          border: 2px solid var(--primary-green);
         }
 
         .regDash-card h5 {
@@ -234,11 +240,11 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
         }
 
         .accDash-card {
-          background: rgba(20, 56, 32, 0.55); 
+          background: var(--gradient-secondary) !important;
           backdrop-filter: blur(12px) brightness(0.9);
           -webkit-backdrop-filter: blur(12px) brightness(0.9);
           color: var(--pastel-green);
-          border:none;
+          border:2px solid var(--dark-green);
         }
 
         .accDash-card-body {
@@ -251,134 +257,143 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
         }
 
           .table {
-        border-radius: 20px;
-        overflow: hidden;
-        backdrop-filter: blur(10px);
-        background: rgba(255, 255, 255, 0.15); 
-        color: var(--white);
-        border:none !important;
-        border-collapse: collapse !important;
-        width: 100%;
-    }
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15); 
+            color: var(--white);
+            border:none !important;
+            border-collapse: collapse !important;
+            width: 100%;
+        }
 
-    .table th {
-         text-align: center;
-        font-weight: 600;
-        padding: 12px;
-        background: rgba(0, 0, 0, 0.25) !important; 
-        color: var(--light-green);
-    }
+        .table th {
+            text-align: center;
+            font-weight: 600;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.25) !important; 
+            color: var(--light-green);
+        }
 
-    .table td {
-        vertical-align: middle;
-        padding: 10px;
-        color: var(--primary-green) !important;
-    }
+        .table td {
+            vertical-align: middle;
+            padding: 10px;
+            color: var(--primary-green) !important;
+        }
 
-    table td, 
-    table th {
-        border: 1px solid #ccc; 
-    }
+        table td, 
+        table th {
+            border: 1px solid #ccc; 
+        }
 
-    table tr:first-child th {
-        border-top: none; 
-    }
+        table tr:first-child th {
+            border-top: none; 
+        }
 
-    table tr:last-child td {
-        border-bottom: none; 
-    }
+        table tr:last-child td {
+            border-bottom: none; 
+        }
 
-    table td:first-child,
-    table th:first-child {
-        border-left: none; 
-    }
+        table td:first-child,
+        table th:first-child {
+            border-left: none; 
+        }
 
-    table td:last-child,
-    table th:last-child {
-        border-right: none; 
-    }
+        table td:last-child,
+        table th:last-child {
+            border-right: none; 
+        }
 
-    .table tbody tr:hover {
-        background: rgba(255, 255, 255, 0.08) !important;
-        transition: 0.3s ease;
-    }
+        .table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.08) !important;
+            transition: 0.3s ease;
+        }
 
-    .table thead tr  {
-        background-color: var(--pastel-green);
-        border-top: none!important;
-        color: var(--dark-green) !important;
-        border-top-right-radius: 20px;
-        border-top-left-radius: 20px;
-    }
+        .table thead tr  {
+            background-color: var(--pastel-green);
+            border-top: none!important;
+            color: var(--dark-green) !important;
+            border-top-right-radius: 20px;
+            border-top-left-radius: 20px;
+        }
 
-    .table .btn {
-        border-radius: 20px;
-        font-size: 0.85rem;
-        padding: 4px 10px;
-        transition: all 0.3s ease;
-    }
+        .table .btn {
+            border-radius: 20px;
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            transition: all 0.3s ease;
+        }
 
-    .table .btn-success:hover {
-        background-color: var(--dark-green) !important;
-        color: var(--white);
-    }
+        .table .btn-success:hover {
+            background-color: var(--dark-green) !important;
+            color: var(--white);
+        }
 
-    .table .btn-danger {
-        background: #dc2626;
-        border: none;
-    }
+        .table .btn-danger {
+            background: #dc2626;
+            border: none;
+        }
 
-    .table .btn-danger:hover {
-        background: #b91c1c;
-    }
+        .table .btn-danger:hover {
+            background: #b91c1c;
+        }
 
-    .bi-trash3-fill {
-        margin-right: 7px;
-    }
+        .bi-trash3-fill {
+            margin-right: 7px;
+        }
 
-    .bi-trash-con, .bi-reply-fill{
-      margin: 0 !important;
-    }
+        .bi-trash-con, .bi-reply-fill{
+          margin: 0 !important;
+        }
 
-    .reply-btn, .approve-btn {
-      background-color: var(--pastel-green);
-      color: var(--primary-green);
-      border: none !important;
-      font-weight: 500;
-    }
+        .reply-btn, .approve-btn {
+          background-color: var(--pastel-green);
+          color: var(--primary-green);
+          border: none !important;
+          font-weight: 500;
+        }
 
-    .reply-btn:hover {
-      background-color: var(--primary-green);
-      color: var(--light-green);
-    }
+        .reply-btn:hover {
+          background-color: var(--primary-green);
+          color: var(--light-green);
+        }
 
-    .approve-btn:hover {
-      background-color: var(--primary-green);
-      color: var(--light-green);
-    }
+        .approve-btn:hover {
+          background-color: var(--primary-green);
+          color: var(--light-green);
+        }
 
-    .heading {
-      display: flex;
-    }
+        .heading {
+          display: flex;
+        }
 
-    .heading h5{
-      color: var(--light-green);
-    }
+        .heading h5{
+          color: var(--primary-green);
+          font-weight: bold;
+        }
 
-    .heading a {
-      text: end;
-      margin-left: auto;
-      background-color: var(--primary-brown);
-      color: var(--light-green);
-      font-weight: 500;
-      border: none !important;
-      border-radius: 15px;
-      padding: 5px 20px;
-    }
+        .heading a {
+          text: end;
+          margin-left: auto;
+          background-color: var(--primary-brown);
+          color: var(--light-green);
+          font-weight: 500;
+          border: none !important;
+          border-radius: 15px;
+          padding: 5px 20px;
+        }
 
-    .heading a:hover {
-      background-color: var(--dark-brown) !important;
-    }
+        .heading a:hover {
+          background-color: var(--dark-brown) !important;
+        }
+
+        .row .header2 {
+          margin-top: 2rem;
+          margin-bottom: 1rem;
+          color: var(--primary-brown);
+          font-weight: bold;
+          text-shadow: 0px 2px 3px #00000030;
+        }
     </style>
 </head>
 <body>
@@ -413,7 +428,11 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
         </div>
     </div>
 
-    <div id="grid" class="row row-cols-1 row-cols-md-2 g-4 mt-5">
+    <div class="row">
+      <h3 class="header2">Overview</h3>
+    </div>
+
+    <div id="grid" class="row row-cols-1 row-cols-md-2 g-4">
       <div class="col draggable-col">
         <div class="card h-100 regDash-card">
           <div class="card-body regDash-card-body">

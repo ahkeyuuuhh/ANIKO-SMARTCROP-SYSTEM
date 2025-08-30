@@ -77,23 +77,23 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
 
 <style>
      :root {
-      --primary-green: #1D492C;
-      --accent-green: #84cc16;
-      --pastel-green: #BDE08A;
-      --light-green: #f0fdf4;
-      --dark-green: #143820;
-      --dark-gray: #374151;
-      --light-gray: #f9fafb;
-      --white: #ffffff;
-      --bg-color: #cfc4b2ff;
-      --primary-brown: #8A6440;
-      --dark-brown: #4D2D18;
-      --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
-      --gradient-earthy: linear-gradient(135deg, var(--primary-brown), var(--primary-green));
+        --primary-green: #1D492C;
+        --accent-green: #84cc16;
+        --pastel-green: #BDE08A;
+        --light-green: #f0fdf4;
+        --dark-green: #143820;
+        --dark-gray: #374151;
+        --light-gray: #f9fafb;
+        --white: #ffffff;
+        --bg-color: #cfc4b2ff;
+        --primary-brown: #8A6440;
+        --dark-brown: #4D2D18;
+        --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+        --gradient-secondary: linear-gradient(135deg, var(--primary-green), var(--pastel-green));
     }
 
     body {
-        background: var(--gradient-primary) !important;
+        background-color: var(--bg-color) !important;
         min-height: 100vh;
         background-size: cover !important;
         background-repeat: no-repeat !important;
@@ -115,28 +115,30 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
     }
 
     .card {
-        background: rgba(20, 56, 32, 0.55); 
+        background: var(--gradient-secondary);
         backdrop-filter: blur(12px) brightness(0.9);
         -webkit-backdrop-filter: blur(12px) brightness(0.9);
-        border: none !important;
-        box-shadow: 0px 0px 20px 5px var(--pastel-green) !important;
+        border: 2px solid var(--dark-green);
         margin-bottom: 4rem !important;
         border-radius: 20px;
+        padding: 20px 30px;
+        border-radius: 0;
+        border-top-right-radius: 80px;
+        border-bottom-left-radius: 80px;
     }
 
     .card-body h5 {
-        color: var(--pastel-green);
+        color: var(--light-green);
         margin-bottom: 1rem !important;
     }
 
     .header {
-        color: var(--light-green);
-        text-shadow: 0px 0px 10px var(--accent-green);
+        color: var(--dark-brown);
         font-weight: bold;
     }
 
     .subheader {
-        color: var(--light-green) !important;
+        color: var(--primary-brown) !important;
         font-size: 18px;
         font-weight: 400;
     }
@@ -195,10 +197,11 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
     }
 
     .table thead tr  {
-        background: linear-gradient(135deg, #16a34a, #166534) !important;
+        background-color: var(--pastel-green);
         color: var(--dark-green) !important;
         border-top-right-radius: 20px;
         border-top-left-radius: 20px;
+        border-top: none !important;
     }
 
     .table .btn {
@@ -239,7 +242,7 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
 
    .heading .col-6:last-child {
         display: flex;
-        justify-content: flex-end; /* pushes button to the far right */
+        justify-content: flex-end; 
         align-items: center;
     }
 
@@ -253,7 +256,6 @@ $admins = $con->query("SELECT id, username, created_at FROM admin_accounts ORDER
 
    .heading a:hover {
         background-color: var(--dark-brown) !important;
-        box-shadow: 0 0 20px 5px var(--pastel-green), 0 0 30px var(--dark-green);
         transition: all 0.3s ease-in-out;
     }
 

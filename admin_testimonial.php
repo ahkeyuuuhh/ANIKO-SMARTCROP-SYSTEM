@@ -73,11 +73,11 @@ $approved = $con->query("
       --primary-brown: #8A6440;
       --dark-brown: #4D2D18;
       --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
-      --gradient-earthy: linear-gradient(135deg, var(--primary-brown), var(--primary-green));
+      --gradient-secondary: linear-gradient(135deg, var(--primary-green), var(--pastel-green));
     }
 
     body {
-        background: var(--gradient-primary) !important;
+        background-color: var(--bg-color) !important;
         background-size: cover;
         background-repeat: no-repeat;
         max-height: 1000vh;
@@ -99,13 +99,12 @@ $approved = $con->query("
 
     .header {
         text-align: center;
-        color: var(--light-green);
+        color: var(--dark-brown);
         font-weight: bold;
-        text-shadow: 0px 0px 20px var(--accent-green);
     }
 
     .subheader {
-        color: var(--light-green);
+        color: var(--primary-brown);
         text-align: center;
         font-size: 18px;
         margin-bottom: 2rem;
@@ -113,7 +112,7 @@ $approved = $con->query("
     }
 
     .header2 {
-        color: var(--pastel-green);
+        color: var(--light-green);
         font-weight: 500;
         margin-bottom: 1rem;
     }
@@ -133,6 +132,7 @@ $approved = $con->query("
         padding: 12px;
         background: rgba(0, 0, 0, 0.25) !important; 
         color: var(--light-green);
+        border-top: none !important;
     }
 
     .approved-table td {
@@ -147,6 +147,7 @@ $approved = $con->query("
         padding: 12px;
         background: rgba(0, 0, 0, 0.25) !important; 
         color: var(--light-green);
+        border-top: none !important;
     }
 
     .pending-table td {
@@ -164,16 +165,16 @@ $approved = $con->query("
     }
 
     .pending-table thead {
-        border-top: none !important;
-        background: linear-gradient(135deg, #16a34a, #166534) !important;
         color: var(--dark-green) !important;
         border-top-right-radius: 20px;
         border-top-left-radius: 20px;
+        background-color: var(--pastel-green);
+        border-top: none !important;
     }
 
     .approved-table thead {
         border-top: none !important;
-        background: linear-gradient(135deg, #16a34a, #166534) !important;
+        background-color: var(--primary-green);
         border-top-right-radius: 20px !important; 
         border-top-left-radius: 20px !important;
     }
@@ -233,14 +234,16 @@ $approved = $con->query("
     }
 
     .card {
-        background: rgba(20, 56, 32, 0.55); 
+        background: var(--gradient-secondary) !important;
         backdrop-filter: blur(12px) brightness(0.9);
         -webkit-backdrop-filter: blur(12px) brightness(0.9);
         padding: 20px 30px !important;
-        border: none !important;
         margin-bottom: 2rem;
-        border-radius: 20px;
-        box-shadow: 0px 0px 20px 4px var(--pastel-green);
+        border-radius: 0;
+        border-top-right-radius: 80px;
+        border-bottom-left-radius: 80px;
+        box-shadow: 0px 5px 20px 5px #00000049;
+        border: 2px solid var(--dark-green);
     }
 
     .bi {

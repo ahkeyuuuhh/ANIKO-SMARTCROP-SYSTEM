@@ -31,11 +31,11 @@ if (!isset($_SESSION['admin_id'])) {
         --primary-brown: #8A6440;
         --dark-brown: #4D2D18;
         --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
-        --gradient-earthy: linear-gradient(135deg, var(--primary-brown), var(--primary-green));
+        --gradient-secondary: linear-gradient(135deg, var(--primary-green), var(--pastel-green));
     }
 
     body {
-        background: var(--gradient-primary) !important; 
+        background-color: var(--bg-color) !important;
         min-height: 100vh;
     }
 
@@ -57,8 +57,7 @@ if (!isset($_SESSION['admin_id'])) {
     }
 
     .header {
-        color: var(--light-green);
-        text-shadow: 0px 0px 10px var(--accent-green);
+        color: var(--dark-brown);
         font-weight: bold;
         text-align:center;
     }
@@ -66,7 +65,7 @@ if (!isset($_SESSION['admin_id'])) {
     .subheader {
         font-size: 18px;
         font-weight: 400;
-        color: var(--light-green);
+        color: var(--primary-brown);
         text-align:center;
         margin-bottom: 1rem;
     }
@@ -79,19 +78,18 @@ if (!isset($_SESSION['admin_id'])) {
         align-items: center;
         margin: 0 auto !important;
         border: none !important;
-        background: rgba(32, 68, 44, 0.55); 
+        background-color: var(--pastel-green);
         backdrop-filter: blur(12px) brightness(0.9);
         -webkit-backdrop-filter: blur(12px) brightness(0.9);
         padding: 0;
         margin-top: 2rem !important;
         margin-bottom: 3rem !important;
-        box-shadow: 0px 0px 20px 5px var(--pastel-green);
     }
 
     .nav-link {
-        color: var(--light-green);
+        color: var(--primary-green);
         text-decoration: none;
-        font-weight: 500;
+        font-weight: 500 !important;
         align-items: center !important;
         display: flex; 
     }
@@ -106,10 +104,10 @@ if (!isset($_SESSION['admin_id'])) {
     }
 
     .nav-link.active {
-        background-color: var(--pastel-green) !important;
+        background-color: var(--primary-brown) !important;
         border: none !important;
         border-radius: 20px;
-        color: var(--primary-green) !important;
+        color: var(--light-green) !important;
         font-weight: bold !important;
         margin: 0;
         left: 0 !important;
@@ -124,18 +122,19 @@ if (!isset($_SESSION['admin_id'])) {
     }
 
     .card {
-         background: rgba(20, 56, 32, 0.55); 
+        background: var(--gradient-secondary) !important;
         backdrop-filter: blur(12px) brightness(0.9);
         -webkit-backdrop-filter: blur(12px) brightness(0.9);
         padding: 20px 30px !important;
-        border: none !important;
+        border: 2px solid var(--dark-green) !important;
         margin-bottom: 2rem;
-        border-radius: 20px;
-        box-shadow: 0px 0px 20px 4px var(--pastel-green);
+        border-radius: 0px;
+        border-top-right-radius: 80px;
+        border-bottom-left-radius: 80px;
     }
 
     .card h5 {
-        color: var(--pastel-green) !important;
+        color: var(--light-green) !important;
         margin-bottom: 1rem;
     }
 
@@ -148,8 +147,8 @@ if (!isset($_SESSION['admin_id'])) {
         justify-content: space-between;
         margin-left: auto;
         background-color: transparent !important;
-        border: 2px solid var(--pastel-green) !important;
-        color: var(--pastel-green) !important;
+        border: 2px solid var(--primary-brown) !important;
+        color: var(--primary-brown) !important;
         font-weight: 500 !important;
     }
 
@@ -175,11 +174,12 @@ if (!isset($_SESSION['admin_id'])) {
     }
 
     .table th {
-         text-align: center;
+        text-align: center;
         font-weight: 600;
         padding: 12px;
         background: rgba(0, 0, 0, 0.25) !important; 
         color: var(--light-green);
+        border-top: none !important;
     }
 
     .table td {
@@ -221,6 +221,7 @@ if (!isset($_SESSION['admin_id'])) {
         color: var(--dark-green) !important;
         border-top-right-radius: 20px;
         border-top-left-radius: 20px;
+        border-top: none !important;
     }
 
     .team-fc {
