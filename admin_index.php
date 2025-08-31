@@ -156,13 +156,12 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
         }
 
         .table-card {
-          background-color: var(--pastel-green);
+          background: var(--gradient-secondary);
           backdrop-filter: blur(12px) brightness(0.9);
           border-radius: 20px !important;
           overflow: hidden;
           box-shadow: 0 4px 25px rgba(0,0,0,0.35);
-          padding: 20px;
-          border: 2px solid var(--primary-brown);
+           border: 2px solid var(--dark-green);
         }
 
         .display-6 { 
@@ -256,15 +255,15 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
           margin-right: 1rem;
         }
 
-          .table {
-            border-radius: 20px;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.15); 
-            color: var(--white);
-            border:none !important;
-            border-collapse: collapse !important;
-            width: 100%;
+        .table {
+          border-radius: 20px;
+          overflow: hidden;
+          backdrop-filter: blur(10px);
+          background: rgba(255, 255, 255, 0.15); 
+          color: var(--white);
+          border:none !important;
+          border-collapse: collapse !important;
+          width: 100%;
         }
 
         .table th {
@@ -353,6 +352,10 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
           font-weight: 500;
         }
 
+        .bi-check {
+          margin-right: 7px !important;
+        }
+
         .reply-btn:hover {
           background-color: var(--primary-green);
           color: var(--light-green);
@@ -368,7 +371,7 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
         }
 
         .heading h5{
-          color: var(--primary-green);
+          color: var(--light-green);
           font-weight: bold;
         }
 
@@ -393,6 +396,38 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
           color: var(--primary-brown);
           font-weight: bold;
           text-shadow: 0px 2px 3px #00000030;
+        }
+
+       .reply-mod-content {
+          background-color: var(--light-green);
+          border: none !important;
+          border-radius: 0 !important;
+          border-top-right-radius: 80px !important;
+          border-bottom-left-radius: 80px !important;
+          overflow: hidden; 
+          border: 2px solid var(--dark-green) !important;
+        }
+
+        .reply-mod-header {
+          background-color: var(--primary-green) !important;
+          border-radius: 0 !important;
+          border-top-right-radius: 80px !important; 
+          border: 2px solid var(--dark-green) !important;
+          border-bottom: 0 !important;
+          border-left: 0 !important;
+         
+        }
+
+        .reply-mod-body input {
+          border: 1px solid var(--primary-brown) !important;
+        }
+
+        .reply-mod-body .form-label  {
+          text-align: left !important;
+        }
+
+        .reply-mod-body textarea {
+          border: 1px solid var(--primary-brown) !important;
         }
     </style>
 </head>
@@ -475,16 +510,13 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
                   <tr>
                     <td><?= htmlspecialchars($row['email']); ?></td>
                     <td><?= htmlspecialchars($row['testimonial']); ?></td>
-                    <td class="d-flex gap-2">
-                      <!-- Approve Button -->
-                      <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#approveModal<?= $row['id']; ?>">
-                        <i class="bi bi-check"></i> Approve
-                      </button>
-
-                      <!-- Delete Button -->
-                      <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $row['id']; ?>">
-                        <i class="bi bi-trash3-fill"></i> Delete
-                      </button>
+                    <td class="last-td">
+                        <a href="admin_testimonial.php?action=approve&id=<?= $row['id']; ?>" 
+                        class="btn btn-sm btn-success"
+                        onclick="return confirm('Approve this testimonial?');"><i class="bi bi-check"></i>  Approve</a>
+                        <a href="admin_testimonial.php?action=delete_testimonial&id=<?= $row['id']; ?>" 
+                        class="btn btn-sm btn-danger"
+                        onclick="return confirm('Delete this testimonial?');"><i class="bi bi-trash3-fill"></i>Delete</a>
                     </td>
                   </tr>
                 <?php endwhile; ?>
@@ -547,7 +579,7 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
                       </div>
                     </td>
                   </tr>
-                <?php endwhile; ?>
+                <?php endwhile; ?> 
               </tbody>
             </table>
           </div>
@@ -556,16 +588,15 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
     </div>
 
     <!-- Reply Modal -->
-    <div class="modal fade" id="replyModal" tabindex="-1" aria-labelledby="replyModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <form id="replyForm" method="POST" action="send_reply.php">
-          <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
+    <div class="modal fade replyModal" id="replyModal" tabindex="-1" aria-labelledby="replyModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg reply-modal-dialog">
+        <form id="replyForm" method="POST" action="send_reply.php" class="replyForm">
+          <div class="modal-content reply-mod-content">
+            <div class="modal-header bg-primary text-white reply-mod-header">
               <h5 class="modal-title" id="replyModalLabel">Reply to Contact Message</h5>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body">
+            <div class="modal-body reply-mod-body">
               <input type="hidden" name="contact_id" id="contact_id">
               <input type="hidden" name="to_email" id="to_email">
               <input type="hidden" name="subject" id="subject">
@@ -594,44 +625,6 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
       </div>
     </div>
   </div>
-
-  <!-- Approve Modal -->
-<div class="modal fade" id="approveModal<?= $row['id']; ?>" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-success text-white">
-        <h5 class="modal-title">Confirm Approval</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        Approve testimonial from <strong><?= htmlspecialchars($row['email']); ?></strong>?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <a href="admin_index.php?action=approve&id=<?= $row['id']; ?>" class="btn btn-success">Yes, Approve</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Delete Modal -->
-<div class="modal fade" id="deleteModal<?= $row['id']; ?>" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title">Confirm Deletion</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        Delete testimonial from <strong><?= htmlspecialchars($row['email']); ?></strong>?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <a href="admin_index.php?action=delete_testimonial&id=<?= $row['id']; ?>" class="btn btn-danger">Yes, Delete</a>
-      </div>
-    </div>
-  </div>
-</div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.3/Sortable.min.js"></script>
