@@ -353,7 +353,7 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
         }
 
         .bi-check {
-          margin-right: 7px !important;
+          margin-right: 5px !important;
         }
 
         .reply-btn:hover {
@@ -559,7 +559,7 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
                   <tr>
                     <td><?= htmlspecialchars($c['email']); ?></td>
                     <td><?= nl2br(htmlspecialchars($c['message'])); ?></td>
-                   <td>
+                  <td>
                       <div class="d-flex gap-2 justify-content-center w-100">
                           <button type="button"
                                   class="btn btn-sm btn-primary reply-btn"
@@ -574,7 +574,7 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
                           <a href="admin_contact.php?action=delete_contact&id=<?= $c['id']; ?>" 
                             class="btn btn-sm btn-danger del-btn"
                             onclick="return confirm('Delete this contact message?');">
-                            <i class="bi bi-trash3-fill bi-trash-con"></i>Delete
+                            <i class="bi bi-trash3-fill"></i>Delete
                           </a>
                       </div>
                     </td>

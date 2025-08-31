@@ -244,25 +244,9 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
     }
 
     .custom-line {
-      max-width: 150px;
-      height: 6px;
-      background: var(--gradient-primary);
-      margin: 60px auto;
-      border: none;
-      border-radius: 3px;
-      position: relative;
-    }
-
-    .custom-line::before {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: var(--gradient-glow);
-      border-radius: 5px;
-      z-index: -1;
+      width: 80%;
+      margin: 0 auto; 
+      display: block;
     }
 
     .section-heading {
@@ -307,11 +291,13 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
       text-align: center;
       padding: 50px 30px;
       background: var(--light-green);
-      border-radius: 28px;
+      border-radius: 0;
+      border-top-right-radius: 100px !important;
+      border-bottom-left-radius: 100px !important;
       box-shadow: var(--shadow-soft);
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       height: 100%;
-      border: 2px solid rgba(21, 128, 61, 0.08);
+      border: 2px solid var(--primary-green) !important;
       position: relative;
       overflow: hidden;
     }
@@ -464,7 +450,6 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
       transform: scale(1.05) rotate(-2deg);
     }
 
-    /* Enhanced benefit cards with sophisticated hover effects */
     .benefits-row {
       justify-content: center;
       align-items: center;
@@ -473,13 +458,15 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
     
     .benefit-card {
       background: var(--light-green);
-      border-radius: 32px;
+      border-radius: 0;
+      border-top-right-radius: 80px !important;
+      border-bottom-left-radius: 80px !important;
       padding: 50px 32px;
       text-align: center;
       box-shadow: 0px 0px 20px 2px var(--accent-green);
       height: 100%;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 2px solid transparent;
+      border: 2px solid var(--accent-green);
       position: relative;
       overflow: hidden;
     }

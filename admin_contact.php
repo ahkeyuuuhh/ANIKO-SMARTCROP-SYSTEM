@@ -260,38 +260,40 @@ $contacts = $con->query("SELECT * FROM contact_messages ORDER BY submitted_at DE
 
       
       <!-- Reply Modal -->
-      <div class="modal fade" id="replyModal" tabindex="-1" aria-labelledby="replyModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <form id="replyForm" method="POST" action="send_reply.php">
-            <div class="modal-content">
-              <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="replyModalLabel">Reply to Contact Message</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal fade replyModal" id="replyModal" tabindex="-1" aria-labelledby="replyModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg reply-modal-dialog">
+        <form id="replyForm" method="POST" action="send_reply.php" class="replyForm">
+          <div class="modal-content reply-mod-content">
+            <div class="modal-header bg-primary text-white reply-mod-header">
+              <h5 class="modal-title" id="replyModalLabel">Reply to Contact Message</h5>
+            </div>
+
+            <div class="modal-body reply-mod-body">
+              <input type="hidden" name="contact_id" id="contact_id">
+              <input type="hidden" name="to_email" id="to_email">
+              <input type="hidden" name="subject" id="subject">
+              <div class="mb-3">
+                <label for="to_name" class="form-label">To</label>
+                <input type="text" class="form-control" id="to_name" readonly>
               </div>
-              <div class="modal-body">
-                <input type="hidden" name="contact_id" id="contact_id">
-                <input type="hidden" name="to_email" id="to_email">
-                <input type="hidden" name="subject" id="subject">
-                <div class="mb-3">
-                  <label for="to_name" class="form-label">To</label>
-                  <input type="text" class="form-control" id="to_name" readonly>
-                </div>
-                <div class="mb-3">
-                  <label for="email_subject" class="form-label">Subject</label>
-                  <input type="text" class="form-control" id="email_subject" readonly>
-                </div>
-                <div class="mb-3">
-                  <label for="reply_message" class="form-label">Your Message</label>
-                  <textarea class="form-control" id="reply_message" name="reply_message" rows="5" required></textarea>
-                </div>
+
+              <div class="mb-3">
+                <label for="email_subject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="email_subject" readonly>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary">Send Reply</button>
+
+              <div class="mb-3">
+                <label for="reply_message" class="form-label">Your Message</label>
+                <textarea class="form-control" id="reply_message" name="reply_message" rows="5" required></textarea>
               </div>
             </div>
-          </form>
-        </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Send Reply</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
