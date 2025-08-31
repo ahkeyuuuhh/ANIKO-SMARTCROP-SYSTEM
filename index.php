@@ -64,7 +64,7 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
       --primary-brown: #8A6440;
       --dark-brown: #4D2D18;
       --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
-      --gradient-earthy: linear-gradient(135deg, var(--primary-brown), var(--primary-green));
+      --gradient-secondary: linear-gradient(135deg, var(--primary-green), var(--pastel-green));
     }
 
     * {
@@ -544,6 +544,15 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
       z-index: 2;
     }
 
+    .testimonial-container {
+      background-color: #bee08a5e !important;
+      padding: 5rem 3rem;
+      z-index: 1000;
+      border-radius: 150px;
+      border-bottom-left-radius: 10px;
+      border: 3px dashed var(--primary-green) !important;
+    }
+
     .testimonial-section {
       background: var(--bg-color);
       padding: 120px 0;
@@ -565,13 +574,20 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
       z-index: 2;
     }
 
-    .testimonial-section h2 {
+    .testimonial-section h3 {
       font-family: 'Inter', sans-serif;
       font-size: clamp(2.5rem, 5vw, 3.5rem);
       font-weight: 800;
       color: var(--dark-brown) !important;
-      margin-bottom: 20px;
       letter-spacing: -0.02em;
+      text-align: center;
+    }
+
+    .testimonial-subheader {
+      text-align: center !important;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--primary-brown) !important;
     }
 
     .testimonial-section > .container > .row > .col-lg-8 > p {
@@ -582,7 +598,7 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
     }
 
     .submit-btn {
-      background: var(--gradient-primary);
+      background-color: var(--primary-brown) !important;
       color: var(--white) !important;
       font-weight: 500 !important;
       border-radius: 20px !important;
@@ -594,6 +610,15 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
       font-size: 1.1rem;
       position: relative;
       overflow: hidden;
+      justify-content: center !important;
+      align-items: center !important; 
+      display: block !important;
+      margin: 0 auto !important;
+      width: 20% !important;
+    }
+
+    .bi-send {
+      margin-right: 0.5rem;
     }
 
     .submit-btn::before {
@@ -613,10 +638,8 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
 
     .submit-btn:hover {
       transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 12px 35px rgba(21, 128, 61, 0.4);
       color: var(--white);
     }
-
     .testimonial-scroll {
       display: flex;
       flex-wrap: nowrap;
@@ -643,12 +666,14 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
     .testimonial-card {
       flex: 0 0 calc(33.333% - 22px);
       min-width: 350px;
-      border-radius: 28px !important;
-      border: 2px solid #e5e7eb;
+      border-radius: 0 !important;
+      border: 3px solid var(--pastel-green) !important;
       background: var(--light-green) !important;
       box-shadow: var(--shadow-soft);
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       overflow: hidden;
+      position: relative;
+      border-top-right-radius: 80px !important;
       position: relative;
     }
 
@@ -671,7 +696,7 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
     .testimonial-card:hover {
       transform: translateY(-8px) scale(1.02);
       box-shadow: 0 20px 40px rgba(21, 128, 61, 0.12);
-      border-color: var(--accent-green);
+      border-color: var(--accent-green) !important;
     }
 
     .testimonial-card .card-body {
@@ -698,11 +723,21 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
     }
 
     .card-footer {
-      background: var(--pastel-green) !important;
+      background: var(--gradient-secondary) !important;
       border-top: 1px solid #e5e7eb;
-      color: var(--primary-green);
+      color: var(--accent-green) !important;
       font-weight: 600;
       padding: 20px 32px;
+      border-radius: 0 !important;
+    }
+
+    .email-img-testimonial {
+      border: 4px solid var(--primary-green) !important;
+      margin-left: -4.2rem !important;
+      margin-top: auto;
+      z-index: 1000;
+      border-top-left-radius: 50px;
+      border-bottom-right-radius: 50px;
     }
 
     .viewTestimonial-btn {
@@ -1315,10 +1350,8 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
     <button id="clear-history" class="clear-btn">Clear</button>
   </div>
 
-  <!-- Chat Body -->
   <div id="chat-body" class="chat-body"></div>
 
-  <!-- Chat Footer -->
   <div class="chat-footer">
     <input type="text" id="userInput" placeholder="Type a message...">
     <button id="send-btn" class="btn-success">Send</button>
@@ -1470,22 +1503,11 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
 
     <!-- TESTIMONIAL SECTIONNNN -->
   <section class="testimonial-section py-5">
-    <div class="container">
+    <div class="container testimonial-container">
       <div class="row align-items-center mb-4">
-        <div class="col-lg-8">
-          <h2 class="fw-bold text-dark" id="download">What Our Farmers Say</h2>
-          <p class="text-muted mb-0">Real experiences from real farmers who are growing smarter with Aniko.</p>
-        </div>
-
-        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-          <?php
-          if (isset($_SESSION['email'])) {
-            $button_link = "testimonial-submit.php";
-          } else {
-            $button_link = htmlspecialchars($login_url) . "&redirect=testimonial-submit";
-          }
-          ?>
-          <a href="<?php echo $button_link; ?>" class="btn submit-btn">Submit Now!</a>
+        <div class="col">
+          <h3 class="fw-bold text-dark" id="download">What Our Farmers Say</h3>
+          <p class="text-muted mb-0 testimonial-subheader">Real experiences from real farmers who are growing smarter with Aniko.</p>
         </div>
       </div>
 
@@ -1506,7 +1528,6 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
               echo '<div class="testimonial-card card shadow-sm flex-shrink-0">';
               echo '  <div class="card-body">';
               echo '    <div class="d-flex align-items-center mb-3">';
-              echo '      <img src="' . htmlspecialchars($profile_pic) . '" class="rounded-circle me-3" width="50" height="50" alt="Profile">';
               echo '      <div>';
               echo '        <h6 class="mb-0 testimonial-name">' . htmlspecialchars($row['name']) . '</h6>';
               echo '        <small class="text-muted testimonial-email">' . htmlspecialchars($row['email']) . '</small>';
@@ -1514,10 +1535,11 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
               echo '    </div>';
               echo '    <p class="card-text testimonial-text">' . htmlspecialchars($row['testimonial']) . '</p>';
               echo '  </div>';
-              echo '  <div class="card-footer text-muted">';
+              echo '  <div class="card-footer text-muted" style = "color:var(--light-green) !important;">';
               echo '    <small>Posted on ' . date("F j, Y", strtotime($row['created_at'])) . '</small>';
               echo '  </div>';
               echo '</div>';
+              echo '      <img src="' . htmlspecialchars($profile_pic) . '" class=" me-3 email-img-testimonial" width="80" height="80" alt="Profile">'; 
             }
           } else {
             echo '<p class="text-muted">No approved testimonials yet.</p>';
@@ -1525,7 +1547,14 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
         ?>
       </div>
 
-      <button class="viewTestimonial-btn"><a href="testimonial-display.php">View Testimonials</a></button>
+      <?php
+      if (isset($_SESSION['email'])) {
+        $button_link = "testimonial-submit.php";
+      } else {
+        $button_link = htmlspecialchars($login_url) . "&redirect=testimonial-submit";
+      }
+      ?>
+      <a href="<?php echo $button_link; ?>" class="btn submit-btn"><i class="bi bi-send"></i>Submit Now!</a>
 
       <?php
         $result = $con->query("SELECT * FROM download_images ORDER BY uploaded_at DESC LIMIT 1");
