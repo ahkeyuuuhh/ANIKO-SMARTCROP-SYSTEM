@@ -16,10 +16,9 @@ if (!isset($_SESSION['email'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-   
-    
-<style>
-    :root {
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+  :root {
       --primary-green: #1D492C;
       --accent-green: #84cc16;
       --pastel-green: #BDE08A;
@@ -32,7 +31,7 @@ if (!isset($_SESSION['email'])) {
       --primary-brown: #8A6440;
       --dark-brown: #4D2D18;
       --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
-      --gradient-earthy: linear-gradient(135deg, var(--primary-brown), var(--primary-green));
+      --gradient-secondary: linear-gradient(135deg, var(--primary-green), var(--pastel-green));
     }
 
     body {
@@ -72,7 +71,7 @@ if (!isset($_SESSION['email'])) {
     }
     
     .contact-info-section {
-        background: var(--gradient-primary);
+        background: var(--gradient-secondary);
         color: var(--light-green);
         padding: 60px 40px;
         position: relative;
@@ -178,18 +177,22 @@ if (!isset($_SESSION['email'])) {
     }
     
     .form-control {
-        border: 2px solid var(--c1);
+        border: 2px solid var(--pastel-green) !important;
         border-radius: 20px !important;
         padding: 20px 40px;
         background: var(--c7);
         transition: all 0.3s ease;
         font-size: 1rem;
+        color: var(--primary-green) !important;
     }
     
+    .form-control:hover {
+        border: 2px solid var(--primary-green) !important;
+    }
+
     .form-control:focus {
         border:2px solid var(--primary-brown) !important;
         box-shadow: 0 0 0 0.25rem rgba(76, 100, 68, 0.25);
-        background: var(--c7);
     }
     
     .form-floating > label {
@@ -198,11 +201,15 @@ if (!isset($_SESSION['email'])) {
     }
     
     .form-select {
-        border: 2px solid var(--c1);
+        border: 2px solid var(--pastel-green) !important;
         border-radius: 15px;
         padding: 15px;
         background: var(--c7);
         color: var(--primary-brown);
+    }
+
+    .form-select:hover {
+        border: 2px solid var(--primary-green) !important;
     }
     
     .form-select:focus {
@@ -211,7 +218,7 @@ if (!isset($_SESSION['email'])) {
     }
     
     .btn-submit {
-        background: var(--primary-green) !important;
+        background: var(--gradient-secondary) !important;
         border: none !important;
         border-radius: 20px !important;
         padding: 10px 40px !important;
@@ -242,7 +249,7 @@ if (!isset($_SESSION['email'])) {
     .btn-submit:hover {
         transform: translateY(-3px);
         box-shadow: 0 10px 25px rgba(76, 100, 68, 0.4);
-        background-color: var(--dark-green) !important;
+        background: var(--gradient-primary) !important;
     }
     
     .social-links {
@@ -293,10 +300,14 @@ if (!isset($_SESSION['email'])) {
         transform: translateY(-5px);
         color: var(--c5);
     }
+
+    .form-check-input {
+        border-color: var(--primary-green) !important;
+    }
     
     .form-check-input:checked {
-        background-color: var(--c6);
-        border-color: var(--c6);
+        background-color: var(--primary-green) !important;
+        border-color: var(--dark-green);
     }
     
     .form-check-label {
@@ -342,6 +353,12 @@ if (!isset($_SESSION['email'])) {
         .contact-form-section {
             padding: 30px 20px;
         }
+    } 
+    
+    .ok-btn:hover {
+        background-color: var(--primary-green) !important;
+        border: 2px solid var(--dark-green) !important;
+        color: var(--light-green) !important;
     }
 </style>
 </head>
@@ -375,9 +392,7 @@ if (!isset($_SESSION['email'])) {
                     
                     <div class="contact-item">
                         <i class="fas fa-clock"></i>
-                        <div class="contact-item-content">
-
-                        </div>
+                        <div class="contact-item-content">9:00 AM - 10:00 PM</div>
                     </div>
                     
                     <div class="social-links">
@@ -387,7 +402,6 @@ if (!isset($_SESSION['email'])) {
                     </div>
                 </div>
                 
-                <!-- FORM SIDE -->
                 <div class="contact-form-section">
                    <form action="process_contact.php" method="POST">
 
@@ -466,6 +480,34 @@ if (!isset($_SESSION['email'])) {
         </div>
     </section>
 
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius:20px; border: 2px solid var(--dark-green);border-top: 0 !important;">
+          <div class="modal-header bg-success text-white" style="background: var(--gradient-secondary);color: var(--light-green);border: 0; border-top: 2px solid var(--dark-green); border-top-right-radius: 20px; border-top-left-radius: 20px;">
+            <h5 class="modal-title" id="successModalLabel"><i class="fas fa-check-circle me-2"></i>Message Sent</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center" style="background-color: var(--light-green); color: var(--primary-green); font-weight:500;padding: 30px;">
+            Your message has been successfully sent. <br> We’ll get back to you soon!
+          </div>
+          <div class="modal-footer" style="padding: 0px !important;">
+            <button type="button" class="btn btn-success ok-btn" data-bs-dismiss="modal" style="border-radius: 10px; background-color: var(--pastel-green); border: 2px solid var(--primary-green); color: var(--primary-green); font-weight: 500; padding:5px 20px !important;
+            margin: 10px;">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <?php if (isset($_SESSION['success'])): ?>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+      });
+    </script>
+    <?php unset($_SESSION['success']); endif; ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <?php include 'INCLUDE/footer.php';?>
 </body>
 </html>
