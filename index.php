@@ -1092,8 +1092,7 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
     .team-member-img {
       will-change: transform;
     }
-
- /* Floating Circle Button */
+/* Floating Circle Button */
 .floating-circle {
   position: fixed;
   bottom: 20px;
@@ -1119,55 +1118,115 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
   color: #fff;
 }
 
-/* Side Chat Panel */
-.chat-panel {
-  position: fixed;
-  top: 0;
-  right: -350px;
-  width: 350px;
-  height: 100%;
-  background: #fff;
-  box-shadow: -3px 0 10px rgba(0,0,0,0.3);
+/* ChatGPT Style Modal */
+.chatbot-modal {
+  width: 900px;   /* fixed width */
+  height: 600px;  /* fixed height */
+  max-width: 900px;
+  max-height: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  display: flex;
+}
+
+/* Sidebar */
+.chat-sidebar {
+  width: 250px;
+  background: #f7f7f8;
+  border-right: 1px solid #ddd;
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  transition: right 0.3s ease;
-  z-index: 1000;
-}
-
-.chat-panel.open {
-  right: 0; 
-}
-
-
-.chat-header {
-  background: var(--primary-green);
-  color: white;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.chat-header button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-
-.chat-body {
-  flex: 1;
-  padding: 10px;
+  height: 100%;
   overflow-y: auto;
-  background: #f9f9f9;
 }
 
+.history-list {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 500px;
+}
 
-.chat-footer {
+.history-item {
+  padding: 10px;
+  margin-bottom: 8px;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  transition: background 0.2s;
+}
+
+.history-item:hover {
+  background: #e9ecef;
+}
+
+/* Chat Area should behave like a column layout */
+.chat-area {
   display: flex;
+  flex-direction: column;
+  flex: 1;              /* fills available space */
+  height: 100%;         /* important to prevent collapse */
+  overflow: hidden;     /* stops footer being pushed */
+  background: #fff;
+}
+
+/* Chat Header */
+.chat-header {
+  padding: 10px 15px;
+  background: #f1f1f1;
+  border-bottom: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+/* Chat Body (Scrollable Conversation) */
+/* Chat Body grows + scrolls */
+.chat-body {
+  flex: 1;              /* take all remaining space */
+  overflow-y: auto;     /* ✅ scrolls when too many messages */
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #fafafa;
+}
+
+/* Chat Messages */
+.message {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  font-size: 14px;
+}
+
+.message.user {
+  align-self: flex-end;
+  background: #d1e7dd;
+  color: #0f5132;
+  border: 1px solid #bcd0c7;
+}
+
+.message.bot {
+  align-self: flex-start;
+  background: #f1f1f1;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+/* Footer stays pinned */
+.chat-footer {
+  flex-shrink: 0;       /* ✅ prevents moving */
   border-top: 1px solid #ddd;
+  background: #f9f9f9;
+  padding: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .chat-footer input {
@@ -1185,6 +1244,7 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
   cursor: pointer;
 }
 
+/* Suggestions Section */
 .recommendations {
   background: #f1f8f4;
   border-bottom: 1px solid #ddd;
@@ -1236,94 +1296,53 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
   background: #ccc;
 }
 
-.chat-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 15px;
-  background: #fafafa;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.message {
-  max-width: 80%;
-  padding: 10px 14px;
-  border-radius: 12px;
-  line-height: 1.5;
-  word-wrap: break-word;
-  white-space: pre-wrap; 
-  font-size: 14px;
-}
-
-.message.user {
-  align-self: flex-end;
-  background: var(--light-green);
-  color: var(--primary-green);
-  border: 1px solid var(--primary-green);
-}
-
-.message.bot {
-  align-self: flex-start;
-  background: #f1f1f1;
-  color: #333;
-  border: 1px solid #ddd;
-}
-.clear-btn {
-  display: block;
-  width: 100%;
-  background: #e0e0e0;
-  border: none;
-  border-radius: 8px;
-  padding: 6px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: 0.2s;
-  margin-top: 8px;
-  color: red;
-}
-
-.clear-btn:hover {
-  background: #ccc;
-}
-
-
-  </style>
+</style>
 </head>
 
 <body>
 
-  <!-- Floating Circle -->
+<!-- Floating Circle -->
 <div id="chatbot-button" class="floating-circle">
   <img src="IMG/logo-notext.png" alt="Chatbot" style="width:25px; height:25px;">
 </div>
 
-<!-- Chat Panel -->
-<div id="chat-panel" class="chat-panel">
-  <div class="chat-header">
-    <span>AI Chatbot</span>
-    <div class="chat-actions">
-      <button id="close-panel" class="close-btn">X</button>
+<!-- Chatbot Modal -->
+<div class="modal fade" id="chatbotModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content chatbot-modal">
+      <!-- Force modal-content to be full height -->
+      <div class="modal-body p-0 d-flex" style="height:600px;">
+        
+        <!-- Sidebar (Chat History) -->
+        <div class="chat-sidebar">
+          <button id="new-chat" class="btn btn-success w-100 mb-3">+ New Chat</button>
+          <div id="history-list" class="history-list"></div>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="chat-area">
+          <!-- Header -->
+          <div class="chat-header d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Aniko Chatbot</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <!-- Conversation Body -->
+          <div id="chat-body" class="chat-body"></div>
+
+          <!-- Footer -->
+          <div class="chat-footer d-flex">
+            <input id="userInput" type="text" class="form-control me-2" placeholder="Type a message..." />
+            <button id="send-btn" class="btn btn-success">Send</button>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-
-  <!-- Recommendations -->
-  <div id="recommendations" class="recommendations">
-    <p>Suggested farming questions:</p>
-    <div id="suggestions-list"></div>
-    <button id="retry-btn" class="retry-btn">Retry Suggestions</button>
-    <button id="clear-history" class="clear-btn">Clear</button>
-  </div>
-
-  <!-- Chat Body -->
-  <div id="chat-body" class="chat-body"></div>
-
-  <!-- Chat Footer -->
-  <div class="chat-footer">
-    <input type="text" id="userInput" placeholder="Type a message...">
-    <button id="send-btn" class="btn-success">Send</button>
-  </div>
 </div>
+
+
 
 
   <!-- HERO SECTION -->
@@ -1620,58 +1639,65 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
   <?php include 'INCLUDE/footer.php'; ?>
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const scrollContainer = document.getElementById("testimonialScroll");
-      let scrollAmount = 1; 
-      let direction = 1; 
-      function autoScroll() {
-        if (!scrollContainer) return;
-        scrollContainer.scrollLeft += scrollAmount * direction;
-        if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth) {
-          direction = -1;
-        } else if (scrollContainer.scrollLeft <= 0) {
-          direction = 1;
-        }
-      }
-      setInterval(autoScroll, 20);
-    });
-
-
-   
-
-  </script>
-  <script>
+<script>
 document.addEventListener("DOMContentLoaded", () => {
-  // Elements
+  // ----------------- TESTIMONIAL AUTO SCROLL -----------------
+  const scrollContainer = document.getElementById("testimonialScroll");
+  let scrollAmount = 1;
+  let direction = 1;
+  function autoScroll() {
+    if (!scrollContainer) return;
+    scrollContainer.scrollLeft += scrollAmount * direction;
+    if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth) {
+      direction = -1;
+    } else if (scrollContainer.scrollLeft <= 0) {
+      direction = 1;
+    }
+  }
+  setInterval(autoScroll, 20);
+
+  // ----------------- CHATBOT SETUP -----------------
   const chatbotBtn = document.getElementById("chatbot-button");
-  const chatPanel = document.getElementById("chat-panel");
-  const closePanel = document.getElementById("close-panel");
-  const sendBtn = document.getElementById("send-btn");
   const chatBody = document.getElementById("chat-body");
-  const chatInput = document.getElementById("userInput"); // fixed ID
+  const chatInput = document.getElementById("userInput");
+  const sendBtn = document.getElementById("send-btn");
+  const historyList = document.getElementById("history-list");
+  const newChatBtn = document.getElementById("new-chat");
   const retryBtn = document.getElementById("retry-btn");
   const suggestionsList = document.getElementById("suggestions-list");
-  const clearBtn = document.getElementById("clear-history");
 
-const STORAGE_KEY = "chatHistory_" + currentUser;  // unique per user
-let chatHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  const chatbotModal = new bootstrap.Modal(document.getElementById("chatbotModal"));
 
+  // Unique storage key per user
+  const STORAGE_KEY = "chatSessions_" + (typeof currentUser !== "undefined" ? currentUser : "guest");
+  let sessions = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+  let currentSessionId = null;
 
-  // Open/close panel
+  // ----------------- OPEN CHATBOT -----------------
   chatbotBtn.addEventListener("click", () => {
-    chatPanel.classList.add("open");
-    chatbotBtn.style.display = "none";
-    renderChatHistory();
+    chatbotModal.show();
+    if (!currentSessionId) startNewSession();
+    renderHistory();
+    renderChat();
     renderSuggestions();
   });
 
-  closePanel.addEventListener("click", () => {
-    chatPanel.classList.remove("open");
-    chatbotBtn.style.display = "flex";
-  });
+  // ----------------- SESSION MANAGEMENT -----------------
+  function startNewSession() {
+    currentSessionId = "session_" + Date.now();
+    sessions[currentSessionId] = [];
+    saveSessions();
+    renderHistory();
+    renderChat();
+  }
 
-  // Append message
+  newChatBtn.addEventListener("click", startNewSession);
+
+  function saveSessions() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
+  }
+
+  // ----------------- CHAT RENDERING -----------------
   function appendMessage(sender, text, save = true) {
     const msg = document.createElement("div");
     msg.classList.add("message", sender === "You" ? "user" : "bot");
@@ -1679,41 +1705,50 @@ let chatHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
     chatBody.appendChild(msg);
     chatBody.scrollTop = chatBody.scrollHeight;
 
-    if (save) {
-      chatHistory.push({ sender, text });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(chatHistory));
+    if (save && currentSessionId) {
+      sessions[currentSessionId].push({ sender, text });
+      saveSessions();
     }
   }
 
-  // Render chat history
-  function renderChatHistory() {
+  function renderChat() {
     chatBody.innerHTML = "";
-    chatHistory.forEach(msg => appendMessage(msg.sender, msg.text, false));
+    if (!sessions[currentSessionId]) return;
+    sessions[currentSessionId].forEach(msg => appendMessage(msg.sender, msg.text, false));
   }
 
-  // Clear history
-  clearBtn.addEventListener("click", () => {
-    localStorage.removeItem(STORAGE_KEY);
-    chatHistory = [];
-    renderChatHistory();
-  });
+  function renderHistory() {
+    historyList.innerHTML = "";
+    Object.keys(sessions).forEach(id => {
+      const firstMsg = sessions[id][0]?.text || "New Chat";
+      const item = document.createElement("div");
+      item.className = "history-item";
+      item.innerText = firstMsg.length > 25 ? firstMsg.substring(0, 25) + "..." : firstMsg;
+      item.addEventListener("click", () => {
+        currentSessionId = id;
+        renderChat();
+      });
+      historyList.appendChild(item);
+    });
+  }
 
- async function getAIResponse(userMsg) {
-  appendMessage("Bot", "Thinking...", false);
+  // ----------------- AI RESPONSE -----------------
+  async function getAIResponse(userMsg) {
+    appendMessage("Bot", "Thinking...", false);
 
-  try {
-    // Build message history with a farming-only system instruction
-    const messages = [
-      {
-        role: "system",
-        content: "You are Aniko, an AI farming assistant. You ONLY answer farming-related questions. If a user asks something unrelated to farming, politely say: 'I specialize in farming topics. Can you ask me something about crops, livestock, soil, or agriculture?'"
-      },
-      ...chatHistory.map(m => ({
-        role: m.sender === "You" ? "user" : "assistant",
-        content: m.text
-      })),
-      { role: "user", content: userMsg }
-    ];
+    try {
+      const messages = [
+        {
+          role: "system",
+          content:
+            "You are Aniko, an AI farming assistant. You ONLY answer farming-related questions. If asked something else, politely say: 'I specialize in farming topics. Can you ask me something about crops, livestock, soil, or agriculture?'"
+        },
+        ...(sessions[currentSessionId] || []).map(m => ({
+          role: m.sender === "You" ? "user" : "assistant",
+          content: m.text
+        })),
+        { role: "user", content: userMsg }
+      ];
 
       const res = await fetch("chat_api.php", {
         method: "POST",
@@ -1724,22 +1759,19 @@ let chatHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
         })
       });
 
+      const data = await res.json();
+      const reply = data.choices?.[0]?.message?.content || "No response from AI.";
 
-    const data = await res.json();
-    const reply = data.choices?.[0]?.message?.content || "No response from AI.";
+      chatBody.lastChild.remove(); // remove "Thinking..."
+      appendMessage("Bot", reply);
 
-    chatBody.lastChild.remove(); // remove "Thinking..."
-    appendMessage("Bot", reply);
-
-  } catch (err) {
-    chatBody.lastChild.remove();
-    appendMessage("Bot", " Error: " + err.message);
+    } catch (err) {
+      chatBody.lastChild.remove();
+      appendMessage("Bot", "Error: " + err.message);
+    }
   }
-}
 
-
-
-  // Send message
+  // ----------------- MESSAGE SENDING -----------------
   function sendMessage() {
     const userMsg = chatInput.value.trim();
     if (!userMsg) return;
@@ -1749,6 +1781,7 @@ let chatHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
   }
 
   sendBtn.addEventListener("click", sendMessage);
+
   chatInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -1756,7 +1789,7 @@ let chatHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
     }
   });
 
-  // ---------------- Suggestions ----------------
+  // ----------------- SUGGESTIONS -----------------
   const allSuggestions = [
     "How to improve rice yield?",
     "Best fertilizer for corn?",
@@ -1804,48 +1837,44 @@ let chatHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
   }
 
   retryBtn.addEventListener("click", renderSuggestions);
-  renderSuggestions();
+
+  // ----------------- FLOATING BUTTON DRAG -----------------
+  const btn = document.getElementById("chatbot-button");
+  let isDragging = false, offsetX, offsetY;
+
+  btn.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    offsetX = e.clientX - btn.getBoundingClientRect().left;
+    offsetY = e.clientY - btn.getBoundingClientRect().top;
+    btn.style.transition = "none";
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    let left = e.clientX - offsetX;
+    let top = e.clientY - offsetY;
+    const maxLeft = window.innerWidth - btn.offsetWidth;
+    const maxTop = window.innerHeight - btn.offsetHeight;
+    if (left < 0) left = 0;
+    if (top < 0) top = 0;
+    if (left > maxLeft) left = maxLeft;
+    if (top > maxTop) top = maxTop;
+    btn.style.left = left + "px";
+    btn.style.top = top + "px";
+  });
+
+  document.addEventListener("mouseup", () => {
+    if (isDragging) {
+      isDragging = false;
+      btn.style.transition = "transform 0.2s ease, background 0.2s ease";
+    }
+  });
 });
 </script>
 
-<!-- Floating Button Drag -->
-<script>
-const btn = document.getElementById('chatbot-button');
-let isDragging = false, offsetX, offsetY;
-
-btn.addEventListener('mousedown', (e) => {
-  isDragging = true;
-  offsetX = e.clientX - btn.getBoundingClientRect().left;
-  offsetY = e.clientY - btn.getBoundingClientRect().top;
-  btn.style.transition = 'none';
-});
-
-document.addEventListener('mousemove', (e) => {
-  if (!isDragging) return;
-  let left = e.clientX - offsetX;
-  let top = e.clientY - offsetY;
-  const maxLeft = window.innerWidth - btn.offsetWidth;
-  const maxTop = window.innerHeight - btn.offsetHeight;
-  if (left < 0) left = 0;
-  if (top < 0) top = 0;
-  if (left > maxLeft) left = maxLeft;
-  if (top > maxTop) top = maxTop;
-  btn.style.left = left + 'px';
-  btn.style.top = top + 'px';
-});
-
-document.addEventListener('mouseup', () => {
-  if (isDragging) {
-    isDragging = false;
-    btn.style.transition = 'transform 0.2s ease, background 0.2s ease';
-  }
-});
-</script>
 <script>
   const currentUser = "<?php echo $_SESSION['email']; ?>"; 
 </script>
-
-
 
 
 
