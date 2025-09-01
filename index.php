@@ -1886,41 +1886,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   retryBtn.addEventListener("click", renderSuggestions);
-
-  // ----------------- FLOATING BUTTON DRAG -----------------
-  const btn = document.getElementById("chatbot-button");
-  let isDragging = false, offsetX, offsetY;
-
-  btn.addEventListener("mousedown", (e) => {
-    isDragging = true;
-    offsetX = e.clientX - btn.getBoundingClientRect().left;
-    offsetY = e.clientY - btn.getBoundingClientRect().top;
-    btn.style.transition = "none";
-  });
-
-  document.addEventListener("mousemove", (e) => {
-    if (!isDragging) return;
-    let left = e.clientX - offsetX;
-    let top = e.clientY - offsetY;
-    const maxLeft = window.innerWidth - btn.offsetWidth;
-    const maxTop = window.innerHeight - btn.offsetHeight;
-    if (left < 0) left = 0;
-    if (top < 0) top = 0;
-    if (left > maxLeft) left = maxLeft;
-    if (top > maxTop) top = maxTop;
-    btn.style.left = left + "px";
-    btn.style.top = top + "px";
-  });
-
-  document.addEventListener("mouseup", () => {
-    if (isDragging) {
-      isDragging = false;
-      btn.style.transition = "transform 0.2s ease, background 0.2s ease";
-    }
-  });
-});
-</script>
-
 <script>
   const currentUser = "<?php echo $_SESSION['email']; ?>"; 
 </script>
