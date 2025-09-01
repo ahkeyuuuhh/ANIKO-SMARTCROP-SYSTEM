@@ -1096,7 +1096,6 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
       }
     }
 
-    /* scrollinggg */
     html {
       scroll-behavior: smooth;
     }
@@ -1127,213 +1126,204 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
     .team-member-img {
       will-change: transform;
     }
-/* Floating Circle Button */
-.floating-circle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
-  background: var(--light-green);
-  color: var(--primary-green);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 28px;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  z-index: 1001;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
 
-.floating-circle:hover {
-  transform: scale(1.1);
-  background: var(--accent-green);
-  color: #fff;
-}
+  .floating-circle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: var(--light-green);
+    color: var(--primary-green);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
 
-/* ChatGPT Style Modal */
-.chatbot-modal {
-  width: 900px;   /* fixed width */
-  height: 600px;  /* fixed height */
-  max-width: 900px;
-  max-height: 600px;
-  border-radius: 12px;
-  overflow: hidden;
-  margin: auto;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  display: flex;
-}
+  .floating-circle:hover {
+    transform: scale(1.1);
+    background: var(--accent-green);
+    color: #fff;
+  }
 
-/* Sidebar */
-.chat-sidebar {
-  width: 250px;
-  background: #f7f7f8;
-  border-right: 1px solid #ddd;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow-y: auto;
-}
+  .chatbot-modal {
+    width: 900px;  
+    height: 600px;  
+    max-width: 900px;
+    max-height: 600px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    display: flex;
+  }
 
-.history-list {
-  flex: 1;
-  overflow-y: auto;
-  max-height: 500px;
-}
+  .chat-sidebar {
+    width: 250px;
+    background: #f7f7f8;
+    border-right: 1px solid #ddd;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+  }
 
-.history-item {
-  padding: 10px;
-  margin-bottom: 8px;
-  background: #fff;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  border: 1px solid #ddd;
-  transition: background 0.2s;
-}
+  .history-list {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 500px;
+  }
 
-.history-item:hover {
-  background: #e9ecef;
-}
+  .history-item {
+    padding: 10px;
+    margin-bottom: 8px;
+    background: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    transition: background 0.2s;
+  }
 
-/* Chat Area should behave like a column layout */
-.chat-area {
-  display: flex;
-  flex-direction: column;
-  flex: 1;              /* fills available space */
-  height: 100%;         /* important to prevent collapse */
-  overflow: hidden;     /* stops footer being pushed */
-  background: #fff;
-}
+  .history-item:hover {
+    background: #e9ecef;
+  }
 
-/* Chat Header */
-.chat-header {
-  padding: 10px 15px;
-  background: #f1f1f1;
-  border-bottom: 1px solid #ddd;
-  flex-shrink: 0;
-}
+  .chat-area {
+    display: flex;
+    flex-direction: column;
+    flex: 1;             
+    height: 100%;        
+    overflow: hidden;   
+    background: #fff;
+  }
 
-/* Chat Body (Scrollable Conversation) */
-/* Chat Body grows + scrolls */
-.chat-body {
-  flex: 1;              /* take all remaining space */
-  overflow-y: auto;     /* ✅ scrolls when too many messages */
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  background: #fafafa;
-}
+  .chat-header {
+    padding: 10px 15px;
+    background: #f1f1f1;
+    border-bottom: 1px solid #ddd;
+    flex-shrink: 0;
+  }
 
-/* Chat Messages */
-.message {
-  max-width: 80%;
-  padding: 10px 14px;
-  border-radius: 12px;
-  line-height: 1.5;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  font-size: 14px;
-}
+  .chat-body {
+    flex: 1;              
+    overflow-y: auto;    
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #fafafa;
+  }
 
-.message.user {
-  align-self: flex-end;
-  background: #d1e7dd;
-  color: #0f5132;
-  border: 1px solid #bcd0c7;
-}
+  .message {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    font-size: 14px;
+  }
 
-.message.bot {
-  align-self: flex-start;
-  background: #f1f1f1;
-  color: #333;
-  border: 1px solid #ddd;
-}
+  .message.user {
+    align-self: flex-end;
+    background: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #bcd0c7;
+  }
 
-/* Footer stays pinned */
-.chat-footer {
-  flex-shrink: 0;       /* ✅ prevents moving */
-  border-top: 1px solid #ddd;
-  background: #f9f9f9;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-}
+  .message.bot {
+    align-self: flex-start;
+    background: #f1f1f1;
+    color: #333;
+    border: 1px solid #ddd;
+  }
 
-.chat-footer input {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  outline: none;
-}
+  .chat-footer {
+    flex-shrink: 0;       
+    border-top: 1px solid #ddd;
+    background: #f9f9f9;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
 
-.chat-footer button {
-  background: var(--primary-green);
-  border: none;
-  padding: 10px 15px;
-  color: white;
-  cursor: pointer;
-}
+  .chat-footer input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+  }
 
-/* Suggestions Section */
-.recommendations {
-  background: #f1f8f4;
-  border-bottom: 1px solid #ddd;
-  padding: 10px;
-}
+  .chat-footer button {
+    background: var(--primary-green);
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    cursor: pointer;
+  }
 
-.recommendations p {
-  margin: 0 0 8px;
-  font-size: 14px;
-  color: #333;
-}
+  /* Suggestions Section */
+  .recommendations {
+    background: #f1f8f4;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+  }
 
-#suggestions-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 10px;
-}
+  .recommendations p {
+    margin: 0 0 8px;
+    font-size: 14px;
+    color: #333;
+  }
 
-.suggest-btn {
-  padding: 6px 10px;
-  font-size: 13px;
-  background: var(--light-green);
-  color: var(--primary-green);
-  border: 1px solid var(--primary-green);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: 0.2s;
-}
+  #suggestions-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
 
-.suggest-btn:hover {
-  background: var(--primary-green);
-  color: #fff;
-}
+  .suggest-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+    background: var(--light-green);
+    color: var(--primary-green);
+    border: 1px solid var(--primary-green);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
 
-.retry-btn {
-  display: block;
-  width: 100%;
-  background: #e0e0e0;
-  border: none;
-  border-radius: 8px;
-  padding: 6px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: 0.2s;
-}
+  .suggest-btn:hover {
+    background: var(--primary-green);
+    color: #fff;
+  }
 
-.retry-btn:hover {
-  background: #ccc;
-}
+  .retry-btn {
+    display: block;
+    width: 100%;
+    background: #e0e0e0;
+    border: none;
+    border-radius: 8px;
+    padding: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .retry-btn:hover {
+    background: #ccc;
+  }
 
 </style>
 </head>
-
 <body>
 
 <!-- Floating Circle -->
@@ -1341,31 +1331,24 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
   <img src="IMG/logo-notext.png" alt="Chatbot" style="width:25px; height:25px;">
 </div>
 
-<!-- Chatbot Modal -->
 <div class="modal fade" id="chatbotModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content chatbot-modal">
-      <!-- Force modal-content to be full height -->
       <div class="modal-body p-0 d-flex" style="height:600px;">
         
-        <!-- Sidebar (Chat History) -->
         <div class="chat-sidebar">
           <button id="new-chat" class="btn btn-success w-100 mb-3">+ New Chat</button>
           <div id="history-list" class="history-list"></div>
         </div>
 
-        <!-- Chat Area -->
         <div class="chat-area">
-          <!-- Header -->
           <div class="chat-header d-flex justify-content-between align-items-center">
             <h6 class="mb-0">Aniko Chatbot</h6>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
 
-          <!-- Conversation Body -->
           <div id="chat-body" class="chat-body"></div>
 
-          <!-- Footer -->
           <div class="chat-footer d-flex">
             <input id="userInput" type="text" class="form-control me-2" placeholder="Type a message..." />
             <button id="send-btn" class="btn btn-success">Send</button>
@@ -1394,9 +1377,6 @@ $apiKey = $_ENV['OPENROUTER_API_KEY'];
   </div>
 >>>>>>> 49c830a18ba52b17d8d62a553b288ee0e73cfef3
 </div>
-
-
-
 
   <!-- HERO SECTION -->
   <div class="hero">
