@@ -36,11 +36,11 @@ $result = $con->query($sql);
       --primary-brown: #8A6440;
       --dark-brown: #4D2D18;
       --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--accent-green));
-      --gradient-earthy: linear-gradient(135deg, var(--primary-brown), var(--primary-green));
+      --gradient-secondary: linear-gradient(135deg, var(--primary-green), var(--pastel-green));
     }
 
     body {
-      background:var(--gradient-primary);
+      background:var(--gradient-secondary);
       color: var(--foreground);
       font-family: 'Open Sans', sans-serif;
       line-height: 1.6;
@@ -82,7 +82,7 @@ $result = $con->query($sql);
       position: relative;
       overflow: hidden;
       text-decoration: none !important;
-      box-shadow: 0px 0px 20px 5px var(--accent-green);
+      box-shadow: 0px 0px 20px 5px var(--pastel-green);
       text-align: center;
     }
 
@@ -112,7 +112,7 @@ $result = $con->query($sql);
 
     h2 {
       color: var(--light-green) !important;
-      text-shadow: 0px 0px 5px var(--accent-green) !important;
+      text-shadow: 0px 0px 5px var(--pastel-green) !important;
     }
 
     .header-subtext {
@@ -127,9 +127,10 @@ $result = $con->query($sql);
     }
 
     .testimonial-card {
-      background-color: rgba(144, 238, 144, 0.32); 
+      background-color: #ccebd5ff;
       border: none;
-      border-radius: 20px;
+      border-radius: 80px;
+      border-bottom-left-radius: 0 !important;
       padding: 2rem;
       margin-bottom: 2rem;
       break-inside: avoid;
